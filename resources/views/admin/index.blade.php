@@ -93,7 +93,7 @@
                     <!-- Dashboard -->
                     <li>
                         <a href="{{ route('admin.home') }}"
-                            class="sidebar-item flex items-center p-3 rounded-xl bg-red-50 text-red-700 active">
+                            class="sidebar-item flex items-center p-3 rounded-xl hover:bg-gray-50 text-gray-700 transition-colors">
                             <i class="fas fa-home text-lg w-6 text-center"></i>
                             <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Dashboard</span>
                         </a>
@@ -121,7 +121,7 @@
 
                     <!-- Eventos -->
                     <li>
-                        <a href="#"
+                        <a href="{{ route('admin.eventos') }}"
                             class="sidebar-item flex items-center p-3 rounded-xl hover:bg-gray-50 text-gray-700 transition-colors">
                             <i class="fas fa-calendar-alt text-lg w-6 text-center"></i>
                             <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Eventos</span>
@@ -132,30 +132,30 @@
 
                     <!-- Batismos -->
                     <li>
-                        <a href="#"
+                        <a href="{{ route('admin.batizados') }}"
                             class="sidebar-item flex items-center p-3 rounded-xl hover:bg-gray-50 text-gray-700 transition-colors">
                             <i class="fas fa-water text-lg w-6 text-center"></i>
-                            <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Batismos</span>
+                            <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Batizados</span>
                         </a>
                     </li>
 
                     <!-- Dízimos -->
                     <li>
-                        <a href="#"
+                        <a href="{{ route('admin.dizimistas') }}"
                             class="sidebar-item flex items-center p-3 rounded-xl hover:bg-gray-50 text-gray-700 transition-colors">
                             <i class="fas fa-hand-holding-usd text-lg w-6 text-center"></i>
-                            <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Dízimos</span>
+                            <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Dízimistas</span>
                         </a>
                     </li>
 
                     <!-- Relatórios -->
-                    <li>
+                    {{-- <li>
                         <a href="#"
                             class="sidebar-item flex items-center p-3 rounded-xl hover:bg-gray-50 text-gray-700 transition-colors">
                             <i class="fas fa-chart-bar text-lg w-6 text-center"></i>
                             <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Relatórios</span>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
 
                 <!-- Menu Secundário -->
@@ -163,7 +163,7 @@
                     <ul class="space-y-2">
                         <!-- Configurações -->
                         <li>
-                            <a href="#"
+                            <a href="{{ route('admin.config') }}"
                                 class="sidebar-item flex items-center p-3 rounded-xl hover:bg-gray-50 text-gray-700 transition-colors">
                                 <i class="fas fa-cog text-lg w-6 text-center"></i>
                                 <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Configurações</span>
@@ -172,8 +172,8 @@
 
                         <!-- Ajuda -->
                         <li>
-                            <a href="#"
-                                class="sidebar-item flex items-center p-3 rounded-xl hover:bg-gray-50 text-gray-700 transition-colors">
+                            <a href="https://oscarndodo.com"
+                                class="sidebar-items flex items-center p-3 rounded-xl hover:bg-gray-50 text-red-700 transition-colors">
                                 <i class="fas fa-question-circle text-lg w-6 text-center"></i>
                                 <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Ajuda</span>
                             </a>
@@ -183,7 +183,7 @@
             </nav>
 
             <!-- User Profile -->
-            <div class="p-4 border-t border-gray-100">
+            <a href="{{ route('auth.logout') }}" class="p-4 border-t border-gray-100">
                 <div class="flex items-center">
                     <div class="relative">
                         <div
@@ -195,13 +195,13 @@
                     </div>
                     <div class="hidden lg:block ml-3 flex-1">
                         <p class="text-sm font-semibold text-gray-900">Admin OMNIA</p>
-                        <p class="text-xs text-gray-500">Administrador</p>
+                        <p class="text-xs text-gray-500">Terminar sessão</p>
                     </div>
                     <button class="hidden lg:block text-gray-400 hover:text-gray-600 ml-2">
                         <i class="fas fa-chevron-down"></i>
                     </button>
                 </div>
-            </div>
+            </a>
         </aside>
 
         <!-- Conteúdo Principal -->
@@ -210,6 +210,7 @@
         </div>
     </div>
 
+    <script src="{{ asset('assets/js/main.js') }}"></script>
     @stack('scripts')
 </body>
 

@@ -16,15 +16,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone')->unique();
             $table->string('password');
+            $table->enum('role', ['Provincia', 'Distrito', 'Sector', 'Congregacao', 'Grupo', "Outro"])->default('Outro');
+            $table->boolean('status')->default(true);
             $table->timestamp('phone_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('users');

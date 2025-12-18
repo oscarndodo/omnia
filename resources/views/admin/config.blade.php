@@ -1,441 +1,1323 @@
+<!-- configuracoes.blade.php -->
 @extends('admin.index')
 
 @section('main')
+    <div class="p-6">
+        <!-- Cabeçalho -->
+        <div class="mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                    <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">Configurações</h1>
+                    <p class="text-gray-600 mt-2">Gerencie as configurações do sistema e estrutura da igreja</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Layout em 2 Colunas -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Menu Lateral -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden sticky top-6">
+                    <!-- Perfil do Usuário -->
+                    <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-red-50 to-white">
+                        <div class="flex items-center py-8">
+
+                        </div>
+                    </div>
+
+                    <!-- Navegação -->
+                    <nav class="p-4">
+                        <ul class="space-y-1">
+                            <li>
+                                <button data-tab="usuarios"
+                                    class="config-tab w-full text-left px-4 py-3 rounded-xl hover:bg-red-50 hover:text-red-700 text-gray-700 font-medium flex items-center transition-colors active">
+                                    <i class="fas fa-users w-6 mr-3"></i>
+                                    Usuários
+                                </button>
+                            </li>
+
+                            <li>
+                                <button data-tab="sectores"
+                                    class="config-tab w-full text-left px-4 py-3 rounded-xl hover:bg-red-50 hover:text-red-700 text-gray-700 font-medium flex items-center transition-colors">
+                                    <i class="fas fa-sitemap w-6 mr-3"></i>
+                                    Sectores
+                                </button>
+                            </li>
+
+                            <li>
+                                <button data-tab="congregacoes"
+                                    class="config-tab w-full text-left px-4 py-3 rounded-xl hover:bg-red-50 hover:text-red-700 text-gray-700 font-medium flex items-center transition-colors">
+                                    <i class="fas fa-church w-6 mr-3"></i>
+                                    Congregações
+                                </button>
+                            </li>
+
+                            <li>
+                                <button data-tab="notificacoes"
+                                    class="config-tab w-full text-left px-4 py-3 rounded-xl hover:bg-red-50 hover:text-red-700 text-gray-700 font-medium flex items-center transition-colors">
+                                    <i class="fas fa-bell w-6 mr-3"></i>
+                                    Notificações
+                                </button>
+                            </li>
+                            <li>
+                                <button data-tab="backup"
+                                    class="config-tab w-full text-left px-4 py-3 rounded-xl hover:bg-red-50 hover:text-red-700 text-gray-700 font-medium flex items-center transition-colors">
+                                    <i class="fas fa-database w-6 mr-3"></i>
+                                    Backup & Segurança
+                                </button>
+                            </li>
+                        </ul>
+
+                        <!-- Configurações Avançadas -->
+                        <div class="mt-8 pt-6 border-t border-gray-100">
+                            <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 px-4">Avançado</h4>
+                            <ul class="space-y-1">
+                                <li>
+                                    <button data-tab="api"
+                                        class="config-tab w-full text-left px-4 py-3 rounded-xl hover:bg-red-50 hover:text-red-700 text-gray-700 font-medium flex items-center transition-colors">
+                                        <i class="fas fa-code w-6 mr-3"></i>
+                                        API
+                                    </button>
+                                </li>
+                                <li>
+                                    <button data-tab="logs"
+                                        class="config-tab w-full text-left px-4 py-3 rounded-xl hover:bg-red-50 hover:text-red-700 text-gray-700 font-medium flex items-center transition-colors">
+                                        <i class="fas fa-history w-6 mr-3"></i>
+                                        Logs de Sistema
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Conteúdo Principal -->
+            <div class="lg:col-span-3 space-y-8">
+                <!-- Tab Usuários (Ativa por padrão) -->
+                <div id="tab-usuarios" class="config-content">
+                    <!-- Cabeçalho -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                            <div>
+                                <h2 class="text-xl font-bold text-gray-900">Gestão de Usuários</h2>
+                                <p class="text-gray-600 mt-1">Gerencie os usuários do sistema OMNIA</p>
+                            </div>
+                            <button id="novoUsuarioBtn"
+                                class="mt-4 lg:mt-0 px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-medium rounded-xl transition-all duration-300 shadow-sm hover:shadow-md flex items-center justify-center group">
+                                <i class="fas fa-user-plus mr-2 group-hover:scale-110 transition-transform"></i> Novo
+                                Usuário
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Estatísticas -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 my-4">
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm font-medium">Total Usuários</p>
+                                    <p class="text-3xl font-bold text-gray-900 mt-2">24</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
+                                    <i class="fas fa-users text-blue-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <span class="text-green-600 text-sm font-medium flex items-center">
+                                    <i class="fas fa-arrow-up mr-1"></i> +3 este mês
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm font-medium">Ativos</p>
+                                    <p class="text-3xl font-bold text-gray-900 mt-2">22</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
+                                    <i class="fas fa-user-check text-green-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <span class="text-green-600 text-sm font-medium">92% ativos</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm font-medium">Administradores</p>
+                                    <p class="text-3xl font-bold text-gray-900 mt-2">3</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center">
+                                    <i class="fas fa-user-shield text-red-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <span class="text-gray-500 text-sm">12,5% do total</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm font-medium">Inativos</p>
+                                    <p class="text-3xl font-bold text-gray-900 mt-2">2</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center">
+                                    <i class="fas fa-user-times text-yellow-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <span class="text-red-600 text-sm font-medium">Necessita atenção</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Usuários -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="p-6 border-b border-gray-100">
+                            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                <div class="flex-1">
+                                    <div class="relative">
+                                        <i
+                                            class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                        <input type="text" placeholder="Buscar usuário por nome, e-mail ou cargo..."
+                                            class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3 mt-4 lg:mt-0 lg:ml-4">
+                                    <button
+                                        class="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors flex items-center">
+                                        <i class="fas fa-filter mr-2"></i> Filtros
+                                    </button>
+                                    <button
+                                        class="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors flex items-center">
+                                        <i class="fas fa-download mr-2"></i> Exportar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Usuário</th>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Acesso
+                                        </th>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Último
+                                            Actualização
+                                        </th>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Status</th>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+
+                                    @forelse ($users as $item)
+                                        <!-- Usuário 1 -->
+                                        <tr class="hover:bg-gray-50 transition-colors">
+                                            <td class="py-4 px-6">
+                                                <div class="flex items-center">
+                                                    <div
+                                                        class="w-10 h-10 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white font-semibold mr-3">
+                                                        {{ $item->name[0] }}
+                                                    </div>
+                                                    <div>
+                                                        <p class="font-medium text-gray-900">{{ $item->name }}</p>
+                                                        <p class="text-sm text-gray-500">{{ $item->phone }}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="py-4 px-6">
+                                                <div class="space-y-1">
+                                                    <span
+                                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                                                        {{ $item->role }}l
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td class="py-4 px-6">
+                                                <div class="space-y-1">
+                                                    <span
+                                                        class="text-sm text-gray-700">{{ $item->updated_at->diffForHumans() }}</span>
+                                                </div>
+                                            </td>
+                                            <td class="py-4 px-6">
+                                                @if ($item->status)
+                                                    <span
+                                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                                        <i class="fas fa-circle mr-1 text-xs"></i> Online
+                                                    </span>
+                                                @else
+                                                    <span
+                                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                                                        <i class="fas fa-circle mr-1 text-xs"></i> Offline
+                                                    </span>
+                                                @endif
+                                            </td>
+                                            <td class="py-4 px-6">
+                                                <div class="flex items-center space-x-2">
+
+                                                    <a href="#"
+                                                        class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    @if ($item->status)
+                                                        <a href="{{ route('admin.config.user.status', ['id' => $item->id]) }}"
+                                                            class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
+                                                            <i class="fas fa-lock"></i>
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('admin.config.user.status', ['id' => $item->id]) }}"
+                                                            class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
+                                                            <i class="fas fa-unlock"></i>
+                                                        </a>
+                                                    @endif
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="py-4 px-6 text-center text-gray-500">
+                                                Nenhum usuário encontrado.
+                                            </td>
+                                        </tr>
+                                    @endforelse
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Paginação -->
+                        <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
+                            <!-- Na seção de paginação dos usuários -->
+                            <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
+                                <div class="text-sm text-gray-500">
+                                    Mostrando {{ $users->firstItem() }} a {{ $users->lastItem() }} de {{ $users->total() }}
+                                    usuários
+                                </div>
+
+                                @if ($users->hasPages())
+                                    <div class="flex items-center space-x-2">
+                                        <!-- Botão Anterior -->
+                                        @if ($users->onFirstPage())
+                                            <button disabled
+                                                class="w-10 h-10 rounded-lg bg-gray-100 text-gray-400 cursor-not-allowed flex items-center justify-center">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </button>
+                                        @else
+                                            <a href="{{ $users->previousPageUrl() }}"
+                                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </a>
+                                        @endif
+
+                                        <!-- Primeira página -->
+                                        @if ($users->currentPage() > 3)
+                                            <a href="{{ $users->url(1) }}"
+                                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                                                1
+                                            </a>
+                                            @if ($users->currentPage() > 4)
+                                                <span class="px-2 text-gray-500">...</span>
+                                            @endif
+                                        @endif
+
+                                        <!-- Páginas ao redor da atual -->
+                                        @foreach (range(1, $users->lastPage()) as $page)
+                                            @if ($page >= $users->currentPage() - 2 && $page <= $users->currentPage() + 2)
+                                                @if ($page == $users->currentPage())
+                                                    <span
+                                                        class="w-10 h-10 rounded-lg bg-red-600 text-white flex items-center justify-center">
+                                                        {{ $page }}
+                                                    </span>
+                                                @else
+                                                    <a href="{{ $users->url($page) }}"
+                                                        class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                                                        {{ $page }}
+                                                    </a>
+                                                @endif
+                                            @endif
+                                        @endforeach
+
+                                        <!-- Última página -->
+                                        @if ($users->currentPage() < $users->lastPage() - 2)
+                                            @if ($users->currentPage() < $users->lastPage() - 3)
+                                                <span class="px-2 text-gray-500">...</span>
+                                            @endif
+                                            <a href="{{ $users->url($users->lastPage()) }}"
+                                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                                                {{ $users->lastPage() }}
+                                            </a>
+                                        @endif
+
+                                        <!-- Botão Próximo -->
+                                        @if ($users->hasMorePages())
+                                            <a href="{{ $users->nextPageUrl() }}"
+                                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </a>
+                                        @else
+                                            <button disabled
+                                                class="w-10 h-10 rounded-lg bg-gray-100 text-gray-400 cursor-not-allowed flex items-center justify-center">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </button>
+                                        @endif
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Sectores -->
+                <div id="tab-sectores" class="config-content hidden">
+                    <!-- Cabeçalho -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 -mt-8">
+                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                            <div>
+                                <h2 class="text-xl font-bold text-gray-900">Gestão de Sectores</h2>
+                                <p class="text-gray-600 mt-1">Organize os sectores da sua igreja</p>
+                            </div>
+                            <button id="novoSectorBtn"
+                                class="mt-4 lg:mt-0 px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-medium rounded-xl transition-all duration-300 shadow-sm hover:shadow-md flex items-center justify-center group">
+                                <i class="fas fa-plus-circle mr-2 group-hover:scale-110 transition-transform"></i> Novo
+                                Sector
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Estatísticas -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-4">
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm font-medium">Total Sectores</p>
+                                    <p class="text-3xl font-bold text-gray-900 mt-2">8</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
+                                    <i class="fas fa-sitemap text-blue-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <span class="text-green-600 text-sm font-medium flex items-center">
+                                    <i class="fas fa-check-circle mr-1"></i> Ativos
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm font-medium">Líderes Designados</p>
+                                    <p class="text-3xl font-bold text-gray-900 mt-2">6</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
+                                    <i class="fas fa-user-tie text-green-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <span class="text-yellow-600 text-sm font-medium">2 vagas</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm font-medium">Membros nos Sectores</p>
+                                    <p class="text-3xl font-bold text-gray-900 mt-2">156</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center">
+                                    <i class="fas fa-users text-red-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <span class="text-gray-500 text-sm">Média: 19.5/sector</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Sectores -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="p-6 border-b border-gray-100">
+                            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                <div class="flex-1">
+                                    <div class="relative">
+                                        <i
+                                            class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                        <input type="text"
+                                            placeholder="Buscar sector por nome, líder ou localização..."
+                                            class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3 mt-4 lg:mt-0 lg:ml-4">
+                                    <button
+                                        class="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors flex items-center">
+                                        <i class="fas fa-filter mr-2"></i> Filtros
+                                    </button>
+                                    <button
+                                        class="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors flex items-center">
+                                        <i class="fas fa-download mr-2"></i> Exportar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Sector</th>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Líder
+                                        </th>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Localização
+                                        </th>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Membros</th>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Status</th>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+                                    <!-- Sector 1 -->
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="py-4 px-6">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="w-10 h-10 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white font-semibold mr-3">
+                                                    S1
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-gray-900">Sector Central</p>
+                                                    <p class="text-sm text-gray-500">Fundado: 12/2022</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="font-medium text-gray-900">João Miguel</span>
+                                                <p class="text-sm text-gray-500">Pastor</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="text-sm text-gray-700">Maputo Cidade</span>
+                                                <span class="text-xs text-gray-500">Bairro Central</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="text-2xl font-bold text-gray-900">25</span>
+                                                <p class="text-xs text-gray-500">+2 este mês</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <span
+                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                                <i class="fas fa-circle mr-1 text-xs"></i> Ativo
+                                            </span>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="flex items-center space-x-2">
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Sector 2 -->
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="py-4 px-6">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white font-semibold mr-3">
+                                                    S2
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-gray-900">Sector Matola</p>
+                                                    <p class="text-sm text-gray-500">Fundado: 03/2023</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="font-medium text-gray-900">Ana Costa</span>
+                                                <p class="text-sm text-gray-500">Líder de Sector</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="text-sm text-gray-700">Cidade da Matola</span>
+                                                <span class="text-xs text-gray-500">Bairro Militar</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="text-2xl font-bold text-gray-900">18</span>
+                                                <p class="text-xs text-gray-500">+1 este mês</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <span
+                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                                <i class="fas fa-circle mr-1 text-xs"></i> Ativo
+                                            </span>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="flex items-center space-x-2">
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Sector 3 -->
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="py-4 px-6">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-semibold mr-3">
+                                                    S3
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-gray-900">Sector Boane</p>
+                                                    <p class="text-sm text-gray-500">Fundado: 08/2023</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="font-medium text-gray-900">Carlos Mendes</span>
+                                                <p class="text-sm text-gray-500">Evangelista</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="text-sm text-gray-700">Boane</span>
+                                                <span class="text-xs text-gray-500">Vila de Boane</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="text-2xl font-bold text-gray-900">12</span>
+                                                <p class="text-xs text-gray-500">+0 este mês</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <span
+                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                                                <i class="fas fa-circle mr-1 text-xs"></i> Em formação
+                                            </span>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="flex items-center space-x-2">
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Paginação -->
+                        <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
+                            <div class="text-sm text-gray-500">
+                                Mostrando 1-3 de 8 sectores
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button
+                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button
+                                    class="w-10 h-10 rounded-lg bg-red-600 text-white flex items-center justify-center">1</button>
+                                <button
+                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">2</button>
+                                <button
+                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">3</button>
+                                <span class="px-2">...</span>
+                                <button
+                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">8</button>
+                                <button
+                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Congregações -->
+                <div id="tab-congregacoes" class="config-content hidden">
+                    <!-- Cabeçalho -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                            <div>
+                                <h2 class="text-xl font-bold text-gray-900">Gestão de Congregações</h2>
+                                <p class="text-gray-600 mt-1">Administre as congregações da sua igreja</p>
+                            </div>
+                            <button id="novaCongregacaoBtn"
+                                class="mt-4 lg:mt-0 px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-medium rounded-xl transition-all duration-300 shadow-sm hover:shadow-md flex items-center justify-center group">
+                                <i class="fas fa-plus-circle mr-2 group-hover:scale-110 transition-transform"></i> Nova
+                                Congregação
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Estatísticas -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-4">
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm font-medium">Total Congregações</p>
+                                    <p class="text-3xl font-bold text-gray-900 mt-2">4</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
+                                    <i class="fas fa-church text-blue-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <span class="text-green-600 text-sm font-medium flex items-center">
+                                    <i class="fas fa-check-circle mr-1"></i> Ativas
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm font-medium">Pastores Responsáveis</p>
+                                    <p class="text-3xl font-bold text-gray-900 mt-2">4</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
+                                    <i class="fas fa-user-tie text-green-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <span class="text-green-600 text-sm font-medium">100% designados</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm font-medium">Membros nas Congregações</p>
+                                    <p class="text-3xl font-bold text-gray-900 mt-2">342</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center">
+                                    <i class="fas fa-users text-red-600 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <span class="text-gray-500 text-sm">Média: 85.5/congregação</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Congregações -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="p-6 border-b border-gray-100">
+                            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                <div class="flex-1">
+                                    <div class="relative">
+                                        <i
+                                            class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                        <input type="text"
+                                            placeholder="Buscar congregação por nome, pastor ou cidade..."
+                                            class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3 mt-4 lg:mt-0 lg:ml-4">
+                                    <button
+                                        class="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors flex items-center">
+                                        <i class="fas fa-filter mr-2"></i> Filtros
+                                    </button>
+                                    <button
+                                        class="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors flex items-center">
+                                        <i class="fas fa-download mr-2"></i> Exportar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Congregação
+                                        </th>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Pastor
+                                            Responsável
+                                        </th>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Localização
+                                        </th>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Membros</th>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Status</th>
+                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+                                    <!-- Congregação 1 -->
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="py-4 px-6">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="w-10 h-10 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white font-semibold mr-3">
+                                                    C1
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-gray-900">Congregação Central</p>
+                                                    <p class="text-sm text-gray-500">Igreja Matriz</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="font-medium text-gray-900">João Miguel</span>
+                                                <p class="text-sm text-gray-500">Pastor Titular</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="text-sm text-gray-700">Maputo Cidade</span>
+                                                <span class="text-xs text-gray-500">Av. 25 de Setembro</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="text-2xl font-bold text-gray-900">156</span>
+                                                <p class="text-xs text-gray-500">+8 este mês</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <span
+                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                                <i class="fas fa-circle mr-1 text-xs"></i> Ativa
+                                            </span>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="flex items-center space-x-2">
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Congregação 2 -->
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="py-4 px-6">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white font-semibold mr-3">
+                                                    C2
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-gray-900">Congregação Matola</p>
+                                                    <p class="text-sm text-gray-500">Filial</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="font-medium text-gray-900">Pedro Santos</span>
+                                                <p class="text-sm text-gray-500">Pastor Auxiliar</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="text-sm text-gray-700">Cidade da Matola</span>
+                                                <span class="text-xs text-gray-500">Bairro Militar</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="text-2xl font-bold text-gray-900">87</span>
+                                                <p class="text-xs text-gray-500">+3 este mês</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <span
+                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                                <i class="fas fa-circle mr-1 text-xs"></i> Ativa
+                                            </span>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="flex items-center space-x-2">
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Congregação 3 -->
+                                    <tr class="hover:bg-gray-50 transition-colors">
+                                        <td class="py-4 px-6">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-semibold mr-3">
+                                                    C3
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium text-gray-900">Congregação Boane</p>
+                                                    <p class="text-sm text-gray-500">Missão</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="font-medium text-gray-900">Maria Fernandes</span>
+                                                <p class="text-sm text-gray-500">Missionária</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="text-sm text-gray-700">Boane</span>
+                                                <span class="text-xs text-gray-500">Vila de Boane</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="space-y-1">
+                                                <span class="text-2xl font-bold text-gray-900">45</span>
+                                                <p class="text-xs text-gray-500">+5 este mês</p>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <span
+                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                                                <i class="fas fa-circle mr-1 text-xs"></i> Em crescimento
+                                            </span>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="flex items-center space-x-2">
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button
+                                                    class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Paginação -->
+                        <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
+                            <div class="text-sm text-gray-500">
+                                Mostrando 1-3 de 4 congregações
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button
+                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button
+                                    class="w-10 h-10 rounded-lg bg-red-600 text-white flex items-center justify-center">1</button>
+                                <button
+                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">2</button>
+                                <button
+                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">3</button>
+                                <button
+                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs restantes (mantidas do original) -->
+                <div id="tab-notificacoes" class="config-content hidden">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                        <h2 class="text-xl font-bold text-gray-900">Notificações</h2>
+                        <p class="text-gray-600 mt-1">Em construção...</p>
+                    </div>
+                </div>
+
+                <div id="tab-backup" class="config-content hidden">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                        <h2 class="text-xl font-bold text-gray-900">Backup & Segurança</h2>
+                        <p class="text-gray-600 mt-1">Em construção...</p>
+                    </div>
+                </div>
+
+                <div id="tab-api" class="config-content hidden">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                        <h2 class="text-xl font-bold text-gray-900">API</h2>
+                        <p class="text-gray-600 mt-1">Em construção...</p>
+                    </div>
+                </div>
+
+                <div id="tab-logs" class="config-content hidden">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                        <h2 class="text-xl font-bold text-gray-900">Logs de Sistema</h2>
+                        <p class="text-gray-600 mt-1">Em construção...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Novo Usuário -->
+    <div id="modalNovoUsuario"
+        class="fixed inset-0 bg-black backdrop-blur-sm bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        <div
+            class="bg-white rounded-2xl w-full max-w-xl max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0">
+            <div class="sticky top-0 bg-white p-6 border-b border-gray-100 z-10">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-900">Novo Usuário</h2>
+                        <p class="text-gray-600 mt-1">Crie uma nova conta de acesso</p>
+                    </div>
+                    <button id="fecharModalUsuario"
+                        class="w-10 h-10 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors">
+                        <i class="fas fa-times text-gray-500"></i>
+                    </button>
+                </div>
+            </div>
+
+            <form class="p-6" action="{{ route('admin.config.user') }}" method="POST">
+                @csrf
+                <div class="space-y-6">
+                    <!-- Informações Pessoais -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Informações Pessoais</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
+                                <input type="text" name="name"
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                                    placeholder="Ex: João da Silva">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Telefone</label>
+                                <input type="tel" name="phone"
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                                    placeholder="81 23 45 678">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Perfil e Permissões -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Perfil de usuário</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Perfil *</label>
+                                <select name="role"
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                    <option value="">Selecione um perfil</option>
+                                    <option value="Provincia">Provincial</option>
+                                    <option value="Distrito">Distrital</option>
+                                    <option value="Sector">Sectorial</option>
+                                    <option value="Congregacao">Pastor</option>
+                                    <option value="Grupo">Líder</option>
+                                    <option value="Outro">Crente</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-100 flex justify-end space-x-4">
+                    <button type="button" id="cancelarModalUsuario"
+                        class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-xl transition-colors">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                        class="px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-medium rounded-xl transition-all duration-300 flex items-center">
+                        <i class="fas fa-user-plus mr-2"></i> Criar Usuário
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Novo Sector -->
+    <div id="modalNovoSector"
+        class="fixed inset-0 bg-black backdrop-blur-sm bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        <div
+            class="bg-white rounded-2xl w-full max-w-xl max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0">
+            <div class="sticky top-0 bg-white p-6 border-b border-gray-100 z-10">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-900">Novo Sector</h2>
+                        <p class="text-gray-600 mt-1">Crie um novo sector organizacional</p>
+                    </div>
+                    <button id="fecharModalSector"
+                        class="w-10 h-10 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors">
+                        <i class="fas fa-times text-gray-500"></i>
+                    </button>
+                </div>
+            </div>
+
+            <form class="p-6">
+                <div class="space-y-6">
+                    <!-- Informações do Sector -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Informações do Sector</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nome do Sector *</label>
+                                <input type="text" name="nome"
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                                    placeholder="Ex: Sector Central">
+                            </div>
+
+
+
+                            <div class="grid grid-cols-1 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Líder do Sector</label>
+                                    <select name="lider"
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                        <option value="">Selecione um líder</option>
+                                        @foreach ($users as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                ({{ $item->role }}l)
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-100 flex justify-end space-x-4">
+                    <button type="button" id="cancelarModalSector"
+                        class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-xl transition-colors">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                        class="px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-medium rounded-xl transition-all duration-300 flex items-center">
+                        <i class="fas fa-plus-circle mr-2"></i> Criar Sector
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Nova Congregação -->
+    <div id="modalNovaCongregacao"
+        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        <div
+            class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0">
+            <div class="sticky top-0 bg-white p-6 border-b border-gray-100 z-10">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-900">Nova Congregação</h2>
+                        <p class="text-gray-600 mt-1">Crie uma nova congregação</p>
+                    </div>
+                    <button id="fecharModalCongregacao"
+                        class="w-10 h-10 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors">
+                        <i class="fas fa-times text-gray-500"></i>
+                    </button>
+                </div>
+            </div>
+
+            <form class="p-6">
+                <div class="space-y-6">
+                    <!-- Informações da Congregação -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Informações da Congregação</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nome da Congregação *</label>
+                                <input type="text"
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                                    placeholder="Ex: Congregação Central">
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Tipo</label>
+                                    <select
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                        <option value="">Selecione o tipo</option>
+                                        <option value="matriz">Igreja Matriz</option>
+                                        <option value="filial">Filial</option>
+                                        <option value="missao">Missão</option>
+                                        <option value="ponto_de_cego">Ponto de Oração</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Pastor Responsável
+                                        *</label>
+                                    <select
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                        <option value="">Selecione um pastor</option>
+                                        <option value="1">João Miguel</option>
+                                        <option value="2">Pedro Santos</option>
+                                        <option value="3">Maria Fernandes</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Data de Fundação</label>
+                                <input type="date"
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Localização e Contactos -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Localização e Contactos</h3>
+                        <div class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Província</label>
+                                    <select
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                        <option value="">Selecione uma província</option>
+                                        <option value="maputo">Maputo Cidade</option>
+                                        <option value="maputo_prov">Maputo Província</option>
+                                        <option value="gaza">Gaza</option>
+                                        <option value="inhambane">Inhambane</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Cidade/Distrito</label>
+                                    <input type="text"
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                                        placeholder="Ex: Maputo, Matola, Boane">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Endereço Completo</label>
+                                <textarea rows="2"
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all resize-none"
+                                    placeholder="Ex: Av. 25 de Setembro, Nº 123, Bairro Central"></textarea>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Telefone Principal</label>
+                                    <input type="tel"
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                                        placeholder="+258 84 123 4567">
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
+                                    <input type="email"
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                                        placeholder="congregacao@igreja.com">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-100 flex justify-end space-x-4">
+                    <button type="button" id="cancelarModalCongregacao"
+                        class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-xl transition-colors">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                        class="px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-medium rounded-xl transition-all duration-300 flex items-center">
+                        <i class="fas fa-plus-circle mr-2"></i> Criar Congregação
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     @push('styles')
         <style>
-            /* Variáveis CSS */
-            :root {
-                --primary-gradient: linear-gradient(135deg, #7f1d1d 0%, #991b1b 50%, #b91c1c 100%);
-                --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-                --card-shadow-hover: 0 20px 50px rgba(0, 0, 0, 0.12);
-            }
-
-            /* Layout Principal */
-            .settings-container {
-                display: grid;
-                grid-template-columns: 280px 1fr;
-                gap: 2rem;
-                min-height: calc(100vh - 180px);
-            }
-
-            /* Sidebar de Configurações */
-            .settings-sidebar {
-                position: sticky;
-                top: 120px;
-                height: fit-content;
-            }
-
-            .settings-nav-item {
-                display: flex;
-                align-items: center;
-                padding: 1rem 1.5rem;
-                color: #64748b;
-                text-decoration: none;
-                border-radius: 12px;
-                margin-bottom: 0.5rem;
-                transition: all 0.3s ease;
-                border-left: 4px solid transparent;
-            }
-
-            .settings-nav-item:hover {
-                background: #f8fafc;
-                color: #1e293b;
-                transform: translateX(4px);
-            }
-
-            .settings-nav-item.active {
-                background: linear-gradient(90deg, rgba(127, 29, 29, 0.1) 0%, rgba(127, 29, 29, 0.05) 100%);
-                color: #7f1d1d;
-                border-left-color: #7f1d1d;
+            .config-tab.active {
+                background-color: #fef2f2;
+                color: #dc2626;
                 font-weight: 600;
             }
 
-            .settings-nav-icon {
-                width: 24px;
-                height: 24px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-right: 12px;
-                background: rgba(127, 29, 29, 0.1);
-                border-radius: 8px;
-                color: #7f1d1d;
+            .config-tab.active:hover {
+                background-color: #fee2e2;
             }
 
-            /* Cards Modernos */
-            .modern-card {
-                background: white;
-                border-radius: 20px;
-                box-shadow: var(--card-shadow);
-                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                overflow: hidden;
-                border: 1px solid rgba(0, 0, 0, 0.05);
+            .config-content {
+                animation: fadeIn 0.3s ease;
             }
 
-            .modern-card:hover {
-                box-shadow: var(--card-shadow-hover);
-                transform: translateY(-4px);
-            }
-
-            .card-header {
-                padding: 1.75rem 2rem;
-                border-bottom: 1px solid #f1f5f9;
-                background: linear-gradient(90deg, #f8fafc 0%, #ffffff 100%);
-            }
-
-            .card-body {
-                padding: 2rem;
-            }
-
-            /* Form Elements Avançados */
-            .form-group {
-                margin-bottom: 1.75rem;
-            }
-
-            .form-label {
-                display: block;
-                margin-bottom: 0.75rem;
-                font-weight: 500;
-                color: #334155;
-                font-size: 0.875rem;
-            }
-
-            .form-input-modern {
-                width: 100%;
-                padding: 1rem 1.25rem;
-                border: 2px solid #e2e8f0;
-                border-radius: 12px;
-                font-size: 0.95rem;
-                transition: all 0.3s ease;
-                background: white;
-            }
-
-            .form-input-modern:focus {
-                outline: none;
-                border-color: #7f1d1d;
-                box-shadow: 0 0 0 3px rgba(127, 29, 29, 0.1);
-            }
-
-            .form-input-modern.error {
-                border-color: #ef4444;
-            }
-
-            /* Badges Avançados */
-            .badge-modern {
-                display: inline-flex;
-                align-items: center;
-                padding: 0.375rem 0.875rem;
-                border-radius: 20px;
-                font-size: 0.75rem;
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-            }
-
-            .badge-success {
-                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-                color: white;
-            }
-
-            .badge-warning {
-                background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-                color: white;
-            }
-
-            .badge-danger {
-                background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-                color: white;
-            }
-
-            .badge-info {
-                background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-                color: white;
-            }
-
-            /* User Cards */
-            .user-card {
-                display: flex;
-                align-items: center;
-                padding: 1.25rem;
-                border-radius: 16px;
-                background: white;
-                border: 1px solid #f1f5f9;
-                transition: all 0.3s ease;
-                margin-bottom: 1rem;
-            }
-
-            .user-card:hover {
-                border-color: #7f1d1d;
-                transform: translateY(-2px);
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            }
-
-            .user-avatar {
-                width: 56px;
-                height: 56px;
-                border-radius: 16px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: 700;
-                font-size: 1.25rem;
-                color: white;
-                margin-right: 1rem;
-                flex-shrink: 0;
-                position: relative;
-                overflow: hidden;
-            }
-
-            .user-avatar::before {
-                content: '';
-                position: absolute;
-                top: -2px;
-                left: -2px;
-                right: -2px;
-                bottom: -2px;
-                background: linear-gradient(135deg, #7f1d1d, #dc2626);
-                border-radius: 18px;
-                z-index: -1;
-                animation: pulse-ring 2s infinite;
-            }
-
-            .user-info {
-                flex: 1;
-                min-width: 0;
-            }
-
-            .user-name {
-                font-weight: 600;
-                color: #1e293b;
-                margin-bottom: 0.25rem;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .user-email {
-                font-size: 0.875rem;
-                color: #64748b;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .user-actions {
-                display: flex;
-                gap: 0.5rem;
-                opacity: 0;
-                transition: opacity 0.3s ease;
-            }
-
-            .user-card:hover .user-actions {
-                opacity: 1;
-            }
-
-            .action-btn {
-                width: 36px;
-                height: 36px;
-                border-radius: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: #f8fafc;
-                color: #64748b;
-                border: none;
-                cursor: pointer;
-                transition: all 0.2s ease;
-            }
-
-            .action-btn:hover {
-                background: #7f1d1d;
-                color: white;
-                transform: scale(1.1);
-            }
-
-            /* Group Cards */
-            .group-card {
-                background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-                border-radius: 20px;
-                padding: 1.5rem;
-                border: 1px solid #e2e8f0;
-                transition: all 0.3s ease;
-                position: relative;
-                overflow: hidden;
-            }
-
-            .group-card::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 4px;
-                background: linear-gradient(90deg, #7f1d1d, #dc2626);
-            }
-
-            .group-card:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            }
-
-            .group-icon {
-                width: 64px;
-                height: 64px;
-                border-radius: 16px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.5rem;
-                margin-bottom: 1rem;
-                background: rgba(127, 29, 29, 0.1);
-                color: #7f1d1d;
-            }
-
-            .group-stats {
-                display: flex;
-                justify-content: space-between;
-                margin-top: 1rem;
-                padding-top: 1rem;
-                border-top: 1px solid #e2e8f0;
-            }
-
-            .stat-item {
-                text-align: center;
-            }
-
-            .stat-value {
-                font-weight: 700;
-                color: #1e293b;
-                font-size: 1.25rem;
-            }
-
-            .stat-label {
-                font-size: 0.75rem;
-                color: #64748b;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-            }
-
-            /* Tabs Modernas */
-            .modern-tabs {
-                display: flex;
-                border-bottom: 2px solid #f1f5f9;
-                margin-bottom: 2rem;
-            }
-
-            .modern-tab {
-                padding: 1rem 2rem;
-                color: #64748b;
-                font-weight: 500;
-                text-decoration: none;
-                position: relative;
-                transition: all 0.3s ease;
-                border-bottom: 3px solid transparent;
-                margin-bottom: -2px;
-            }
-
-            .modern-tab:hover {
-                color: #1e293b;
-            }
-
-            .modern-tab.active {
-                color: #7f1d1d;
-                border-bottom-color: #7f1d1d;
-            }
-
-            /* Modal Moderno */
-            .modal-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.75);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1000;
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
-                backdrop-filter: blur(5px);
-            }
-
-            .modal-overlay.active {
-                opacity: 1;
-                visibility: visible;
-            }
-
-            .modal-content {
-                background: white;
-                border-radius: 24px;
-                width: 90%;
-                max-width: 600px;
-                max-height: 90vh;
-                overflow-y: auto;
-                transform: scale(0.9);
-                opacity: 0;
-                transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            }
-
-            .modal-overlay.active .modal-content {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            /* Search Modern */
-            .search-container {
-                position: relative;
-                margin-bottom: 2rem;
-            }
-
-            .search-input {
-                width: 100%;
-                padding: 1rem 1.5rem 1rem 3.5rem;
-                border: 2px solid #e2e8f0;
-                border-radius: 16px;
-                font-size: 1rem;
-                transition: all 0.3s ease;
-                background: white;
-            }
-
-            .search-input:focus {
-                outline: none;
-                border-color: #7f1d1d;
-                box-shadow: 0 0 0 3px rgba(127, 29, 29, 0.1);
-            }
-
-            .search-icon {
-                position: absolute;
-                left: 1.25rem;
-                top: 50%;
-                transform: translateY(-50%);
-                color: #94a3b8;
-            }
-
-            /* Loading Skeleton */
-            .skeleton {
-                background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-                background-size: 200% 100%;
-                animation: loading 1.5s infinite;
-                border-radius: 12px;
-            }
-
-            @keyframes loading {
-                0% {
-                    background-position: 200% 0;
-                }
-
-                100% {
-                    background-position: -200% 0;
-                }
-            }
-
-            /* Animações */
-            @keyframes fadeInUp {
+            @keyframes fadeIn {
                 from {
                     opacity: 0;
-                    transform: translateY(20px);
+                    transform: translateY(10px);
                 }
 
                 to {
@@ -444,906 +1326,248 @@
                 }
             }
 
-            .animate-in {
-                animation: fadeInUp 0.6s ease forwards;
+            /* Switch personalizado */
+            input[type="checkbox"]:checked+label div {
+                background-color: #10b981 !important;
             }
 
-            .delay-1 {
-                animation-delay: 0.1s;
-                opacity: 0;
+            input[type="checkbox"]:checked+label div div {
+                transform: translateX(24px) !important;
             }
 
-            .delay-2 {
-                animation-delay: 0.2s;
-                opacity: 0;
-            }
-
-            .delay-3 {
-                animation-delay: 0.3s;
-                opacity: 0;
-            }
-
-            .delay-4 {
-                animation-delay: 0.4s;
-                opacity: 0;
-            }
-
-            /* Responsivo */
-            @media (max-width: 1024px) {
-                .settings-container {
-                    grid-template-columns: 1fr;
+            /* Animação dos modais */
+            @keyframes modalEntrada {
+                from {
+                    opacity: 0;
+                    transform: scale(0.95);
                 }
 
-                .settings-sidebar {
-                    position: static;
-                    margin-bottom: 2rem;
+                to {
+                    opacity: 1;
+                    transform: scale(1);
                 }
+            }
+
+            .modal-aberto {
+                animation: modalEntrada 0.3s ease forwards;
             }
         </style>
     @endpush
 
-    <div class="w-full">
-        <!-- Header -->
-        <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-lg border-b border-gray-100/50 shadow-sm">
-            <div class="flex items-center justify-between px-8 py-5">
-                <div class="flex items-center space-x-4">
-                    <button id="menuToggle"
-                        class="lg:hidden text-gray-600 hover:text-red-700 p-2 rounded-xl hover:bg-gray-100 transition-all">
-                        <i class="fas fa-bars text-lg"></i>
-                    </button>
-                    <div>
-                        <h1
-                            class="text-2xl font-bold text-gray-900 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                            Configurações
-                        </h1>
-                        <p class="text-sm text-gray-500 mt-1">Gerencie usuários, grupos e configurações do sistema</p>
-                    </div>
-                </div>
-
-                <div class="flex items-center space-x-3">
-                    <div class="relative">
-                        <button id="createBtn"
-                            class="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg hover:shadow-red-200 transition-all transform hover:-translate-y-0.5">
-                            <i class="fas fa-plus mr-2"></i> Criar Novo
-                        </button>
-                        <div id="createDropdown"
-                            class="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 py-2 z-50 hidden animate-in">
-                            <div class="px-4 py-3 border-b border-gray-100">
-                                <h3 class="font-semibold text-gray-900">Criar Novo</h3>
-                            </div>
-                            <div class="py-2">
-                                <a href="#" onclick="openUserModal()"
-                                    class="flex items-center px-4 py-3 hover:bg-red-50 transition-colors group">
-                                    <div
-                                        class="w-10 h-10 rounded-xl bg-red-100 group-hover:bg-red-200 transition-colors flex items-center justify-center mr-3">
-                                        <i class="fas fa-user-plus text-red-600"></i>
-                                    </div>
-                                    <div>
-                                        <p class="font-medium text-gray-900">Novo Usuário</p>
-                                        <p class="text-xs text-gray-500">Adicionar administrador/membro</p>
-                                    </div>
-                                </a>
-                                <a href="#" onclick="openGroupModal()"
-                                    class="flex items-center px-4 py-3 hover:bg-blue-50 transition-colors group">
-                                    <div
-                                        class="w-10 h-10 rounded-xl bg-blue-100 group-hover:bg-blue-200 transition-colors flex items-center justify-center mr-3">
-                                        <i class="fas fa-layer-group text-blue-600"></i>
-                                    </div>
-                                    <div>
-                                        <p class="font-medium text-gray-900">Nova Célula</p>
-                                        <p class="text-xs text-gray-500">Criar grupo/célula da igreja</p>
-                                    </div>
-                                </a>
-                                <a href="#" onclick="openRoleModal()"
-                                    class="flex items-center px-4 py-3 hover:bg-green-50 transition-colors group">
-                                    <div
-                                        class="w-10 h-10 rounded-xl bg-green-100 group-hover:bg-green-200 transition-colors flex items-center justify-center mr-3">
-                                        <i class="fas fa-shield-alt text-green-600"></i>
-                                    </div>
-                                    <div>
-                                        <p class="font-medium text-gray-900">Novo Cargo</p>
-                                        <p class="text-xs text-gray-500">Definir permissões</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- Conteúdo Principal -->
-        <main class="p-8">
-            <!-- Banner de Ações Rápidas -->
-            <div class="modern-card mb-8 animate-in">
-                <div class="card-header">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h2 class="text-xl font-bold text-gray-900">Gestão do Sistema</h2>
-                            <p class="text-gray-500 mt-1">Gerencie todos os aspectos do sistema em um só lugar</p>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <button onclick="exportData()"
-                                class="px-4 py-2 border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors">
-                                <i class="fas fa-download mr-2"></i> Exportar
-                            </button>
-                            <button onclick="backupSystem()"
-                                class="px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors">
-                                <i class="fas fa-database mr-2"></i> Backup
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Layout de Configurações -->
-            <div class="settings-container">
-                <!-- Sidebar -->
-                <aside class="settings-sidebar">
-                    <div class="modern-card">
-                        <nav class="py-4">
-                            <a href="#" onclick="switchTab('users')" class="settings-nav-item active"
-                                data-tab="users">
-                                <div class="settings-nav-icon">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                                <span>Usuários</span>
-                                <span class="ml-auto text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">12</span>
-                            </a>
-                            <a href="#" onclick="switchTab('groups')" class="settings-nav-item" data-tab="groups">
-                                <div class="settings-nav-icon">
-                                    <i class="fas fa-church"></i>
-                                </div>
-                                <span>Grupos & Células</span>
-                                <span class="ml-auto text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">8</span>
-                            </a>
-                            <a href="#" onclick="switchTab('roles')" class="settings-nav-item" data-tab="roles">
-                                <div class="settings-nav-icon">
-                                    <i class="fas fa-user-tag"></i>
-                                </div>
-                                <span>Cargos & Permissões</span>
-                            </a>
-                            <a href="#" onclick="switchTab('system')" class="settings-nav-item" data-tab="system">
-                                <div class="settings-nav-icon">
-                                    <i class="fas fa-cogs"></i>
-                                </div>
-                                <span>Configurações</span>
-                            </a>
-                            <a href="#" onclick="switchTab('logs')" class="settings-nav-item" data-tab="logs">
-                                <div class="settings-nav-icon">
-                                    <i class="fas fa-history"></i>
-                                </div>
-                                <span>Logs do Sistema</span>
-                            </a>
-                            <a href="#" onclick="switchTab('backup')" class="settings-nav-item" data-tab="backup">
-                                <div class="settings-nav-icon">
-                                    <i class="fas fa-shield-alt"></i>
-                                </div>
-                                <span>Segurança & Backup</span>
-                            </a>
-                        </nav>
-                    </div>
-
-                    <!-- Quick Stats -->
-                    <div class="modern-card mt-6">
-                        <div class="p-6">
-                            <h3 class="font-semibold text-gray-900 mb-4">Resumo do Sistema</h3>
-                            <div class="space-y-4">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-gray-600">Usuários Ativos</span>
-                                    <span class="font-semibold text-gray-900">8/12</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-gray-600">Células Ativas</span>
-                                    <span class="font-semibold text-gray-900">6/8</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-gray-600">Último Backup</span>
-                                    <span class="font-semibold text-green-600">Hoje</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-gray-600">Espaço Usado</span>
-                                    <span class="font-semibold text-gray-900">1.2GB</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </aside>
-
-                <!-- Conteúdo Principal -->
-                <div class="settings-content">
-                    <!-- Tab: Usuários -->
-                    <div id="users-tab" class="tab-content active">
-                        <div class="modern-card animate-in">
-                            <div class="card-header">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h2 class="text-xl font-bold text-gray-900">Gestão de Usuários</h2>
-                                        <p class="text-gray-500 mt-1">Gerencie administradores e membros do sistema</p>
-                                    </div>
-                                    <div class="flex items-center space-x-3">
-                                        <div class="relative">
-                                            <div class="search-container">
-                                                <i class="fas fa-search search-icon"></i>
-                                                <input type="text" id="userSearch" placeholder="Buscar usuários..."
-                                                    class="search-input" oninput="searchUsers(this.value)">
-                                            </div>
-                                        </div>
-                                        <button onclick="openUserModal()"
-                                            class="bg-gradient-to-r from-red-600 to-red-700 text-white px-5 py-2.5 rounded-xl font-medium hover:shadow-lg hover:shadow-red-200 transition-all">
-                                            <i class="fas fa-plus mr-2"></i> Adicionar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card-body">
-                                <!-- Filtros -->
-                                <div class="flex items-center justify-between mb-6">
-                                    <div class="flex space-x-2">
-                                        <button onclick="filterUsers('all')"
-                                            class="px-4 py-2 bg-red-600 text-white rounded-xl font-medium">Todos</button>
-                                        <button onclick="filterUsers('active')"
-                                            class="px-4 py-2 border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50">Ativos</button>
-                                        <button onclick="filterUsers('inactive')"
-                                            class="px-4 py-2 border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50">Inativos</button>
-                                        <button onclick="filterUsers('admin')"
-                                            class="px-4 py-2 border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50">Administradores</button>
-                                    </div>
-                                    <div class="flex items-center space-x-3">
-                                        <span class="text-sm text-gray-500">Ordenar por:</span>
-                                        <select class="form-input-modern w-48" onchange="sortUsers(this.value)">
-                                            <option value="name">Nome</option>
-                                            <option value="date">Data de Criação</option>
-                                            <option value="role">Cargo</option>
-                                            <option value="status">Status</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- Lista de Usuários -->
-                                <div id="usersList" class="space-y-3">
-                                    <!-- Usuário 1 -->
-                                    <div class="user-card animate-in delay-1">
-                                        <div class="user-avatar"
-                                            style="background: linear-gradient(135deg, #7f1d1d, #dc2626);">
-                                            AD
-                                        </div>
-                                        <div class="user-info">
-                                            <div class="user-name">Admin OMNIA</div>
-                                            <div class="user-email">admin@igreja.com</div>
-                                            <div class="flex items-center mt-2 space-x-3">
-                                                <span class="badge-modern badge-success">Administrador</span>
-                                                <span class="text-xs text-gray-500">
-                                                    <i class="fas fa-calendar mr-1"></i> Criado em: 15/01/2024
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="user-actions">
-                                            <button onclick="editUser(1)" class="action-btn" title="Editar">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button onclick="viewUser(1)" class="action-btn" title="Visualizar">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button onclick="toggleUserStatus(1)" class="action-btn" title="Desativar">
-                                                <i class="fas fa-power-off"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- Usuário 2 -->
-                                    <div class="user-card animate-in delay-2">
-                                        <div class="user-avatar"
-                                            style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
-                                            MP
-                                        </div>
-                                        <div class="user-info">
-                                            <div class="user-name">Maria Pastor</div>
-                                            <div class="user-email">maria.pastor@igreja.com</div>
-                                            <div class="flex items-center mt-2 space-x-3">
-                                                <span class="badge-modern badge-info">Pastora</span>
-                                                <span class="text-xs text-gray-500">
-                                                    <i class="fas fa-clock mr-1"></i> Último acesso: Hoje, 14:30
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="user-actions">
-                                            <button onclick="editUser(2)" class="action-btn">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button onclick="viewUser(2)" class="action-btn">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button onclick="sendResetPassword(2)" class="action-btn"
-                                                title="Redefinir Senha">
-                                                <i class="fas fa-key"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- Usuário 3 -->
-                                    <div class="user-card animate-in delay-3">
-                                        <div class="user-avatar"
-                                            style="background: linear-gradient(135deg, #10b981, #059669);">
-                                            JB
-                                        </div>
-                                        <div class="user-info">
-                                            <div class="user-name">João Batista</div>
-                                            <div class="user-email">joao.batista@igreja.com</div>
-                                            <div class="flex items-center mt-2 space-x-3">
-                                                <span class="badge-modern badge-warning">Líder de Célula</span>
-                                                <span class="text-xs text-gray-500">
-                                                    <i class="fas fa-users mr-1"></i> 45 membros
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="user-actions">
-                                            <button onclick="editUser(3)" class="action-btn">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button onclick="viewUser(3)" class="action-btn">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button onclick="toggleUserStatus(3)" class="action-btn">
-                                                <i class="fas fa-power-off"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- Usuário 4 -->
-                                    <div class="user-card animate-in delay-4">
-                                        <div class="user-avatar"
-                                            style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
-                                            AP
-                                        </div>
-                                        <div class="user-info">
-                                            <div class="user-name">Ana Profeta</div>
-                                            <div class="user-email">ana.profeta@igreja.com</div>
-                                            <div class="flex items-center mt-2 space-x-3">
-                                                <span class="badge-modern badge-info">Ministra de Louvor</span>
-                                                <span class="text-xs text-gray-500">
-                                                    <i class="fas fa-clock mr-1"></i> Último acesso: Ontem
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="user-actions">
-                                            <button onclick="editUser(4)" class="action-btn">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button onclick="viewUser(4)" class="action-btn">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button onclick="sendResetPassword(4)" class="action-btn">
-                                                <i class="fas fa-key"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Paginação -->
-                                <div class="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
-                                    <div class="text-sm text-gray-500">
-                                        Mostrando 4 de 12 usuários
-                                    </div>
-                                    <div class="flex items-center space-x-2">
-                                        <button
-                                            class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50">
-                                            <i class="fas fa-chevron-left"></i>
-                                        </button>
-                                        <button
-                                            class="w-10 h-10 flex items-center justify-center rounded-xl bg-red-600 text-white font-medium">1</button>
-                                        <button
-                                            class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50">2</button>
-                                        <button
-                                            class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50">3</button>
-                                        <button
-                                            class="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Tab: Grupos & Células -->
-                    <div id="groups-tab" class="tab-content">
-                        <div class="modern-card animate-in">
-                            <div class="card-header">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <h2 class="text-xl font-bold text-gray-900">Grupos & Células</h2>
-                                        <p class="text-gray-500 mt-1">Gerencie os grupos e células da igreja</p>
-                                    </div>
-                                    <button onclick="openGroupModal()"
-                                        class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-5 py-2.5 rounded-xl font-medium hover:shadow-lg hover:shadow-blue-200 transition-all">
-                                        <i class="fas fa-plus mr-2"></i> Nova Célula
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="card-body">
-                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    <!-- Grupo 1 -->
-                                    <div class="group-card animate-in delay-1">
-                                        <div class="group-icon">
-                                            <i class="fas fa-church"></i>
-                                        </div>
-                                        <h3 class="text-lg font-bold text-gray-900 mb-2">Célula Central</h3>
-                                        <p class="text-gray-600 text-sm mb-4">Célula principal da igreja com foco em
-                                            discipulado</p>
-
-                                        <div class="group-stats">
-                                            <div class="stat-item">
-                                                <div class="stat-value">65</div>
-                                                <div class="stat-label">Membros</div>
-                                            </div>
-                                            <div class="stat-item">
-                                                <div class="stat-value">Qua</div>
-                                                <div class="stat-label">Dia</div>
-                                            </div>
-                                            <div class="stat-item">
-                                                <div class="stat-value">19h</div>
-                                                <div class="stat-label">Horário</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="flex justify-between items-center mt-6">
-                                            <div class="flex items-center">
-                                                <div
-                                                    class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center mr-2">
-                                                    <span class="text-xs font-semibold text-red-700">MP</span>
-                                                </div>
-                                                <span class="text-sm text-gray-600">Maria Pastor</span>
-                                            </div>
-                                            <button onclick="viewGroup(1)" class="text-blue-600 hover:text-blue-800">
-                                                <i class="fas fa-chevron-right"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- Grupo 2 -->
-                                    <div class="group-card animate-in delay-2">
-                                        <div class="group-icon"
-                                            style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">
-                                            <i class="fas fa-music"></i>
-                                        </div>
-                                        <h3 class="text-lg font-bold text-gray-900 mb-2">Ministério de Louvor</h3>
-                                        <p class="text-gray-600 text-sm mb-4">Equipe responsável pela adoração e música</p>
-
-                                        <div class="group-stats">
-                                            <div class="stat-item">
-                                                <div class="stat-value">24</div>
-                                                <div class="stat-label">Membros</div>
-                                            </div>
-                                            <div class="stat-item">
-                                                <div class="stat-value">Sáb</div>
-                                                <div class="stat-label">Dia</div>
-                                            </div>
-                                            <div class="stat-item">
-                                                <div class="stat-value">15h</div>
-                                                <div class="stat-label">Horário</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="flex justify-between items-center mt-6">
-                                            <div class="flex items-center">
-                                                <div
-                                                    class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-                                                    <span class="text-xs font-semibold text-blue-700">JB</span>
-                                                </div>
-                                                <span class="text-sm text-gray-600">João Batista</span>
-                                            </div>
-                                            <button onclick="viewGroup(2)" class="text-blue-600 hover:text-blue-800">
-                                                <i class="fas fa-chevron-right"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- Grupo 3 -->
-                                    <div class="group-card animate-in delay-3">
-                                        <div class="group-icon"
-                                            style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
-                                            <i class="fas fa-hands-helping"></i>
-                                        </div>
-                                        <h3 class="text-lg font-bold text-gray-900 mb-2">Diaconia</h3>
-                                        <p class="text-gray-600 text-sm mb-4">Serviço social e assistência à comunidade</p>
-
-                                        <div class="group-stats">
-                                            <div class="stat-item">
-                                                <div class="stat-value">18</div>
-                                                <div class="stat-label">Membros</div>
-                                            </div>
-                                            <div class="stat-item">
-                                                <div class="stat-value">Sex</div>
-                                                <div class="stat-label">Dia</div>
-                                            </div>
-                                            <div class="stat-item">
-                                                <div class="stat-value">17h</div>
-                                                <div class="stat-label">Horário</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="flex justify-between items-center mt-6">
-                                            <div class="flex items-center">
-                                                <div
-                                                    class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-2">
-                                                    <span class="text-xs font-semibold text-green-700">PA</span>
-                                                </div>
-                                                <span class="text-sm text-gray-600">Pedro Apóstolo</span>
-                                            </div>
-                                            <button onclick="viewGroup(3)" class="text-blue-600 hover:text-blue-800">
-                                                <i class="fas fa-chevron-right"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Outras Tabs (simplificadas) -->
-                    <div id="roles-tab" class="tab-content">
-                        <div class="modern-card animate-in">
-                            <div class="card-header">
-                                <h2 class="text-xl font-bold text-gray-900">Cargos & Permissões</h2>
-                            </div>
-                            <div class="card-body">
-                                <!-- Conteúdo dos cargos -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="system-tab" class="tab-content">
-                        <div class="modern-card animate-in">
-                            <div class="card-header">
-                                <h2 class="text-xl font-bold text-gray-900">Configurações do Sistema</h2>
-                            </div>
-                            <div class="card-body">
-                                <!-- Configurações -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="logs-tab" class="tab-content">
-                        <div class="modern-card animate-in">
-                            <div class="card-header">
-                                <h2 class="text-xl font-bold text-gray-900">Logs do Sistema</h2>
-                            </div>
-                            <div class="card-body">
-                                <!-- Logs -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="backup-tab" class="tab-content">
-                        <div class="modern-card animate-in">
-                            <div class="card-header">
-                                <h2 class="text-xl font-bold text-gray-900">Segurança & Backup</h2>
-                            </div>
-                            <div class="card-body">
-                                <!-- Backup -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Modal de Usuário -->
-    <div id="userModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="p-8">
-                <div class="flex items-center justify-between mb-8">
-                    <div>
-                        <h2 class="text-2xl font-bold text-gray-900">Novo Usuário</h2>
-                        <p class="text-gray-500 mt-1">Adicione um novo usuário ao sistema</p>
-                    </div>
-                    <button onclick="closeModal('userModal')"
-                        class="w-10 h-10 rounded-xl flex items-center justify-center hover:bg-gray-100">
-                        <i class="fas fa-times text-gray-500"></i>
-                    </button>
-                </div>
-
-                <form id="userForm" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="form-group">
-                            <label class="form-label">Nome Completo</label>
-                            <input type="text" class="form-input-modern" placeholder="Digite o nome completo"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-input-modern" placeholder="exemplo@igreja.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Telefone</label>
-                            <input type="tel" class="form-input-modern" placeholder="+258 84 123 4567">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Cargo</label>
-                            <select class="form-input-modern">
-                                <option value="">Selecione um cargo</option>
-                                <option value="admin">Administrador</option>
-                                <option value="pastor">Pastor/Pastora</option>
-                                <option value="leader">Líder de Célula</option>
-                                <option value="member">Membro</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="form-group">
-                            <label class="form-label">Senha</label>
-                            <input type="password" class="form-input-modern" placeholder="Mínimo 8 caracteres" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Confirmar Senha</label>
-                            <input type="password" class="form-input-modern" placeholder="Digite novamente" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Permissões</label>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-3">
-                            <label class="flex items-center space-x-3 cursor-pointer">
-                                <input type="checkbox" class="w-5 h-5 text-red-600 rounded">
-                                <span class="text-gray-700">Usuários</span>
-                            </label>
-                            <label class="flex items-center space-x-3 cursor-pointer">
-                                <input type="checkbox" class="w-5 h-5 text-red-600 rounded">
-                                <span class="text-gray-700">Grupos</span>
-                            </label>
-                            <label class="flex items-center space-x-3 cursor-pointer">
-                                <input type="checkbox" class="w-5 h-5 text-red-600 rounded">
-                                <span class="text-gray-700">Financeiro</span>
-                            </label>
-                            <label class="flex items-center space-x-3 cursor-pointer">
-                                <input type="checkbox" class="w-5 h-5 text-red-600 rounded">
-                                <span class="text-gray-700">Relatórios</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="flex justify-end space-x-4 pt-6 border-t border-gray-100">
-                        <button type="button" onclick="closeModal('userModal')"
-                            class="px-6 py-3 border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors">
-                            Cancelar
-                        </button>
-                        <button type="submit"
-                            class="px-6 py-3 bg-red-600 text-white rounded-xl font-medium hover:bg-red-700 transition-colors">
-                            <i class="fas fa-save mr-2"></i> Salvar Usuário
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de Grupo -->
-    <div id="groupModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="p-8">
-                <div class="flex items-center justify-between mb-8">
-                    <div>
-                        <h2 class="text-2xl font-bold text-gray-900">Nova Célula/Grupo</h2>
-                        <p class="text-gray-500 mt-1">Crie um novo grupo ou célula da igreja</p>
-                    </div>
-                    <button onclick="closeModal('groupModal')"
-                        class="w-10 h-10 rounded-xl flex items-center justify-center hover:bg-gray-100">
-                        <i class="fas fa-times text-gray-500"></i>
-                    </button>
-                </div>
-
-                <form id="groupForm" class="space-y-6">
-                    <div class="form-group">
-                        <label class="form-label">Nome do Grupo</label>
-                        <input type="text" class="form-input-modern" placeholder="Ex: Célula Central" required>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="form-group">
-                            <label class="form-label">Tipo</label>
-                            <select class="form-input-modern">
-                                <option value="cell">Célula</option>
-                                <option value="ministry">Ministério</option>
-                                <option value="department">Departamento</option>
-                                <option value="team">Equipe</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Líder Responsável</label>
-                            <select class="form-input-modern">
-                                <option value="">Selecione um líder</option>
-                                <option value="1">Maria Pastor</option>
-                                <option value="2">João Batista</option>
-                                <option value="3">Pedro Apóstolo</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="form-group">
-                            <label class="form-label">Dia da Reunião</label>
-                            <select class="form-input-modern">
-                                <option>Segunda-feira</option>
-                                <option>Terça-feira</option>
-                                <option>Quarta-feira</option>
-                                <option>Quinta-feira</option>
-                                <option>Sexta-feira</option>
-                                <option>Sábado</option>
-                                <option>Domingo</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Horário</label>
-                            <input type="time" class="form-input-modern">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Local</label>
-                            <input type="text" class="form-input-modern" placeholder="Ex: Templo Principal">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Descrição</label>
-                        <textarea rows="4" class="form-input-modern" placeholder="Descreva o propósito deste grupo..."></textarea>
-                    </div>
-
-                    <div class="flex justify-end space-x-4 pt-6 border-t border-gray-100">
-                        <button type="button" onclick="closeModal('groupModal')"
-                            class="px-6 py-3 border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors">
-                            Cancelar
-                        </button>
-                        <button type="submit"
-                            class="px-6 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-colors">
-                            <i class="fas fa-plus mr-2"></i> Criar Grupo
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     @push('scripts')
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                // Sistema de Tabs
-                window.switchTab = function(tabName) {
-                    // Remover active de todas as tabs
-                    document.querySelectorAll('.tab-content').forEach(tab => {
+                // Controle das Tabs de Configurações
+                const configTabs = document.querySelectorAll('.config-tab');
+                const configContents = document.querySelectorAll('.config-content');
+
+                function mostrarTab(tabId) {
+                    // Remover classe active de todas as tabs
+                    configTabs.forEach(tab => {
                         tab.classList.remove('active');
                     });
 
-                    document.querySelectorAll('.settings-nav-item').forEach(item => {
-                        item.classList.remove('active');
+                    // Esconder todos os conteúdos
+                    configContents.forEach(content => {
+                        content.classList.add('hidden');
                     });
 
-                    // Ativar tab selecionada
-                    document.getElementById(tabName + '-tab').classList.add('active');
-                    document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+                    // Ativar tab clicada
+                    const tabAtiva = document.querySelector(`[data-tab="${tabId}"]`);
+                    if (tabAtiva) {
+                        tabAtiva.classList.add('active');
+                    }
 
-                    // Animar entrada
-                    const tabContent = document.getElementById(tabName + '-tab');
-                    tabContent.querySelectorAll('.animate-in').forEach((el, index) => {
-                        el.style.animationDelay = `${index * 0.1}s`;
-                        el.classList.add('animate-in');
-                    });
-                };
-
-                // Create Button Dropdown
-                const createBtn = document.getElementById('createBtn');
-                const createDropdown = document.getElementById('createDropdown');
-
-                if (createBtn) {
-                    createBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        createDropdown.classList.toggle('hidden');
-                    });
+                    // Mostrar conteúdo correspondente
+                    const conteudoAtivo = document.getElementById(`tab-${tabId}`);
+                    if (conteudoAtivo) {
+                        conteudoAtivo.classList.remove('hidden');
+                    }
                 }
 
-                // Fechar dropdown ao clicar fora
-                document.addEventListener('click', function(e) {
-                    if (!e.target.closest('#createDropdown') && !e.target.closest('#createBtn')) {
-                        createDropdown.classList.add('hidden');
-                    }
+                // Adicionar event listeners para cada tab
+                configTabs.forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        const tabId = this.getAttribute('data-tab');
+                        mostrarTab(tabId);
+                    });
                 });
 
-                // Modal Functions
-                window.openUserModal = function() {
-                    document.getElementById('userModal').classList.add('active');
-                    createDropdown.classList.add('hidden');
-                };
+                // Modal Novo Usuário
+                const novoUsuarioBtn = document.getElementById('novoUsuarioBtn');
+                const modalNovoUsuario = document.getElementById('modalNovoUsuario');
+                const fecharModalUsuario = document.getElementById('fecharModalUsuario');
+                const cancelarModalUsuario = document.getElementById('cancelarModalUsuario');
+                const modalUsuarioContent = modalNovoUsuario?.querySelector('.transform');
 
-                window.openGroupModal = function() {
-                    document.getElementById('groupModal').classList.add('active');
-                    createDropdown.classList.add('hidden');
-                };
+                function abrirModalUsuario() {
+                    modalNovoUsuario.classList.remove('hidden');
+                    modalNovoUsuario.classList.add('flex');
+                    setTimeout(() => {
+                        modalUsuarioContent.classList.remove('scale-95', 'opacity-0');
+                        modalUsuarioContent.classList.add('modal-aberto');
+                    }, 10);
+                    document.body.style.overflow = 'hidden';
+                }
 
-                window.closeModal = function(modalId) {
-                    document.getElementById(modalId).classList.remove('active');
-                };
+                function fecharModalUsuarioFunc() {
+                    modalUsuarioContent.classList.remove('modal-aberto');
+                    modalUsuarioContent.classList.add('scale-95', 'opacity-0');
+                    setTimeout(() => {
+                        modalNovoUsuario.classList.remove('flex');
+                        modalNovoUsuario.classList.add('hidden');
+                        document.body.style.overflow = '';
+                    }, 300);
+                }
 
-                // Fechar modal ao clicar fora
-                document.querySelectorAll('.modal-overlay').forEach(modal => {
-                    modal.addEventListener('click', function(e) {
-                        if (e.target === modal) {
-                            modal.classList.remove('active');
+                if (novoUsuarioBtn) novoUsuarioBtn.addEventListener('click', abrirModalUsuario);
+                if (fecharModalUsuario) fecharModalUsuario.addEventListener('click', fecharModalUsuarioFunc);
+                if (cancelarModalUsuario) cancelarModalUsuario.addEventListener('click', fecharModalUsuarioFunc);
+
+                if (modalNovoUsuario) {
+                    modalNovoUsuario.addEventListener('click', function(e) {
+                        if (e.target === modalNovoUsuario) {
+                            fecharModalUsuarioFunc();
+                        }
+                    });
+
+                    const form = modalNovoUsuario.querySelector('form');
+                    if (form) {
+                        form.addEventListener('submit', function(e) {
+                            form.submit();
+                        });
+                    }
+                }
+
+                // Modal Novo Sector
+                const novoSectorBtn = document.getElementById('novoSectorBtn');
+                const modalNovoSector = document.getElementById('modalNovoSector');
+                const fecharModalSector = document.getElementById('fecharModalSector');
+                const cancelarModalSector = document.getElementById('cancelarModalSector');
+                const modalSectorContent = modalNovoSector?.querySelector('.transform');
+
+                function abrirModalSector() {
+                    modalNovoSector.classList.remove('hidden');
+                    modalNovoSector.classList.add('flex');
+                    setTimeout(() => {
+                        modalSectorContent.classList.remove('scale-95', 'opacity-0');
+                        modalSectorContent.classList.add('modal-aberto');
+                    }, 10);
+                    document.body.style.overflow = 'hidden';
+                }
+
+                function fecharModalSectorFunc() {
+                    modalSectorContent.classList.remove('modal-aberto');
+                    modalSectorContent.classList.add('scale-95', 'opacity-0');
+                    setTimeout(() => {
+                        modalNovoSector.classList.remove('flex');
+                        modalNovoSector.classList.add('hidden');
+                        document.body.style.overflow = '';
+                    }, 300);
+                }
+
+                if (novoSectorBtn) novoSectorBtn.addEventListener('click', abrirModalSector);
+                if (fecharModalSector) fecharModalSector.addEventListener('click', fecharModalSectorFunc);
+                if (cancelarModalSector) cancelarModalSector.addEventListener('click', fecharModalSectorFunc);
+
+                if (modalNovoSector) {
+                    modalNovoSector.addEventListener('click', function(e) {
+                        if (e.target === modalNovoSector) {
+                            fecharModalSectorFunc();
+                        }
+                    });
+
+                    const form = modalNovoSector.querySelector('form');
+                    if (form) {
+                        form.addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            alert('Sector criado com sucesso!');
+                            fecharModalSectorFunc();
+                        });
+                    }
+                }
+
+                // Modal Nova Congregação
+                const novaCongregacaoBtn = document.getElementById('novaCongregacaoBtn');
+                const modalNovaCongregacao = document.getElementById('modalNovaCongregacao');
+                const fecharModalCongregacao = document.getElementById('fecharModalCongregacao');
+                const cancelarModalCongregacao = document.getElementById('cancelarModalCongregacao');
+                const modalCongregacaoContent = modalNovaCongregacao?.querySelector('.transform');
+
+                function abrirModalCongregacao() {
+                    modalNovaCongregacao.classList.remove('hidden');
+                    modalNovaCongregacao.classList.add('flex');
+                    setTimeout(() => {
+                        modalCongregacaoContent.classList.remove('scale-95', 'opacity-0');
+                        modalCongregacaoContent.classList.add('modal-aberto');
+                    }, 10);
+                    document.body.style.overflow = 'hidden';
+                }
+
+                function fecharModalCongregacaoFunc() {
+                    modalCongregacaoContent.classList.remove('modal-aberto');
+                    modalCongregacaoContent.classList.add('scale-95', 'opacity-0');
+                    setTimeout(() => {
+                        modalNovaCongregacao.classList.remove('flex');
+                        modalNovaCongregacao.classList.add('hidden');
+                        document.body.style.overflow = '';
+                    }, 300);
+                }
+
+                if (novaCongregacaoBtn) novaCongregacaoBtn.addEventListener('click', abrirModalCongregacao);
+                if (fecharModalCongregacao) fecharModalCongregacao.addEventListener('click',
+                    fecharModalCongregacaoFunc);
+                if (cancelarModalCongregacao) cancelarModalCongregacao.addEventListener('click',
+                    fecharModalCongregacaoFunc);
+
+                if (modalNovaCongregacao) {
+                    modalNovaCongregacao.addEventListener('click', function(e) {
+                        if (e.target === modalNovaCongregacao) {
+                            fecharModalCongregacaoFunc();
+                        }
+                    });
+
+                    const form = modalNovaCongregacao.querySelector('form');
+                    if (form) {
+                        form.addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            alert('Congregação criada com sucesso!');
+                            fecharModalCongregacaoFunc();
+                        });
+                    }
+                }
+
+                // Validação de formulários
+                const forms = document.querySelectorAll('form');
+                forms.forEach(form => {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+
+                        // Validação básica de campos obrigatórios
+                        const requiredFields = form.querySelectorAll('[required]');
+                        let isValid = true;
+
+                        requiredFields.forEach(field => {
+                            if (!field.value.trim()) {
+                                isValid = false;
+                                field.classList.add('border-red-500');
+                                field.classList.remove('border-gray-200');
+                            } else {
+                                field.classList.remove('border-red-500');
+                                field.classList.add('border-gray-200');
+                            }
+                        });
+
+                        if (isValid) {
+                            console.log('Formulário válido, enviando...');
+                        } else {
+                            alert('Por favor, preencha todos os campos obrigatórios!');
                         }
                     });
                 });
 
-                // Form Submissions
-                document.getElementById('userForm')?.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    // Implementar criação de usuário
-                    alert('Usuário criado com sucesso!');
-                    closeModal('userModal');
-                });
-
-                document.getElementById('groupForm')?.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    // Implementar criação de grupo
-                    alert('Grupo criado com sucesso!');
-                    closeModal('groupModal');
-                });
-
-                // Search Users
-                window.searchUsers = function(query) {
-                    console.log('Buscando usuários:', query);
-                    // Implementar busca
-                };
-
-                // Filter Users
-                window.filterUsers = function(filter) {
-                    console.log('Filtrando por:', filter);
-                    // Implementar filtro
-                };
-
-                // Sort Users
-                window.sortUsers = function(sortBy) {
-                    console.log('Ordenando por:', sortBy);
-                    // Implementar ordenação
-                };
-
-                // User Actions
-                window.editUser = function(id) {
-                    console.log('Editando usuário:', id);
-                    openUserModal();
-                };
-
-                window.viewUser = function(id) {
-                    console.log('Visualizando usuário:', id);
-                    // Implementar visualização
-                };
-
-                window.toggleUserStatus = function(id) {
-                    console.log('Alternando status do usuário:', id);
-                    // Implementar alternância de status
-                };
-
-                window.sendResetPassword = function(id) {
-                    console.log('Enviando redefinição de senha para:', id);
-                    // Implementar redefinição
-                };
-
-                window.viewGroup = function(id) {
-                    console.log('Visualizando grupo:', id);
-                    // Implementar visualização
-                };
-
-                // System Functions
-                window.exportData = function() {
-                    console.log('Exportando dados...');
-                    // Implementar exportação
-                };
-
-                window.backupSystem = function() {
-                    console.log('Fazendo backup do sistema...');
-                    // Implementar backup
-                };
+                // Inicializar com a primeira tab ativa
+                mostrarTab('usuarios');
             });
         </script>
     @endpush

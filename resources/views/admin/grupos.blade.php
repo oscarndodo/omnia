@@ -571,7 +571,7 @@
                                     <span class="text-gray-700">(11) 99999-8888</span>
                                 </td>
                                 <td class="py-4 px-6">
-                                    <span class="text-gray-700">joao.miguel@email.com</span>
+                                    <span class="text-gray-700">joao.miguel@email.com</span>3mwenj
                                 </td>
                                 <td class="py-4 px-6">
                                     <span
@@ -744,11 +744,12 @@
         </div>
 
         <!-- Modal para Novo Grupo (inicialmente escondido) -->
-        <div id="novoGrupoModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
-            <div class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+        <div id="novoGrupoModal"
+            class="fixed inset-0 bg-black backdrop-blur-sm bg-opacity-50 z-50 hidden items-center justify-center p-4">
+            <div class="bg-white rounded-2xl w-full max-w-sm max-h-[90vh] overflow-y-auto">
                 <div class="p-6 border-b border-gray-100">
                     <div class="flex items-center justify-between">
-                        <h2 class="text-xl font-bold text-gray-900">Novo Grupo/Célula</h2>
+                        <h2 class="text-xl font-bold text-gray-900">Novo Grupo Familiar</h2>
                         <button id="fecharModalBtn"
                             class="w-10 h-10 rounded-lg hover:bg-gray-100 flex items-center justify-center">
                             <i class="fas fa-times text-gray-500"></i>
@@ -757,7 +758,7 @@
                 </div>
 
                 <form class="p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="grid grid-cols-1 gap-6 mb-6">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Nome do Grupo</label>
                             <input type="text"
@@ -775,37 +776,7 @@
                                 <option>Ana Costa</option>
                             </select>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Dia da Reunião</label>
-                            <select
-                                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                <option>Selecione o dia</option>
-                                <option>Segunda-feira</option>
-                                <option>Terça-feira</option>
-                                <option>Quarta-feira</option>
-                                <option>Quinta-feira</option>
-                                <option>Sexta-feira</option>
-                                <option>Sábado</option>
-                                <option>Domingo</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Horário</label>
-                            <input type="time"
-                                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Região</label>
-                            <select
-                                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                <option>Selecione a região</option>
-                                <option>Centro</option>
-                                <option>Norte</option>
-                                <option>Sul</option>
-                                <option>Leste</option>
-                                <option>Oeste</option>
-                            </select>
-                        </div>
+
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Endereço</label>
                             <input type="text"
@@ -814,12 +785,6 @@
                         </div>
                     </div>
 
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Descrição (opcional)</label>
-                        <textarea rows="3"
-                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                            placeholder="Descreva o propósito deste grupo..."></textarea>
-                    </div>
 
                     <div class="flex justify-end space-x-4 pt-6 border-t border-gray-100">
                         <button type="button" id="cancelarModalBtn"

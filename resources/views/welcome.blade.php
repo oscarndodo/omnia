@@ -29,8 +29,9 @@
 
             <!-- Formulário -->
             <div class="p-6 animate-slide-up">
-                <form id="loginForm" class="space-y-5" novalidate>
+                <form id="loginForm" class="space-y-5" action="{{ route('auth.login') }}" method="POST">
                     <!-- Campo Número -->
+                    @csrf
                     <div>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -41,7 +42,7 @@
                                     </path>
                                 </svg>
                             </div>
-                            <input type="tel" name="numero" placeholder="Número de telefone" required
+                            <input type="tel" name="telefone" placeholder="Número de telefone" required
                                 class="w-full pl-10 pr-4 py-3 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none transition-all duration-200 bg-surface/50"
                                 autocomplete="tel" />
                         </div>
@@ -59,7 +60,7 @@
                                     </path>
                                 </svg>
                             </div>
-                            <input type="password" name="senha" id="passwordField" placeholder="Senha" required
+                            <input type="password" name="password" id="passwordField" placeholder="Senha" required
                                 minlength="6"
                                 class="w-full pl-10 pr-12 py-3 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none transition-all duration-200 bg-surface/50"
                                 autocomplete="current-password" />
@@ -81,7 +82,7 @@
 
                     <!-- Botão de Submit com estados -->
                     <button type="submit" id="submitBtn"
-                        class="w-full py-3 px-4 bg-gradient-to-r from-red-700 to-red-900 text-white font-medium rounded-lg hover:from-primary-dark hover:to-primary-dark/90 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:ring-offset-2 transition-all text-sm uppercase duration-300 transform hover:-translate-y-0.5 active:translate-y-0 -md hover:-lg">
+                        class="w-full py-3 px-4 bg-gradient-to-r from-red-700 to-red-900 text-white font-medium rounded-lg hover:from-red-800 hover:to-red-900 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2 transition-all text-sm uppercase duration-300 transform hover:-translate-y-0.5 active:translate-y-0 -md hover:-lg">
                         <span id="btnText">Entrar</span>
                         <div id="loadingSpinner" class="hidden justify-center flex w-full">
                             <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
