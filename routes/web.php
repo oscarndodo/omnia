@@ -33,7 +33,13 @@ Route::prefix('admin')->group(function () {
 
     Route::get("/dizimistas", [AdminController::class, 'dizimistas'])->name('admin.dizimistas');
 
-    Route::get("/configuracoes", [AdminController::class, 'config'])->name('admin.config');
-    Route::post("/configuracoes/novo/usuario", [AdminController::class, 'novoUsuario'])->name('admin.config.user');
-    Route::get("/configuracoes/novo/usuario/{id}/status", [AdminController::class, 'usuarioStatus'])->name('admin.config.user.status');
+    Route::prefix("configuracoes")->group(function() {
+        Route::get("/", [AdminController::class, 'config'])->name('admin.config');
+        Route::post("/novo/usuario", [AdminController::class, 'novoUsuario'])->name('admin.config.user');
+        Route::get("/novo/usuario/{id}/status", [AdminController::class, 'usuarioStatus'])->name('admin.config.user.status');
+        
+        Route::post("/novo/sector", [AdminController::class, "novoSector"])->name("admin.sector.novo");
+
+        Route::post("nova/congregacao", [AdminController::class, "novaCongregacao"])->name("admin.congregacao.novo");
+    });
 });

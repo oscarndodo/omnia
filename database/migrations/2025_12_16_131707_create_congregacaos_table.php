@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('nome');
             $table->string('lider');
             $table->string('endereco');
+            $table->string("tipo_obra")->nullable();
+            $table->string("proprietario")->nullable();
+            $table->date("fundacao")->nullable();
             $table->boolean('sede')->default(false);
             $table->boolean('status')->default(true);
             $table->timestamps();

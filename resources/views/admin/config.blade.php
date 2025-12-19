@@ -20,7 +20,7 @@
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden sticky top-6">
                     <!-- Perfil do Usuário -->
                     <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-red-50 to-white">
-                        <div class="flex items-center py-8">
+                        <div class="flex items-center py-2">
 
                         </div>
                     </div>
@@ -59,13 +59,7 @@
                                     Notificações
                                 </button>
                             </li>
-                            <li>
-                                <button data-tab="backup"
-                                    class="config-tab w-full text-left px-4 py-3 rounded-xl hover:bg-red-50 hover:text-red-700 text-gray-700 font-medium flex items-center transition-colors">
-                                    <i class="fas fa-database w-6 mr-3"></i>
-                                    Backup & Segurança
-                                </button>
-                            </li>
+                           
                         </ul>
 
                         <!-- Configurações Avançadas -->
@@ -112,12 +106,12 @@
                     </div>
 
                     <!-- Estatísticas -->
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 my-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-4">
                         <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-gray-500 text-sm font-medium">Total Usuários</p>
-                                    <p class="text-3xl font-bold text-gray-900 mt-2">24</p>
+                                    <p class="text-3xl font-bold text-gray-900 mt-2">{{$users->count()}}</p>
                                 </div>
                                 <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
                                     <i class="fas fa-users text-blue-600 text-xl"></i>
@@ -134,7 +128,7 @@
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-gray-500 text-sm font-medium">Ativos</p>
-                                    <p class="text-3xl font-bold text-gray-900 mt-2">22</p>
+                                    <p class="text-3xl font-bold text-gray-900 mt-2">{{ $activos }}</p>
                                 </div>
                                 <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
                                     <i class="fas fa-user-check text-green-600 text-xl"></i>
@@ -145,26 +139,12 @@
                             </div>
                         </div>
 
-                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-gray-500 text-sm font-medium">Administradores</p>
-                                    <p class="text-3xl font-bold text-gray-900 mt-2">3</p>
-                                </div>
-                                <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center">
-                                    <i class="fas fa-user-shield text-red-600 text-xl"></i>
-                                </div>
-                            </div>
-                            <div class="mt-4">
-                                <span class="text-gray-500 text-sm">12,5% do total</span>
-                            </div>
-                        </div>
-
+                       
                         <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-gray-500 text-sm font-medium">Inativos</p>
-                                    <p class="text-3xl font-bold text-gray-900 mt-2">2</p>
+                                    <p class="text-3xl font-bold text-gray-900 mt-2">{{$inactivos}}</p>
                                 </div>
                                 <div class="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center">
                                     <i class="fas fa-user-times text-yellow-600 text-xl"></i>
@@ -236,7 +216,7 @@
                                                 <div class="space-y-1">
                                                     <span
                                                         class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                                                        {{ $item->role }}l
+                                                        {{ $item->role }}
                                                     </span>
                                                 </div>
                                             </td>
@@ -391,55 +371,7 @@
                         </div>
                     </div>
 
-                    <!-- Estatísticas -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-4">
-                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-gray-500 text-sm font-medium">Total Sectores</p>
-                                    <p class="text-3xl font-bold text-gray-900 mt-2">8</p>
-                                </div>
-                                <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
-                                    <i class="fas fa-sitemap text-blue-600 text-xl"></i>
-                                </div>
-                            </div>
-                            <div class="mt-4">
-                                <span class="text-green-600 text-sm font-medium flex items-center">
-                                    <i class="fas fa-check-circle mr-1"></i> Ativos
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-gray-500 text-sm font-medium">Líderes Designados</p>
-                                    <p class="text-3xl font-bold text-gray-900 mt-2">6</p>
-                                </div>
-                                <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
-                                    <i class="fas fa-user-tie text-green-600 text-xl"></i>
-                                </div>
-                            </div>
-                            <div class="mt-4">
-                                <span class="text-yellow-600 text-sm font-medium">2 vagas</span>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-gray-500 text-sm font-medium">Membros nos Sectores</p>
-                                    <p class="text-3xl font-bold text-gray-900 mt-2">156</p>
-                                </div>
-                                <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center">
-                                    <i class="fas fa-users text-red-600 text-xl"></i>
-                                </div>
-                            </div>
-                            <div class="mt-4">
-                                <span class="text-gray-500 text-sm">Média: 19.5/sector</span>
-                            </div>
-                        </div>
-                    </div>
+                 
 
                     <!-- Lista de Sectores -->
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
@@ -474,51 +406,43 @@
                                         <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Sector</th>
                                         <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Líder
                                         </th>
-                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Localização
-                                        </th>
-                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Membros</th>
                                         <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Status</th>
                                         <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-100">
+                                    @forelse ($sectores as $item)
                                     <!-- Sector 1 -->
                                     <tr class="hover:bg-gray-50 transition-colors">
                                         <td class="py-4 px-6">
                                             <div class="flex items-center">
-                                                <div
-                                                    class="w-10 h-10 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white font-semibold mr-3">
-                                                    S1
-                                                </div>
+                                               
                                                 <div>
-                                                    <p class="font-medium text-gray-900">Sector Central</p>
-                                                    <p class="text-sm text-gray-500">Fundado: 12/2022</p>
+                                                    <p class="font-medium text-gray-900">{{$item->nome}}</p>
+                                                    <p class="text-sm text-gray-500">Cadastro: {{ $item->created_at->format('m/Y') }}</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="py-4 px-6">
                                             <div class="space-y-1">
-                                                <span class="font-medium text-gray-900">João Miguel</span>
-                                                <p class="text-sm text-gray-500">Pastor</p>
+                                                <span class="font-medium text-gray-900">{{ $item->lider->name }}</span>
+                                                <p class="text-sm text-gray-500">{{ $item->lider->role }}</p>
                                             </div>
                                         </td>
+                                       
+                                       
                                         <td class="py-4 px-6">
-                                            <div class="space-y-1">
-                                                <span class="text-sm text-gray-700">Maputo Cidade</span>
-                                                <span class="text-xs text-gray-500">Bairro Central</span>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="space-y-1">
-                                                <span class="text-2xl font-bold text-gray-900">25</span>
-                                                <p class="text-xs text-gray-500">+2 este mês</p>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <span
-                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                                <i class="fas fa-circle mr-1 text-xs"></i> Ativo
-                                            </span>
+                                            @if ($item->status)
+                                                    <span
+                                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                                        <i class="fas fa-circle mr-1 text-xs"></i> Activo
+                                                    </span>
+                                                @else
+                                                    <span
+                                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                                                        <i class="fas fa-circle mr-1 text-xs"></i> Inactivo
+                                                    </span>
+                                                @endif
                                         </td>
                                         <td class="py-4 px-6">
                                             <div class="flex items-center space-x-2">
@@ -537,145 +461,95 @@
                                             </div>
                                         </td>
                                     </tr>
+                                      @empty
+                                        <tr>
+                                            <td colspan="4" class="py-4 px-6 text-center text-gray-500">
+                                                Nenhum sector encontrado.
+                                            </td>
+                                        </tr>
+                                    @endforelse
 
-                                    <!-- Sector 2 -->
-                                    <tr class="hover:bg-gray-50 transition-colors">
-                                        <td class="py-4 px-6">
-                                            <div class="flex items-center">
-                                                <div
-                                                    class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white font-semibold mr-3">
-                                                    S2
-                                                </div>
-                                                <div>
-                                                    <p class="font-medium text-gray-900">Sector Matola</p>
-                                                    <p class="text-sm text-gray-500">Fundado: 03/2023</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="space-y-1">
-                                                <span class="font-medium text-gray-900">Ana Costa</span>
-                                                <p class="text-sm text-gray-500">Líder de Sector</p>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="space-y-1">
-                                                <span class="text-sm text-gray-700">Cidade da Matola</span>
-                                                <span class="text-xs text-gray-500">Bairro Militar</span>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="space-y-1">
-                                                <span class="text-2xl font-bold text-gray-900">18</span>
-                                                <p class="text-xs text-gray-500">+1 este mês</p>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <span
-                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                                <i class="fas fa-circle mr-1 text-xs"></i> Ativo
-                                            </span>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="flex items-center space-x-2">
-                                                <button
-                                                    class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <button
-                                                    class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button
-                                                    class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <!-- Sector 3 -->
-                                    <tr class="hover:bg-gray-50 transition-colors">
-                                        <td class="py-4 px-6">
-                                            <div class="flex items-center">
-                                                <div
-                                                    class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-semibold mr-3">
-                                                    S3
-                                                </div>
-                                                <div>
-                                                    <p class="font-medium text-gray-900">Sector Boane</p>
-                                                    <p class="text-sm text-gray-500">Fundado: 08/2023</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="space-y-1">
-                                                <span class="font-medium text-gray-900">Carlos Mendes</span>
-                                                <p class="text-sm text-gray-500">Evangelista</p>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="space-y-1">
-                                                <span class="text-sm text-gray-700">Boane</span>
-                                                <span class="text-xs text-gray-500">Vila de Boane</span>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="space-y-1">
-                                                <span class="text-2xl font-bold text-gray-900">12</span>
-                                                <p class="text-xs text-gray-500">+0 este mês</p>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <span
-                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
-                                                <i class="fas fa-circle mr-1 text-xs"></i> Em formação
-                                            </span>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="flex items-center space-x-2">
-                                                <button
-                                                    class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <button
-                                                    class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button
-                                                    class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
 
                         <!-- Paginação -->
                         <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
-                            <div class="text-sm text-gray-500">
-                                Mostrando 1-3 de 8 sectores
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <button
-                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <button
-                                    class="w-10 h-10 rounded-lg bg-red-600 text-white flex items-center justify-center">1</button>
-                                <button
-                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">2</button>
-                                <button
-                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">3</button>
-                                <span class="px-2">...</span>
-                                <button
-                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">8</button>
-                                <button
-                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
+                            <!-- Na seção de paginação dos usuários -->
+                            <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
+                                <div class="text-sm text-gray-500">
+                                    Mostrando {{ $sectores->firstItem() }} a {{ $sectores->lastItem() }} de {{ $sectores->total() }}
+                                    sectores
+                                </div>
+
+                                @if ($sectores->hasPages())
+                                    <div class="flex items-center space-x-2">
+                                        <!-- Botão Anterior -->
+                                        @if ($sectores->onFirstPage())
+                                            <button disabled
+                                                class="w-10 h-10 rounded-lg bg-gray-100 text-gray-400 cursor-not-allowed flex items-center justify-center">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </button>
+                                        @else
+                                            <a href="{{ $sectores->previousPageUrl() }}"
+                                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </a>
+                                        @endif
+
+                                        <!-- Primeira página -->
+                                        @if ($sectores->currentPage() > 3)
+                                            <a href="{{ $sectores->url(1) }}"
+                                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                                                1
+                                            </a>
+                                            @if ($sectores->currentPage() > 4)
+                                                <span class="px-2 text-gray-500">...</span>
+                                            @endif
+                                        @endif
+
+                                        <!-- Páginas ao redor da atual -->
+                                        @foreach (range(1, $sectores->lastPage()) as $page)
+                                            @if ($page >= $sectores->currentPage() - 2 && $page <= $sectores->currentPage() + 2)
+                                                @if ($page == $sectores->currentPage())
+                                                    <span
+                                                        class="w-10 h-10 rounded-lg bg-red-600 text-white flex items-center justify-center">
+                                                        {{ $page }}
+                                                    </span>
+                                                @else
+                                                    <a href="{{ $sectores->url($page) }}"
+                                                        class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                                                        {{ $page }}
+                                                    </a>
+                                                @endif
+                                            @endif
+                                        @endforeach
+
+                                        <!-- Última página -->
+                                        @if ($sectores->currentPage() < $sectores->lastPage() - 2)
+                                            @if ($sectores->currentPage() < $sectores->lastPage() - 3)
+                                                <span class="px-2 text-gray-500">...</span>
+                                            @endif
+                                            <a href="{{ $sectores->url($sectores->lastPage()) }}"
+                                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                                                {{ $sectores->lastPage() }}
+                                            </a>
+                                        @endif
+
+                                        <!-- Botão Próximo -->
+                                        @if ($sectores->hasMorePages())
+                                            <a href="{{ $sectores->nextPageUrl() }}"
+                                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </a>
+                                        @else
+                                            <button disabled
+                                                class="w-10 h-10 rounded-lg bg-gray-100 text-gray-400 cursor-not-allowed flex items-center justify-center">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </button>
+                                        @endif
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -785,13 +659,14 @@
                                         </th>
                                         <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Localização
                                         </th>
-                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Membros</th>
                                         <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Status</th>
                                         <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-100">
-                                    <!-- Congregação 1 -->
+
+                                    @forelse ($congregacoes as $item)
+                                         <!-- Congregação 1 -->
                                     <tr class="hover:bg-gray-50 transition-colors">
                                         <td class="py-4 px-6">
                                             <div class="flex items-center">
@@ -800,34 +675,35 @@
                                                     C1
                                                 </div>
                                                 <div>
-                                                    <p class="font-medium text-gray-900">Congregação Central</p>
-                                                    <p class="text-sm text-gray-500">Igreja Matriz</p>
+                                                    <p class="font-medium text-gray-900">{{ $item->nome }}</p>
+                                                    <p class="text-sm text-gray-500">{{ $item->sector->nome }}</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="py-4 px-6">
                                             <div class="space-y-1">
-                                                <span class="font-medium text-gray-900">João Miguel</span>
+                                                <span class="font-medium text-gray-900">{{ $item->lider }}</span>
                                                 <p class="text-sm text-gray-500">Pastor Titular</p>
                                             </div>
                                         </td>
                                         <td class="py-4 px-6">
                                             <div class="space-y-1">
-                                                <span class="text-sm text-gray-700">Maputo Cidade</span>
-                                                <span class="text-xs text-gray-500">Av. 25 de Setembro</span>
+                                                <span class="text-sm text-gray-700">{{ $item->endereco }}</span>
                                             </div>
                                         </td>
+                                        
                                         <td class="py-4 px-6">
-                                            <div class="space-y-1">
-                                                <span class="text-2xl font-bold text-gray-900">156</span>
-                                                <p class="text-xs text-gray-500">+8 este mês</p>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <span
-                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                                <i class="fas fa-circle mr-1 text-xs"></i> Ativa
-                                            </span>
+                                             @if ($item->status)
+                                                    <span
+                                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                                        <i class="fas fa-circle mr-1 text-xs"></i> Activo
+                                                    </span>
+                                                @else
+                                                    <span
+                                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                                                        <i class="fas fa-circle mr-1 text-xs"></i> Inactivo
+                                                    </span>
+                                                @endif
                                         </td>
                                         <td class="py-4 px-6">
                                             <div class="flex items-center space-x-2">
@@ -846,118 +722,15 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @empty
+                                         <tr>
+                                            <td colspan="4" class="py-4 px-6 text-center text-gray-500">
+                                                Nenhuma congregacao encontrada.
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                   
 
-                                    <!-- Congregação 2 -->
-                                    <tr class="hover:bg-gray-50 transition-colors">
-                                        <td class="py-4 px-6">
-                                            <div class="flex items-center">
-                                                <div
-                                                    class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white font-semibold mr-3">
-                                                    C2
-                                                </div>
-                                                <div>
-                                                    <p class="font-medium text-gray-900">Congregação Matola</p>
-                                                    <p class="text-sm text-gray-500">Filial</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="space-y-1">
-                                                <span class="font-medium text-gray-900">Pedro Santos</span>
-                                                <p class="text-sm text-gray-500">Pastor Auxiliar</p>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="space-y-1">
-                                                <span class="text-sm text-gray-700">Cidade da Matola</span>
-                                                <span class="text-xs text-gray-500">Bairro Militar</span>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="space-y-1">
-                                                <span class="text-2xl font-bold text-gray-900">87</span>
-                                                <p class="text-xs text-gray-500">+3 este mês</p>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <span
-                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                                <i class="fas fa-circle mr-1 text-xs"></i> Ativa
-                                            </span>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="flex items-center space-x-2">
-                                                <button
-                                                    class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <button
-                                                    class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button
-                                                    class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <!-- Congregação 3 -->
-                                    <tr class="hover:bg-gray-50 transition-colors">
-                                        <td class="py-4 px-6">
-                                            <div class="flex items-center">
-                                                <div
-                                                    class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-semibold mr-3">
-                                                    C3
-                                                </div>
-                                                <div>
-                                                    <p class="font-medium text-gray-900">Congregação Boane</p>
-                                                    <p class="text-sm text-gray-500">Missão</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="space-y-1">
-                                                <span class="font-medium text-gray-900">Maria Fernandes</span>
-                                                <p class="text-sm text-gray-500">Missionária</p>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="space-y-1">
-                                                <span class="text-sm text-gray-700">Boane</span>
-                                                <span class="text-xs text-gray-500">Vila de Boane</span>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="space-y-1">
-                                                <span class="text-2xl font-bold text-gray-900">45</span>
-                                                <p class="text-xs text-gray-500">+5 este mês</p>
-                                            </div>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <span
-                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
-                                                <i class="fas fa-circle mr-1 text-xs"></i> Em crescimento
-                                            </span>
-                                        </td>
-                                        <td class="py-4 px-6">
-                                            <div class="flex items-center space-x-2">
-                                                <button
-                                                    class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                                    <i class="fas fa-eye"></i>
-                                                </button>
-                                                <button
-                                                    class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button
-                                                    class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -1117,7 +890,8 @@
                 </div>
             </div>
 
-            <form class="p-6">
+            <form class="p-6" action="{{ route('admin.sector.novo') }}" method="POST">
+                @csrf
                 <div class="space-y-6">
                     <!-- Informações do Sector -->
                     <div>
@@ -1140,7 +914,7 @@
                                         <option value="">Selecione um líder</option>
                                         @foreach ($users as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}
-                                                ({{ $item->role }}l)
+                                                ({{ $item->role }})
                                             </option>
                                         @endforeach
                                     </select>
@@ -1170,9 +944,9 @@
 
     <!-- Modal Nova Congregação -->
     <div id="modalNovaCongregacao"
-        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        class="fixed inset-0 bg-black backdrop-blur-sm bg-opacity-50 z-50 hidden items-center justify-center p-4">
         <div
-            class="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0">
+            class="bg-white rounded-2xl w-full max-w-2xl overflow-y-auto transform transition-all duration-300 scale-95 opacity-0">
             <div class="sticky top-0 bg-white p-6 border-b border-gray-100 z-10">
                 <div class="flex items-center justify-between">
                     <div>
@@ -1186,100 +960,97 @@
                 </div>
             </div>
 
-            <form class="p-6">
+            <form class="p-6" action={{ route('admin.congregacao.novo') }} method="POST">
                 <div class="space-y-6">
+                    @csrf
                     <!-- Informações da Congregação -->
                     <div>
                         <h3 class="text-lg font-semibold text-gray-900 mb-4">Informações da Congregação</h3>
                         <div class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Nome da Congregação *</label>
-                                <input type="text"
+                                <input type="text" name="nome"
                                     class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
                                     placeholder="Ex: Congregação Central">
                             </div>
 
+                             <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Data de Fundação</label>
+                                <input type="date" name="data_fundancao"
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                            </div>
+
+                            </div>
+
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                 <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Pastor Responsável</label>
+                                <input type="text" name="lider" placeholder="Joel Manuel"
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                            </div>
+
+                               
+                                
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Tipo</label>
-                                    <select
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de obra</label>
+                                    <select name="tipo"
                                         class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
                                         <option value="">Selecione o tipo</option>
-                                        <option value="matriz">Igreja Matriz</option>
-                                        <option value="filial">Filial</option>
-                                        <option value="missao">Missão</option>
-                                        <option value="ponto_de_cego">Ponto de Oração</option>
+                                        <option value="Precaria">Precaria</option>
+                                        <option value="Condigna">Condigna</option>
                                     </select>
                                 </div>
+                            </div>
 
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Pastor Responsável
-                                        *</label>
-                                    <select
-                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
-                                        <option value="">Selecione um pastor</option>
-                                        <option value="1">João Miguel</option>
-                                        <option value="2">Pedro Santos</option>
-                                        <option value="3">Maria Fernandes</option>
-                                    </select>
-                                </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                             <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Proprietario</label>
+                                <input type="text" name="propriedade" placeholder="Ex: Igreja"
+                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Data de Fundação</label>
-                                <input type="date"
-                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Sector</label>
+                                    <select name="sector_id"
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                        <option value="">Selecione o sector</option>
+                                        @foreach ($sectores as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nome }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                             </div>
+                           
                         </div>
                     </div>
 
                     <!-- Localização e Contactos -->
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Localização e Contactos</h3>
                         <div class="space-y-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Província</label>
-                                    <select
-                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
-                                        <option value="">Selecione uma província</option>
-                                        <option value="maputo">Maputo Cidade</option>
-                                        <option value="maputo_prov">Maputo Província</option>
-                                        <option value="gaza">Gaza</option>
-                                        <option value="inhambane">Inhambane</option>
-                                    </select>
-                                </div>
+                                
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Cidade/Distrito</label>
-                                    <input type="text"
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Endereço</label>
+                                    <input type="text" name="endereco"
                                         class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
                                         placeholder="Ex: Maputo, Matola, Boane">
                                 </div>
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Endereço Completo</label>
-                                <textarea rows="2"
-                                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all resize-none"
-                                    placeholder="Ex: Av. 25 de Setembro, Nº 123, Bairro Central"></textarea>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Telefone Principal</label>
-                                    <input type="tel"
-                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
-                                        placeholder="+258 84 123 4567">
-                                </div>
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">E-mail</label>
-                                    <input type="email"
-                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
-                                        placeholder="congregacao@igreja.com">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Categoria</label>
+                                    <select name="sede"
+                                        class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
+                                        <option value="1">Congregação(Sede)</option>
+                                        <option value="0">Sub-Congregação</option>
+                                    </select>
                                 </div>
                             </div>
+
+                           
                         </div>
                     </div>
                 </div>
@@ -1480,9 +1251,7 @@
                     const form = modalNovoSector.querySelector('form');
                     if (form) {
                         form.addEventListener('submit', function(e) {
-                            e.preventDefault();
-                            alert('Sector criado com sucesso!');
-                            fecharModalSectorFunc();
+                            form.submit();
                         });
                     }
                 }
@@ -1530,9 +1299,7 @@
                     const form = modalNovaCongregacao.querySelector('form');
                     if (form) {
                         form.addEventListener('submit', function(e) {
-                            e.preventDefault();
-                            alert('Congregação criada com sucesso!');
-                            fecharModalCongregacaoFunc();
+                            form.submit()
                         });
                     }
                 }
