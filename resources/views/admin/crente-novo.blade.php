@@ -2,26 +2,7 @@
 
 @section('main')
     <div class="p-6 w-full flex flex-col space-y-6 items-center">
-        <header class="w-full sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm">
-            <div class="flex items-center justify-between px-6 py-4">
-                <div class="flex items-center space-x-4">
-                    <button id="menuToggle"
-                        class="lg:hidden text-gray-600 hover:text-red-700 p-2 rounded-lg hover:bg-gray-100">
-                        <i class="fas fa-bars text-lg"></i>
-                    </button>
-                    <div>
-                        <h1 class="text-xl font-bold text-gray-900">Cadastrar Crente</h1>
-                        <div class="flex items-center text-sm text-gray-500">
-                            <a href="{{ route('admin.home') }}" class="hover:text-red-700">Dashboard</a>
-                            <i class="fas fa-chevron-right mx-2 text-xs"></i>
-                            <a href="{{ route('admin.crentes') }}" class="hover:text-red-700">Crentes</a>
-                            <i class="fas fa-chevron-right mx-2 text-xs"></i>
-                            <span class="text-gray-900 font-medium">Novo Cadastro</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+      
 
         <form id="memberForm" action="{{ route('admin.crentes.novo') }}" method="POST" class="max-w-4xl mx-auto">
             @csrf
@@ -228,6 +209,17 @@
                 </div>
 
                 <div class="p-6 space-y-6">
+                      <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Grupo Familiar</label>
+                            <select name="grupo"
+                                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                <option>Selecione uma congregação</option>
+                                @foreach ($grupos as $grupo)
+                                    <option value="{{ $grupo->id }}">{{ $grupo->nome }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                     <!-- Datas Importantes -->
                     <div class="space-y-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-2">Datas Importantes</h3>
@@ -260,7 +252,7 @@
                     <div class="space-y-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-2">Status</h3>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border border-gray-200 p-4 rounded-lg">
                             <div class="flex items-center space-x-3">
                                 <input type="checkbox" name="batizado" value="1"
                                     class="h-5 w-5 rounded border-gray-300 text-red-600 focus:ring-red-500"
@@ -283,23 +275,23 @@
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                             @php
                                 $estados = [
-                                    'ativo' => [
+                                    'Ativo' => [
                                         'label' => 'Ativo',
                                         'icon' => 'fa-check-circle',
                                         'color' => 'text-green-600',
                                     ],
-                                    'inativo' => [
+                                    'Inativo' => [
                                         'label' => 'Inativo',
                                         'icon' => 'fa-pause-circle',
                                         'color' => 'text-yellow-600',
                                     ],
-                                    'suspenso' => [
-                                        'label' => 'Suspenso',
+                                    'Morto' => [
+                                        'label' => 'Morto',
                                         'icon' => 'fa-ban',
                                         'color' => 'text-red-600',
                                     ],
-                                    'transferido' => [
-                                        'label' => 'Transferido',
+                                    'Desviado' => [
+                                        'label' => 'Desviado',
                                         'icon' => 'fa-exchange-alt',
                                         'color' => 'text-blue-600',
                                     ],

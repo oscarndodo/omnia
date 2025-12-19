@@ -24,6 +24,8 @@ Route::prefix('admin')->group(function () {
     Route::post("/crentes/novo", [AdminController::class, 'novoCrente'])->name('admin.crentes.novo');
 
     Route::get("/grupos", [AdminController::class, 'grupos'])->name('admin.grupos');
+    Route::post('/novo/grupo', [AdminController::class, 'novoGrupo'])->name('admin.grupos.novo');
+    Route::post('/novo/evento', [AdminController::class, 'novoEvento'])->name('admin.grupos.evento');
     Route::get("/grupos/{id}", [AdminController::class, 'grupo'])->name('admin.grupo');
     Route::get("/grupos/{id}/evento/{evento_id}", [AdminController::class, 'evento'])->name('admin.grupo.evento');
 
@@ -33,11 +35,11 @@ Route::prefix('admin')->group(function () {
 
     Route::get("/dizimistas", [AdminController::class, 'dizimistas'])->name('admin.dizimistas');
 
-    Route::prefix("configuracoes")->group(function() {
+    Route::prefix("configuracoes")->group(function () {
         Route::get("/", [AdminController::class, 'config'])->name('admin.config');
         Route::post("/novo/usuario", [AdminController::class, 'novoUsuario'])->name('admin.config.user');
         Route::get("/novo/usuario/{id}/status", [AdminController::class, 'usuarioStatus'])->name('admin.config.user.status');
-        
+
         Route::post("/novo/sector", [AdminController::class, "novoSector"])->name("admin.sector.novo");
 
         Route::post("nova/congregacao", [AdminController::class, "novaCongregacao"])->name("admin.congregacao.novo");

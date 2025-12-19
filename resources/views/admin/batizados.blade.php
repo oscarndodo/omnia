@@ -104,7 +104,9 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
-                                <!-- Crente 1 -->
+     
+                                @forelse ($batizados as $item)
+                                                               <!-- Crente 1 -->
                                 <tr class="hover:bg-gray-50 transition-colors">
                                     <td class="py-4 px-6">
                                         <div class="flex items-center">
@@ -155,110 +157,10 @@
                                         </div>
                                     </td>
                                 </tr>
+                                @empty
+                                    
+                                @endforelse
 
-                                <!-- Crente 2 -->
-                                <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="py-4 px-6">
-                                        <div class="flex items-center">
-                                            <div
-                                                class="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center text-white font-semibold mr-3">
-                                                CS
-                                            </div>
-                                            <div>
-                                                <p class="font-medium text-gray-900">Carlos Santos</p>
-                                                <p class="text-sm text-gray-500">Pai de Família</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="text-gray-700">Família Santos</span>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                            Centro
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <div class="space-y-1">
-                                            <span class="text-sm text-gray-700">22/08/2019</span>
-                                            <span class="text-xs text-gray-500">5 anos</span>
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="text-gray-700">38 anos</span>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                            Ativo
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <div class="flex items-center space-x-2">
-                                            <button
-                                                class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button
-                                                class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Crente 3 -->
-                                <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="py-4 px-6">
-                                        <div class="flex items-center">
-                                            <div
-                                                class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white font-semibold mr-3">
-                                                JO
-                                            </div>
-                                            <div>
-                                                <p class="font-medium text-gray-900">José Oliveira</p>
-                                                <p class="text-sm text-gray-500">Pai de Família</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="text-gray-700">Família Oliveira</span>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
-                                            Sul
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <div class="space-y-1">
-                                            <span class="text-sm text-gray-700">10/05/2021</span>
-                                            <span class="text-xs text-gray-500">3 anos</span>
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="text-gray-700">52 anos</span>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                            Ativo
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <div class="flex items-center space-x-2">
-                                            <button
-                                                class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button
-                                                class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>

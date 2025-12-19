@@ -15,6 +15,7 @@ class Grupo extends Model
         'lider',
         'secretario',
         'tesoureiro',
+        'endereco',
         'estado',
     ];
 
@@ -26,5 +27,10 @@ class Grupo extends Model
     public function crentes()
     {
         return $this->hasMany(Crente::class);
+    }
+
+    public function eventos()
+    {
+        return $this->hasMany(Evento::class);
     }
 }

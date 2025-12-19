@@ -25,138 +25,11 @@
             </div>
         </div>
 
-        <!-- Tabs para alternar entre Crentes e Grupos -->
-        <div class="mb-8">
-            <div class="border-b border-gray-200">
-                <nav class="-mb-px flex space-x-8">
-                    <!-- Tab Grupos (Ativa por padrão) -->
-                    <button id="tab-grupos"
-                        class="tab-button py-3 px-1 border-b-2 font-medium text-sm transition-colors border-red-700 text-red-700 flex items-center">
-                        <i class="fas fa-church mr-2"></i> Grupos
-                        <span class="ml-2 bg-red-100 text-red-800 text-xs px-2 py-0.5 rounded-full">18</span>
-                    </button>
-
-                    <!-- Tab Crentes -->
-                    <button id="tab-crentes"
-                        class="tab-button py-3 px-1 border-b-2 font-medium text-sm transition-colors border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 flex items-center">
-                        <i class="fas fa-users mr-2"></i> Crentes
-                        <span class="ml-2 bg-gray-100 text-gray-800 text-xs px-2 py-0.5 rounded-full">248</span>
-                    </button>
-                </nav>
-            </div>
-        </div>
 
         <!-- Conteúdo da Tab Grupos (Visível por padrão) -->
         <div id="conteudo-grupos">
-            <!-- Cards de Estatísticas -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <!-- Total de Grupos -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm font-medium">Total de Grupos</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">18</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center">
-                            <i class="fas fa-church text-red-600 text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-green-600 text-sm font-medium flex items-center">
-                            <i class="fas fa-arrow-up mr-1"></i> +2 este mês
-                        </span>
-                    </div>
-                </div>
 
-                <!-- Membros Ativos -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm font-medium">Membros Ativos</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">248</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
-                            <i class="fas fa-users text-blue-600 text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-green-600 text-sm font-medium flex items-center">
-                            <i class="fas fa-arrow-up mr-1"></i> +15 este mês
-                        </span>
-                    </div>
-                </div>
 
-                <!-- Líderes -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm font-medium">Líderes</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">24</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
-                            <i class="fas fa-user-friends text-green-600 text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-gray-500 text-sm">+2 novos líderes</span>
-                    </div>
-                </div>
-
-                <!-- Reuniões Esta Semana -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm font-medium">Reuniões Esta Semana</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">15</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center">
-                            <i class="fas fa-calendar-alt text-purple-600 text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-blue-600 text-sm font-medium">Ver calendário →</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Filtros e Busca -->
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6">
-                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                    <div class="flex-1">
-                        <div class="relative">
-                            <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                            <input type="text" placeholder="Buscar grupo ou líder..."
-                                class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap gap-3">
-                        <select
-                            class="px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                            <option>Todos os Dias</option>
-                            <option>Segunda-feira</option>
-                            <option>Terça-feira</option>
-                            <option>Quarta-feira</option>
-                            <option>Quinta-feira</option>
-                            <option>Sexta-feira</option>
-                            <option>Sábado</option>
-                            <option>Domingo</option>
-                        </select>
-                        <select
-                            class="px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                            <option>Todas as Regiões</option>
-                            <option>Centro</option>
-                            <option>Norte</option>
-                            <option>Sul</option>
-                            <option>Leste</option>
-                            <option>Oeste</option>
-                        </select>
-                        <button
-                            class="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors flex items-center">
-                            <i class="fas fa-filter mr-2"></i> Mais Filtros
-                        </button>
-                    </div>
-                </div>
-            </div>
 
             <!-- Lista de Grupos -->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
@@ -166,266 +39,152 @@
                             <tr>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Nome do Grupo</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Líder</th>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Dia da Reunião</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Membros</th>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Região</th>
+                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Congregação</th>
+                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Sector</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Status</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Ações</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
-                            <!-- Grupo 1 -->
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div class="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center mr-3">
-                                            <i class="fas fa-church text-red-600"></i>
-                                        </div>
-                                        <div>
-                                            <p class="font-medium text-gray-900">Célula Avivamento</p>
-                                            <p class="text-sm text-gray-500">Reuniões às 19h</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-sm font-semibold mr-2">
-                                            JM
-                                        </div>
-                                        <span class="font-medium">João Miguel</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                                        <i class="fas fa-calendar-day mr-1"></i> Segunda
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div class="flex -space-x-2 mr-3">
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border-2 border-white">
-                                            </div>
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 border-2 border-white">
-                                            </div>
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 border-2 border-white">
-                                            </div>
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-red-400 to-red-600 border-2 border-white">
-                                            </div>
-                                        </div>
-                                        <span class="font-medium">15</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-gray-700">Centro</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                        <i class="fas fa-circle mr-1 text-xs"></i> Ativo
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <a href="{{ route('admin.grupo', 12) }}"
-                                            class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
 
-                            <!-- Grupo 2 -->
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-3">
-                                            <i class="fas fa-church text-blue-600"></i>
-                                        </div>
-                                        <div>
-                                            <p class="font-medium text-gray-900">Célula Fé Viva</p>
-                                            <p class="text-sm text-gray-500">Reuniões às 20h</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white text-sm font-semibold mr-2">
-                                            MA
-                                        </div>
-                                        <span class="font-medium">Maria Alice</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
-                                        <i class="fas fa-calendar-day mr-1"></i> Quarta
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div class="flex -space-x-2 mr-3">
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border-2 border-white">
-                                            </div>
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 border-2 border-white">
-                                            </div>
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 border-2 border-white">
-                                            </div>
-                                        </div>
-                                        <span class="font-medium">12</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-gray-700">Norte</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                        <i class="fas fa-circle mr-1 text-xs"></i> Ativo
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
 
-                            <!-- Grupo 3 -->
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-lg bg-yellow-100 flex items-center justify-center mr-3">
-                                            <i class="fas fa-church text-yellow-600"></i>
-                                        </div>
-                                        <div>
-                                            <p class="font-medium text-gray-900">Célula Esperança</p>
-                                            <p class="text-sm text-gray-500">Reuniões às 19:30h</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center text-white text-sm font-semibold mr-2">
-                                            PS
-                                        </div>
-                                        <span class="font-medium">Pedro Silva</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                        <i class="fas fa-calendar-day mr-1"></i> Sexta
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div class="flex -space-x-2 mr-3">
+                            @foreach ($grupos as $item)
+                                <!-- Grupo-->
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center">
                                             <div
-                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border-2 border-white">
+                                                class="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center mr-3">
+                                                <i class="fas fa-church text-red-600"></i>
                                             </div>
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 border-2 border-white">
-                                            </div>
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 border-2 border-white">
-                                            </div>
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-red-400 to-red-600 border-2 border-white">
-                                            </div>
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white">
+                                            <div>
+                                                <p class="font-medium text-gray-900">{{ $item->nome }}</p>
+                                                <p class="text-sm text-gray-500">{{ $item->endereco ?? 'N/A' }}</p>
                                             </div>
                                         </div>
-                                        <span class="font-medium">18</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-gray-700">Sul</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
-                                        <i class="fas fa-circle mr-1 text-xs"></i> Inativo
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center">
+                                            <div
+                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-sm font-semibold mr-2">
+                                                {{ $item->lider->name[0] }}
+                                            </div>
+                                            <span class="font-medium">{{ $item->lider->name }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center">
+                                            <span class="font-medium">{{ $item->crentes->count() }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                            {{ $item->congregacao->nome ?? 'N/A' }}
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span class="text-gray-700">{{ $item->congregacao->sector->nome }}</span>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        @if ($item->status)
+                                            <span
+                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                                <i class="fas fa-circle mr-1 text-xs"></i> Activo
+                                            </span>
+                                        @else
+                                            <span
+                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                                                <i class="fas fa-circle mr-1 text-xs"></i> Inactivo
+                                            </span>
+                                        @endif
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center space-x-2">
+                                            <a href="{{ route('admin.grupo', $item->id) }}"
+                                                class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <button
+                                                class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button
+                                                class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Paginação -->
                 <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
+                    {{-- Informação --}}
                     <div class="text-sm text-gray-500">
-                        Mostrando 1-3 de 18 grupos
+                        Mostrando
+                        {{ $grupos->firstItem() }}
+                        -
+                        {{ $grupos->lastItem() }}
+                        de
+                        {{ $grupos->total() }}
+                        grupos
                     </div>
+
+                    {{-- Controles --}}
                     <div class="flex items-center space-x-2">
-                        <button
-                            class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button
-                            class="w-10 h-10 rounded-lg bg-red-600 text-white flex items-center justify-center">1</button>
-                        <button
-                            class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">2</button>
-                        <button
-                            class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">3</button>
-                        <span class="px-2">...</span>
-                        <button
-                            class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">6</button>
-                        <button
-                            class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
+                        {{-- Página anterior --}}
+                        @if ($grupos->onFirstPage())
+                            <button
+                                class="w-10 h-10 rounded-lg bg-gray-100 text-gray-400 flex items-center justify-center cursor-not-allowed">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                        @else
+                            <a href="{{ $grupos->previousPageUrl() }}"
+                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        @endif
+
+                        {{-- Páginas --}}
+                        @foreach ($grupos->getUrlRange(max(1, $grupos->currentPage() - 1), min($grupos->lastPage(), $grupos->currentPage() + 1)) as $page => $url)
+                            <a href="{{ $url }}"
+                                class="w-10 h-10 rounded-lg flex items-center justify-center
+                      {{ $page == $grupos->currentPage() ? 'bg-red-600 text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700' }}">
+                                {{ $page }}
+                            </a>
+                        @endforeach
+
+                        {{-- Reticências --}}
+                        @if ($grupos->currentPage() + 1 < $grupos->lastPage())
+                            <span class="px-2 text-gray-400">...</span>
+
+                            <a href="{{ $grupos->url($grupos->lastPage()) }}"
+                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
+                                {{ $grupos->lastPage() }}
+                            </a>
+                        @endif
+
+                        {{-- Próxima página --}}
+                        @if ($grupos->hasMorePages())
+                            <a href="{{ $grupos->nextPageUrl() }}"
+                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        @else
+                            <button
+                                class="w-10 h-10 rounded-lg bg-gray-100 text-gray-400 flex items-center justify-center cursor-not-allowed">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        @endif
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -606,111 +365,7 @@
                                 </td>
                             </tr>
 
-                            <!-- Crente 2 -->
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center text-white font-semibold mr-3">
-                                            MA
-                                        </div>
-                                        <div>
-                                            <p class="font-medium text-gray-900">Maria Alice</p>
-                                            <p class="text-sm text-gray-500">Líder de Célula</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-gray-700">(11) 97777-6666</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-gray-700">maria.alice@email.com</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                                        <i class="fas fa-church mr-1 text-xs"></i> Fé Viva
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                        <i class="fas fa-circle mr-1 text-xs"></i> Ativo
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-gray-700">14/03/2024</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
 
-                            <!-- Crente 3 -->
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center text-white font-semibold mr-3">
-                                            PS
-                                        </div>
-                                        <div>
-                                            <p class="font-medium text-gray-900">Pedro Silva</p>
-                                            <p class="text-sm text-gray-500">Membro</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-gray-700">(11) 95555-4444</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-gray-700">pedro.silva@email.com</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
-                                        <i class="fas fa-church mr-1 text-xs"></i> Esperança
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
-                                        <i class="fas fa-circle mr-1 text-xs"></i> Inativo
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-gray-700">01/02/2024</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -757,29 +412,44 @@
                     </div>
                 </div>
 
-                <form class="p-6">
+                <form class="p-6" action="{{ route('admin.grupos.novo') }}" method="POST">
+                    @csrf
                     <div class="grid grid-cols-1 gap-6 mb-6">
+
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Nome do Grupo</label>
-                            <input type="text"
-                                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
-                                placeholder="Ex: Célula Avivamento">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Líder</label>
-                            <select
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Congregação</label>
+                            <select name="congregacao"
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
-                                <option>Selecione um líder</option>
-                                <option>João Miguel</option>
-                                <option>Maria Alice</option>
-                                <option>Pedro Silva</option>
-                                <option>Ana Costa</option>
+                                <option>Selecione uma congregação</option>
+                                @foreach ($congregacoes as $congregacao)
+                                    <option value="{{ $congregacao->id }}">{{ $congregacao->nome }}</option>
+                                @endforeach
                             </select>
                         </div>
 
                         <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Líder</label>
+                            <select name="lider"
+                                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                <option>Selecione um líder</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nome do Grupo</label>
+                            <input type="text" name="nome"
+                                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                placeholder="Ex: Célula Avivamento">
+                        </div>
+
+
+                        <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Endereço</label>
-                            <input type="text"
+                            <input type="text" name="endereco"
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                                 placeholder="Rua, número, bairro">
                         </div>
@@ -840,10 +510,7 @@
                 const form = document.querySelector('#novoGrupoModal form');
                 if (form) {
                     form.addEventListener('submit', function(e) {
-                        e.preventDefault();
-                        // Aqui você adicionaria a lógica para salvar o grupo
-                        alert('Grupo salvo com sucesso!');
-                        fecharModal();
+                        form.submit();
                     });
                 }
 

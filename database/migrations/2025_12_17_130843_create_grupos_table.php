@@ -15,17 +15,15 @@ return new class extends Migration
             $table->id();
             $table->foreignId('congregacao_id')->constrained('congregacaos')->cascadeOnDelete();
             $table->string('nome');
+            $table->string('endereco')->nullable();
             $table->string('lider')->nullable();
             $table->string('secretario')->nullable();
             $table->string('tesoureiro')->nullable();
-            $table->enum('estado', ['Ativo', 'Inativo'])->default('Ativo');
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('grupos');

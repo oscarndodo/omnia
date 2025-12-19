@@ -186,81 +186,13 @@
 
         <!-- Conteúdo Principal -->
         <main class="flex-1 overflow-y-auto p-6">
-            <!-- Estatísticas Gerais -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <div class="stats-card p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-500 font-medium">Total de Crentes</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">1,248</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center">
-                            <i class="fas fa-users text-2xl text-red-600"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-100">
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-arrow-up text-green-500 mr-2"></i>
-                            <span>+45 este mês</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stats-card p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-500 font-medium">Homens</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">680</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
-                            <i class="fas fa-male text-2xl text-blue-600"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-100">
-                        <div class="text-sm text-gray-600">54.5% do total</div>
-                    </div>
-                </div>
-
-                <div class="stats-card p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-500 font-medium">Mulheres</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">568</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-pink-50 flex items-center justify-center">
-                            <i class="fas fa-female text-2xl text-pink-600"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-100">
-                        <div class="text-sm text-gray-600">45.5% do total</div>
-                    </div>
-                </div>
-
-                <div class="stats-card p-6">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-500 font-medium">Média de Idade</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">38</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center">
-                            <i class="fas fa-birthday-cake text-2xl text-amber-600"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-100">
-                        <div class="flex items-center justify-between text-sm text-gray-600">
-                            <span>Min: 12</span>
-                            <span>Max: 85</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+         
             <!-- Filtros e Busca -->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <!-- Barra de Busca -->
-                    <div class="flex-1">
-                        <div class="search-box flex items-center px-4 py-2.5">
+                    <div class="flex justify-end w-full">
+                        <div class="search-box flex items-center px-4 py-2.5 w-1/3">
                             <i class="fas fa-search text-gray-400 mr-3"></i>
                             <input type="text" placeholder="Buscar crentes por nome, telefone ou localização..."
                                 class="flex-1 outline-none text-sm" id="searchInput">
@@ -270,20 +202,7 @@
                         </div>
                     </div>
 
-                    <!-- Filtros Rápidos -->
-                    <div class="flex items-center space-x-3">
-                        <select
-                            class="text-sm border border-gray-200 rounded-xl px-4 py-2.5 focus:outline-none focus:border-red-300">
-                            <option>Ordenar por: Mais Recentes</option>
-                            <option>Ordenar por: Nome (A-Z)</option>
-                            <option>Ordenar por: Data de Nascimento</option>
-                            <option>Ordenar por: Data de Registro</option>
-                        </select>
-
-                        <button class="p-2.5 border border-gray-200 rounded-xl hover:bg-gray-50">
-                            <i class="fas fa-download text-gray-600"></i>
-                        </button>
-                    </div>
+                  
                 </div>
 
                 <!-- Chips de Filtro -->
@@ -300,41 +219,21 @@
                         <i class="fas fa-water mr-2"></i>
                         Batizados
                     </button>
-                    <button class="filter-chip">
-                        <i class="fas fa-music mr-2"></i>
-                        Ministério de Louvor
-                    </button>
+                   
                     <button class="filter-chip">
                         <i class="fas fa-child mr-2"></i>
                         Jovens
                     </button>
                     <button class="filter-chip">
                         <i class="fas fa-home mr-2"></i>
-                        Visitantes
+                        Casados
                     </button>
                 </div>
             </div>
 
             <!-- Tabela de Crentes -->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                <!-- Cabeçalho da Tabela -->
-                <div class="px-6 py-4 border-b border-gray-100">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900">Lista de Crentes</h3>
-                            <p class="text-sm text-gray-500">1,248 crentes registrados</p>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <span class="text-sm text-gray-600">Mostrar:</span>
-                            <select class="text-sm border border-gray-200 rounded-lg px-3 py-1.5">
-                                <option>25</option>
-                                <option>50</option>
-                                <option>100</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
+                
                 <!-- Tabela -->
                 <div class="overflow-x-auto">
                     <table class="w-full">
@@ -342,84 +241,89 @@
                             <tr>
                                 <th
                                     class="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                    <div class="flex items-center">
-                                        <input type="checkbox" class="rounded border-gray-300">
-                                    </div>
-                                </th>
-                                <th
-                                    class="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                                     Crente</th>
                                 <th
                                     class="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                    Contacto</th>
+                                    Estado</th>
                                 <th
                                     class="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                                     Localização</th>
                                 <th
                                     class="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                    Estado Civil</th>
-                                <th
-                                    class="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                    Status</th>
+                                    Estado</th>
+
                                 <th
                                     class="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                                     Ações</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
-                            @for ($i = 0; $i < 10; $i++)
+                            @forelse ($crentes as $i => $item)
                                 <tr class="table-row-hover">
-                                    <td class="py-4 px-6">
-                                        <input type="checkbox" class="rounded border-gray-300">
-                                    </td>
+                                   
                                     <td class="py-4 px-6">
                                         <div class="flex items-center">
                                             <div
                                                 class="w-10 h-10 rounded-full bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center text-red-800 font-semibold mr-3">
-                                                {{ substr(['Maria', 'João', 'Ana', 'Pedro', 'Luísa', 'Carlos', 'Sofia', 'Miguel', 'Teresa', 'Paulo'][$i], 0, 1) }}
+                                                {{ substr($item->nome, 0, 1) }}
                                             </div>
                                             <div>
                                                 <p class="font-medium text-gray-900">
-                                                    {{ ['Maria João', 'João Baptista', 'Ana Silva', 'Pedro Santos', 'Luísa Fernandes', 'Carlos Manuel', 'Sofia Matos', 'Miguel Costa', 'Teresa Lopes', 'Paulo Dias'][$i] }}
+                                                    {{ $item->nome }}
                                                 </p>
                                                 <p class="text-xs text-gray-500">
-                                                    {{ now()->subYears(rand(20, 60))->subMonths(rand(0, 11))->format('d/m/Y') }}
-                                                    •
-                                                    {{ $i % 2 == 0 ? 'Masculino' : 'Feminino' }}
+                                                    {{ $item->genero }}
                                                 </p>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
                                         <div class="space-y-1">
-                                            <p class="text-sm text-gray-900">+258 84 123 456{{ $i }}</p>
-                                            <p class="text-xs text-gray-500">
-                                                {{ ['maria@gmail.com', 'joao@gmail.com', 'ana@gmail.com', 'pedro@gmail.com', 'luisa@gmail.com', 'carlos@gmail.com', 'sofia@gmail.com', 'miguel@gmail.com', 'teresa@gmail.com', 'paulo@gmail.com'][$i] }}
+                                            <p class="text-sm font-medium text-gray-900">
+                                                @if ($item->batizado)
+                                                    @if ($item->dizimista)
+                                                        Em Comunhão
+                                                    @else
+                                                        Em Disciplina
+                                                    @endif
+                                                @else
+                                                    Simpatizante
+                                                @endif
                                             </p>
+                                            @php
+
+                                                $idade = \Carbon\Carbon::parse($item->data_nascimento)->age;
+
+                                                if ($idade <= 12) {
+                                                    $faixa = 'Criança';
+                                                } elseif ($idade <= 17) {
+                                                    $faixa = 'Adolescente';
+                                                } elseif ($idade <= 35) {
+                                                    $faixa = 'Jovem';
+                                                } else {
+                                                    $faixa = 'Adulto';
+                                                }
+                                            @endphp
+
+
+                                            <p class="text-xs text-gray-500">{{ $faixa }}</p>
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
                                         <div class="space-y-1">
-                                            <p class="text-sm text-gray-900">
-                                                {{ ['Maputo', 'Matola', 'Beira', 'Nampula', 'Quelimane', 'Tete', 'Pemba', 'Xai-Xai', 'Inhambane', 'Chimoio'][$i] }}
+                                            <p class="font-medium text-gray-900">
+                                                {{ $item->endereco }}
                                             </p>
-                                            <p class="text-xs text-gray-500">Grupo {{ chr(65 + ($i % 5)) }}</p>
+                                            <p class="text-xs text-gray-500">Grupo {{ $item->grupo->nome }}</p>
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
-                                        <span
-                                            class="status-badge {{ ['bg-green-100 text-green-800', 'bg-blue-100 text-blue-800', 'bg-yellow-100 text-yellow-800', 'bg-green-100 text-green-800', 'bg-red-100 text-red-800'][$i % 5] }}">
-                                            {{ ['Casado', 'Solteiro', 'Viúvo', 'Casado', 'Divorciado'][$i % 5] }}
-                                        </span>
+                                        <p class="font-medium text-gray-900 capitalize">
+                                            {{ $item->estado_civil }}
+                                        </p>
+                                        <p class="text-xs text-gray-500">{{ $item->estado }}</p>
                                     </td>
-                                    <td class="py-4 px-6">
-                                        <span
-                                            class="status-badge {{ $i < 5 ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800' }}">
-                                            <i
-                                                class="fas fa-circle text-xs mr-1 {{ $i < 5 ? 'text-green-500' : 'text-blue-500' }}"></i>
-                                            {{ $i < 5 ? 'Ativo' : 'Novo' }}
-                                        </span>
-                                    </td>
+
                                     <td class="py-4 px-6">
                                         <div class="flex items-center space-x-2">
                                             <button
@@ -435,33 +339,62 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endfor
+                            @empty
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
 
                 <!-- Paginação -->
                 <div class="px-6 py-4 border-t border-gray-100">
-                    <div class="flex items-center justify-between">
-                        <div class="text-sm text-gray-600">
-                            Mostrando <span class="font-medium">1</span> a <span class="font-medium">10</span> de
-                            <span class="font-medium">1,248</span> resultados
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <button class="pagination-item">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button class="pagination-item active">1</button>
-                            <button class="pagination-item">2</button>
-                            <button class="pagination-item">3</button>
-                            <button class="pagination-item">4</button>
-                            <button class="pagination-item">5</button>
-                            <button class="pagination-item">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+    <div class="flex items-center justify-between">
+        <div class="text-sm text-gray-600">
+            Mostrando
+            <span class="font-medium">{{ $crentes->firstItem() }}</span>
+            a
+            <span class="font-medium">{{ $crentes->lastItem() }}</span>
+            de
+            <span class="font-medium">{{ $crentes->total() }}</span>
+            resultados
+        </div>
+
+        <div class="flex items-center space-x-2">
+            {{-- Botão Anterior --}}
+            @if ($crentes->onFirstPage())
+                <button class="pagination-item opacity-50 cursor-not-allowed">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            @else
+                <a href="{{ $crentes->previousPageUrl() }}" class="pagination-item">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            @endif
+
+            {{-- Números das páginas --}}
+            @foreach ($crentes->getUrlRange(
+                max(1, $crentes->currentPage() - 2),
+                min($crentes->lastPage(), $crentes->currentPage() + 2)
+            ) as $page => $url)
+                <a href="{{ $url }}"
+                   class="pagination-item {{ $page == $crentes->currentPage() ? 'active' : '' }}">
+                    {{ $page }}
+                </a>
+            @endforeach
+
+            {{-- Botão Próximo --}}
+            @if ($crentes->hasMorePages())
+                <a href="{{ $crentes->nextPageUrl() }}" class="pagination-item">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            @else
+                <button class="pagination-item opacity-50 cursor-not-allowed">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            @endif
+        </div>
+    </div>
+</div>
+
             </div>
 
 
