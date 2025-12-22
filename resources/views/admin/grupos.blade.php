@@ -88,7 +88,7 @@
                                         <span class="text-gray-700">{{ $item->congregacao->sector->nome }}</span>
                                     </td>
                                     <td class="py-4 px-6">
-                                        @if ($item->status)
+                                        @if ($item->estado)
                                             <span
                                                 class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
                                                 <i class="fas fa-circle mr-1 text-xs"></i> Activo

@@ -8,7 +8,12 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
-
+    <style>
+        .active {
+            background-color: #d83737;
+            color: white;
+        }
+    </style>
     @vite('resources/css/app.css')
 </head>
 
@@ -54,7 +59,7 @@
                     <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-red-50 to-white">
                         <div class="flex items-center space-x-4">
                             <div
-                                class="w-12 h-12 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white font-bold text-lg">
+                                class="w-16 h-12 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white font-bold text-lg">
                                 {{ Auth::user()->name[0] ?? 'A' }}
                             </div>
                             <div>
