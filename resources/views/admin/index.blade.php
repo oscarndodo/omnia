@@ -117,7 +117,7 @@
                         <a href="{{ route('admin.grupos') }}"
                             class="sidebar-item flex items-center p-3 rounded-xl hover:bg-gray-50 text-gray-700 transition-colors">
                             <i class="fas fa-church text-lg w-6 text-center"></i>
-                            <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Grupos</span>
+                            <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Grupos Fimiliares</span>
                         </a>
                     </li>
 
@@ -126,7 +126,7 @@
                         <a href="{{ route('admin.eventos') }}"
                             class="sidebar-item flex items-center p-3 rounded-xl hover:bg-gray-50 text-gray-700 transition-colors">
                             <i class="fas fa-calendar-alt text-lg w-6 text-center"></i>
-                            <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Eventos</span>
+                            <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Cultos</span>
                            
                         </a>
                     </li>
@@ -136,7 +136,7 @@
                         <a href="{{ route('admin.batizados') }}"
                             class="sidebar-item flex items-center p-3 rounded-xl hover:bg-gray-50 text-gray-700 transition-colors">
                             <i class="fas fa-water text-lg w-6 text-center"></i>
-                            <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Batizados</span>
+                            <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Membros</span>
                         </a>
                     </li>
 

@@ -86,7 +86,7 @@
                             class="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center mr-3 group-hover:bg-red-200 transition-colors">
                             <i class="fas fa-users text-red-600"></i>
                         </div>
-                        <span>Membros</span>
+                        <span>Crentes</span>
                         <span
                             class="ml-2 bg-red-100 text-red-800 text-xs px-2 py-0.5 rounded-full">{{ $grupo->crentes->count() }}</span>
                     </button>
@@ -99,7 +99,7 @@
                             class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-3 group-hover:bg-gray-200 transition-colors">
                             <i class="fas fa-calendar-alt text-gray-600"></i>
                         </div>
-                        <span>Eventos</span>
+                        <span>Cultos</span>
                         <span class="ml-2 bg-gray-100 text-gray-800 text-xs px-2 py-0.5 rounded-full">{{$grupo->eventos()->count()}}</span>
                     </button>
                 </nav>
@@ -111,8 +111,8 @@
             <!-- Cabeçalho da Seção -->
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
                 <div>
-                    <h2 class="text-xl font-bold text-gray-900">Membros do Grupo</h2>
-                    <p class="text-gray-600 mt-1">Gerencie os membros da célula</p>
+                    <h2 class="text-xl font-bold text-gray-900">Crentes do Grupo Familiar</h2>
+                    <p class="text-gray-600 mt-1">Gerencie os crentes da grupo</p>
                 </div>
 
             </div>
@@ -143,7 +143,7 @@
                     <table class="w-full">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Membro</th>
+                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Crente</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Contato</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Status</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Ações</th>
@@ -234,17 +234,17 @@
             </div>
         </div>
 
-        <!-- Conteúdo da Tab Eventos (Escondido por padrão) -->
+        <!-- Conteúdo da Tab Cultos (Escondido por padrão) -->
         <div id="conteudo-eventos" class="hidden space-y-6">
             <!-- Cabeçalho da Seção -->
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
                 <div>
-                    <h2 class="text-xl font-bold text-gray-900">Eventos do Grupo</h2>
-                    <p class="text-gray-600 mt-1">Gerencie os eventos da célula</p>
+                    <h2 class="text-xl font-bold text-gray-900">Cultos do Grupo Familiar</h2>
+                    <p class="text-gray-600 mt-1">Gerencie os cultos da grupo</p>
                 </div>
                 <button id="adicionarEventoBtn"
                     class="px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-medium rounded-xl transition-all duration-300 shadow-sm hover:shadow-md flex items-center justify-center group">
-                    <i class="fas fa-calendar-plus mr-2 group-hover:scale-110 transition-transform"></i> Novo Evento
+                    <i class="fas fa-calendar-plus mr-2 group-hover:scale-110 transition-transform"></i> Novo Culto
                 </button>
             </div>
 
@@ -300,7 +300,7 @@
                     </div>
                 @empty
                     <p class="text-sm text-gray-500 text-center py-6">
-                        Nenhum evento registado.
+                        Nenhum culto registado.
                     </p>
                 @endforelse
 
@@ -319,8 +319,8 @@
             <div class="sticky top-0 bg-white p-6 border-b border-gray-100 z-10">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h2 class="text-xl font-bold text-gray-900">Novo Evento</h2>
-                        <p class="text-gray-600 mt-1">Crie um novo evento para a célula</p>
+                        <h2 class="text-xl font-bold text-gray-900">Novo Culto</h2>
+                        <p class="text-gray-600 mt-1">Crie um novo culto para o grupo</p>
                     </div>
                     <button id="fecharModalEvento"
                         class="w-10 h-10 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors">
@@ -333,7 +333,7 @@
                 @csrf
                 <div class="space-y-5">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Título do Evento *</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Título do Culto *</label>
                         <input type="text" name="titulo"
                             class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
                             placeholder="Ex: Reunião Semanal">
@@ -343,13 +343,10 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Evento</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Culto</label>
                             <select name="tipo"
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
-                                <option value="reuniao">Reunião Semanal</option>
-                                <option value="especial">Evento Especial</option>
-                                <option value="social">Encontro Social</option>
-                                <option value="oracao">Encontro de Oração</option>
+                                <option value=""></option>
                             </select>
                         </div>
                         <div>
@@ -396,7 +393,7 @@
                     </button>
                     <button type="submit"
                         class="px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-medium rounded-xl transition-all duration-300 flex items-center">
-                        <i class="fas fa-calendar-plus mr-2"></i> Criar Evento
+                        <i class="fas fa-calendar-plus mr-2"></i> Criar Culto
                     </button>
                 </div>
             </form>

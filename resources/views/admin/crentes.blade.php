@@ -212,12 +212,8 @@
                         Todos
                     </button>
                     <button class="filter-chip">
-                        <i class="fas fa-star mr-2"></i>
-                        Líderes
-                    </button>
-                    <button class="filter-chip">
                         <i class="fas fa-water mr-2"></i>
-                        Batizados
+                        Em Comunhão
                     </button>
                    
                     <button class="filter-chip">

@@ -29,6 +29,7 @@ class Evento extends Model
     public function ofertas() {
         return $this->hasMany(Oferta::class);
     }
+    
     public function visitas() {
         return $this->hasMany(Visita::class);
     }

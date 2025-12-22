@@ -10,10 +10,7 @@
                     <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">Calendário de Eventos</h1>
                     <p class="text-gray-600 mt-2">Gerencie todos os eventos da igreja e grupos</p>
                 </div>
-                <button id="novoEventoBtn"
-                    class="mt-4 lg:mt-0 px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-medium rounded-xl transition-all duration-300 shadow-sm hover:shadow-md flex items-center justify-center group">
-                    <i class="fas fa-calendar-plus mr-2 group-hover:scale-110 transition-transform"></i> Novo Evento
-                </button>
+                
             </div>
         </div>
 

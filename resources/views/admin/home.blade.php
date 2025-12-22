@@ -146,7 +146,7 @@
 
 
     <div class="w-full">
-       
+
 
         <!-- Conteúdo Principal -->
         <main class="flex-1 overflow-y-auto p-6">
@@ -155,14 +155,14 @@
                 <div class="gradient-bg rounded-2xl p-8 text-white border -lg">
                     <div class="flex flex-col md:flex-row md:items-center justify-between">
                         <div>
-                            <h2 class="text-2xl md:text-3xl font-bold mb-2">Bem-vindo, Administrador</h2>
+                            <h2 class="text-2xl md:text-3xl font-bold mb-2">Bem-vindo, {{ auth()->user()->name }}</h2>
                             <p class="text-red-100 opacity-90">Aqui está uma visão geral da igreja hoje</p>
                         </div>
                         <div class="mt-4 md:mt-0">
                             <a href="{{ route('admin.crentes.novo') }}"
                                 class="bg-white text-red-800 font-semibold px-6 py-3 rounded-xl hover:scale-90 hover:opacity-80 active:scale-95 ease-in-out duration-300 transition-all border-lg">
                                 <i class="fas fa-plus mr-2"></i> Adicionar Novo Crente
-                        </a>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -176,7 +176,7 @@
                         <div>
                             <p class="text-sm text-gray-500 font-medium">Total de Crentes</p>
                             <p class="text-3xl font-bold text-gray-900 mt-2">{{ $total_crentes }}</p>
-                            
+
                         </div>
                         <div class="stats-icon bg-red-50">
                             <i class="fas fa-users text-2xl text-red-600"></i>
@@ -195,9 +195,9 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm text-gray-500 font-medium">Batizados</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">{{$total_batizados}}</p>
+                            <p class="text-3xl font-bold text-gray-900 mt-2">{{ $total_batizados }}</p>
                             <div class="flex items-center mt-2">
-                               
+
                             </div>
                         </div>
                         <div class="stats-icon bg-blue-50">
@@ -216,10 +216,10 @@
                 <div class="card-hover bg-white rounded-2xl border-sm border border-gray-100 p-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-sm text-gray-500 font-medium">Grupos</p>
+                            <p class="text-sm text-gray-500 font-medium">Grupos Familiares</p>
                             <p class="text-3xl font-bold text-gray-900 mt-2">{{ $total_grupos }}</p>
                             <div class="flex items-center mt-2">
-                               
+
                             </div>
                         </div>
                         <div class="stats-icon bg-amber-50">
@@ -239,9 +239,10 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm text-gray-500 font-medium">Total Acumulado</p>
-                            <p class="text-2xl font-bold text-gray-900 mt-2">{{ number_format($total_ofertas, 2, '.', ',') }} MT</p>
+                            <p class="text-2xl font-bold text-gray-900 mt-2">
+                                {{ number_format($total_ofertas, 2, '.', ',') }} MT</p>
                             <div class="flex items-center mt-2">
-                                
+
                             </div>
                         </div>
                         <div class="stats-icon bg-emerald-50">
@@ -267,10 +268,7 @@
                             <p class="text-sm text-gray-500">Últimos 12 meses</p>
                         </div>
                         <div class="flex items-center space-x-2">
-                            <button
-                                class="text-xs px-3 py-1.5 bg-red-50 text-red-700 rounded-lg font-medium">Anual</button>
-                            <button
-                                class="text-xs px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg font-medium hover:bg-gray-200">Mensal</button>
+                           
                         </div>
                     </div>
                     <div id="growthChart" class="chart-container" style="height: 300px;"></div>
@@ -310,82 +308,42 @@
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                // Toggle Menu Mobile
-                const menuToggle = document.getElementById('menuToggle');
-                const sidebar = document.querySelector('.sidebar');
 
-                menuToggle.addEventListener('click', function() {
-                    sidebar.classList.toggle('hidden');
-                });
 
-                // Notifications Dropdown
-                const notificationsBtn = document.getElementById('notificationsBtn');
-                const notificationsDropdown = document.getElementById('notificationsDropdown');
 
-                notificationsBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    notificationsDropdown.classList.toggle('show');
-                });
 
-                // Close dropdowns when clicking outside
-                document.addEventListener('click', function() {
-                    notificationsDropdown.classList.remove('show');
-                });
+                const meses = @json($meses);
+                const registosMensais = @json($registosMensais);
 
-                // Prevent dropdown close when clicking inside
-                notificationsDropdown.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                });
-
-                // Gráfico de Crescimento (ApexCharts)
-                const growthOptions = {
+                /*
+                |--------------------------------------------------------------------------
+                | GRÁFICO DE REGISTOS DE CRENTES POR MÊS
+                |--------------------------------------------------------------------------
+                */
+                const registroMensalOptions = {
                     series: [{
-                        name: 'Total de Crentes',
-                        data: [1000, 1050, 1100, 1150, 1200, 1248, 1280, 1300, 1320, 1350, 1380, 1400]
-                    }, {
-                        name: 'Novos Batismos',
-                        data: [15, 18, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+                        name: 'Registos de Crentes',
+                        data: registosMensais
                     }],
                     chart: {
+                        type: 'bar',
                         height: 300,
-                        type: 'area',
                         toolbar: {
                             show: false
-                        },
-                        zoom: {
-                            enabled: false
-                        },
-                        animations: {
-                            enabled: true,
-                            easing: 'easeinout',
-                            speed: 800
                         }
                     },
-                    colors: ['#7f1d1d', '#0ea5e9'],
+                    colors: ['#7f1d1d'],
+                    plotOptions: {
+                        bar: {
+                            columnWidth: '50%',
+                            borderRadius: 6
+                        }
+                    },
                     dataLabels: {
                         enabled: false
                     },
-                    stroke: {
-                        curve: 'smooth',
-                        width: 3
-                    },
-                    fill: {
-                        type: 'gradient',
-                        gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.7,
-                            opacityTo: 0.1,
-                            stops: [0, 90, 100]
-                        }
-                    },
-                    grid: {
-                        borderColor: '#f1f1f1',
-                        strokeDashArray: 3
-                    },
                     xaxis: {
-                        categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov',
-                            'Dez'
-                        ],
+                        categories: meses,
                         axisBorder: {
                             show: false
                         },
@@ -394,40 +352,43 @@
                         }
                     },
                     yaxis: {
+                        title: {
+                            text: 'Número de Registos'
+                        },
                         labels: {
-                            formatter: function(value) {
-                                return value.toFixed(0);
-                            }
+                            formatter: val => Math.round(val)
                         }
                     },
-                    legend: {
-                        position: 'top',
-                        horizontalAlign: 'right',
-                        fontSize: '12px',
-                        markers: {
-                            radius: 12
-                        }
+                    grid: {
+                        borderColor: '#f1f1f1',
+                        strokeDashArray: 3
                     },
                     tooltip: {
                         theme: 'light',
-                        x: {
-                            show: true
+                        y: {
+                            formatter: val => val + ' crentes'
                         }
                     }
                 };
 
-                const growthChart = new ApexCharts(document.querySelector("#growthChart"), growthOptions);
-                growthChart.render();
+                new ApexCharts(
+                    document.querySelector("#registroMensalChart"),
+                    registroMensalOptions
+                ).render();
 
                 // Gráfico de Distribuição por Idade (ApexCharts)
+                const homens = @json($homens);
+                const mulheres = @json($mulheres);
                 const ageDistributionOptions = {
                     series: [{
-                        name: 'Homens',
-                        data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
-                    }, {
-                        name: 'Mulheres',
-                        data: [23, 32, 27, 41, 38, 48, 55, 75, 110]
-                    }],
+                            name: 'Homens',
+                            data: homens
+                        },
+                        {
+                            name: 'Mulheres',
+                            data: mulheres
+                        }
+                    ],
                     chart: {
                         type: 'bar',
                         height: 300,
@@ -443,7 +404,7 @@
                             columnWidth: '55%',
                             borderRadius: 6,
                             borderRadiusApplication: 'end'
-                        },
+                        }
                     },
                     dataLabels: {
                         enabled: false
@@ -454,7 +415,11 @@
                         colors: ['transparent']
                     },
                     xaxis: {
-                        categories: ['0-12', '13-18', '19-25', '26-35', '36-45', '46-55', '56-65', '66-75', '75+'],
+                        categories: [
+                            '0-12', '13-18', '19-25',
+                            '26-35', '36-45', '46-55',
+                            '56-65', '66-75', '75+'
+                        ]
                     },
                     yaxis: {
                         title: {
@@ -467,9 +432,7 @@
                     tooltip: {
                         theme: 'light',
                         y: {
-                            formatter: function(val) {
-                                return val + " pessoas"
-                            }
+                            formatter: val => val + ' pessoas'
                         }
                     },
                     legend: {
@@ -478,9 +441,10 @@
                     }
                 };
 
-                const ageDistributionChart = new ApexCharts(document.querySelector("#ageDistributionChart"),
-                    ageDistributionOptions);
-                ageDistributionChart.render();
+                new ApexCharts(
+                    document.querySelector("#ageDistributionChart"),
+                    ageDistributionOptions
+                ).render();
 
                 // Animações de entrada
                 const observerOptions = {

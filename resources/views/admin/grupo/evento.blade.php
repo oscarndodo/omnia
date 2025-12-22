@@ -29,7 +29,8 @@
                                             </span>
                                             <span
                                                 class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 border border-purple-200">
-                                                <i class="fas fa-coins mr-1"></i> {{ number_format($total_ofertas, 2, '.', ',') }}
+                                                <i class="fas fa-coins mr-1"></i>
+                                                {{ number_format($total_ofertas, 2, '.', ',') }}
                                                 MT coletado
                                             </span>
                                         </div>
@@ -105,7 +106,7 @@
                     <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                         <div>
                             <h3 class="text-lg font-semibold text-gray-900">Controle de Presenças</h3>
-                            <p class="text-gray-600 mt-1">Marque os membros presentes no evento</p>
+                            <p class="text-gray-600 mt-1">Marque os crentes presentes no culto</p>
                         </div>
                         <div class="flex items-center space-x-3 mt-4 lg:mt-0">
                             <button
@@ -125,7 +126,7 @@
                     <table class="w-full">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Membro</th>
+                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Crente</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Função</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Presença</th>
                             </tr>
@@ -172,7 +173,7 @@
                                                     </label>
                                                 </a>
                                             @else
-                                             <a href="{{ route('admin.grupo.evento.presenca', [$evento->grupo->id, $evento->id, $item->id]) }}"
+                                                <a href="{{ route('admin.grupo.evento.presenca', [$evento->grupo->id, $evento->id, $item->id]) }}"
                                                     class="relative">
                                                     <label for="presenca-3" class="flex items-center cursor-pointer">
                                                         <div
@@ -182,7 +183,6 @@
                                                         <span class="ml-3 text-sm font-medium text-gray-700">Ausente</span>
                                                     </label>
                                                 </a>
-                                               
                                             @endif
                                         </div>
                                     </td>
@@ -193,42 +193,43 @@
 
                             @foreach ($evento->visitas as $item)
                                 <tr class="hover:bg-blue-50/30 transition-colors duration-200">
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center text-white font-semibold mr-3 shadow-md">
-                                            VS
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center">
+                                            <div
+                                                class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center text-white font-semibold mr-3 shadow-md">
+                                                VS
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-900">{{ $item->nome }}</p>
+                                                <p class="text-sm text-gray-500">{{ $item->telefone }}
+                                                    ({{ $item->idade }} anos)</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <p class="font-medium text-gray-900">{{ $item->nome }}</p>
-                                            <p class="text-sm text-gray-500">{{ $item->telefone }} ({{ $item->idade }} anos)</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 border border-gray-200">
-                                        <i class="fas fa-user-clock mr-1 text-xs"></i> Visitante
-                                    </span>
-                                </td>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 border border-gray-200">
+                                            <i class="fas fa-user-clock mr-1 text-xs"></i> Visitante
+                                        </span>
+                                    </td>
 
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div class="relative">
-                                            <label for="presenca-4" class="flex items-center cursor-pointer">
-                                                <div
-                                                    class="w-10 h-6 flex items-center bg-green-500 rounded-full p-1 transition-all duration-300">
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center">
+                                            <div class="relative">
+                                                <label for="presenca-4" class="flex items-center cursor-pointer">
                                                     <div
-                                                        class="bg-white w-4 h-4 rounded-full shadow-md transform translate-x-4">
+                                                        class="w-10 h-6 flex items-center bg-green-500 rounded-full p-1 transition-all duration-300">
+                                                        <div
+                                                            class="bg-white w-4 h-4 rounded-full shadow-md transform translate-x-4">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <span class="ml-3 text-sm font-medium text-green-700">Presente</span>
-                                            </label>
+                                                    <span class="ml-3 text-sm font-medium text-green-700">Presente</span>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
 
-                            </tr>
+                                </tr>
                             @endforeach
 
 
@@ -242,7 +243,7 @@
 
         <!-- Conteúdo da Tab Ofertas -->
         <div id="conteudo-ofertas" class="hidden space-y-6">
-          
+
 
             <!-- Detalhes das Ofertas -->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
@@ -250,7 +251,7 @@
                     <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                         <div>
                             <h3 class="text-lg font-semibold text-gray-900">Registro de Ofertas</h3>
-                            <p class="text-gray-600 mt-1">Registro detalhado das contribuições do evento</p>
+                            <p class="text-gray-600 mt-1">Registro detalhado das contribuições do culto</p>
                         </div>
                         <div class="flex items-center space-x-3 mt-4 lg:mt-0">
                             <button
@@ -277,46 +278,45 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
-                           
+
                             @forelse ($evento->ofertas as $item)
-                                 <!-- Oferta 1 -->
-                            <tr class="hover:bg-green-50/30 transition-colors duration-200">
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-8 h-8 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white text-sm font-semibold mr-3">
-                                            {{ $item->crente->nome[0] }}
+                                <tr class="hover:bg-green-50/30 transition-colors duration-200">
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center">
+                                            <div
+                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white text-sm font-semibold mr-3">
+                                                {{ $item->crente->nome[0] ?? "N/A" }}
+                                            </div>
+                                            <span class="font-medium text-gray-900">{{ $item->crente->nome ?? "N/A" }}</span>
                                         </div>
-                                        <span class="font-medium text-gray-900">{{ $item->crente->nome }}</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
-                                        {{ $item->tipo }}
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-lg font-bold text-green-700">{{ number_format($item->valor, 2, '.', ',') }}
-                            MT</span>
-                              
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <button
-                                        class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <a href="{{ route('admin.grupo.evento.oferta.delete', [$evento->grupo->id, $evento->id, $item->id]) }}"
-                                        class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
-                                        <i class="fas fa-trash"></i>
-                                </a>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
+                                            {{ $item->tipo }}
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span
+                                            class="text-lg font-bold text-green-700">{{ number_format($item->valor, 2, '.', ',') }}
+                                            MT</span>
+
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center space-x-2">
+                                            <button
+                                                class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <a href="{{ route('admin.grupo.evento.oferta.delete', [$evento->grupo->id, $evento->id, $item->id]) }}"
+                                                class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
                             @empty
-                                
                             @endforelse
-                           
+
                         </tbody>
                     </table>
                 </div>
@@ -345,7 +345,8 @@
                 </div>
             </div>
 
-            <form class="p-6" action="{{ route('admin.grupo.evento.visita', [$evento->grupo->id, $evento->id]) }}" method="POST">
+            <form class="p-6" action="{{ route('admin.grupo.evento.visita', [$evento->grupo->id, $evento->id]) }}"
+                method="POST">
                 @csrf
                 <div class="space-y-5">
                     <div>
@@ -370,7 +371,7 @@
                         </div>
                     </div>
 
-                   
+
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Observações</label>
@@ -411,7 +412,8 @@
                 </div>
             </div>
 
-            <form class="p-6" action="{{ route('admin.grupo.evento.oferta', [$evento->grupo->id, $evento->id]) }}" method="POST">
+            <form class="p-6" action="{{ route('admin.grupo.evento.oferta', [$evento->grupo->id, $evento->id]) }}"
+                method="POST">
                 <div class="space-y-5">
                     @csrf
                     <div>
@@ -419,9 +421,9 @@
                         <select name="crente_id"
                             class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
                             <option value="">Selecione um</option>
-                           @foreach ($presenca as $item)
-                               <option value="{{ $item->id }}">{{$item->data->nome}}</option>
-                           @endforeach
+                            @foreach ($presenca as $item)
+                                <option value="{{ $item->id }}">{{ $item->data->nome }}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -665,7 +667,7 @@
                     }
                 });
 
-                
+
             });
         </script>
     @endpush

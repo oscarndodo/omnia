@@ -34,7 +34,7 @@
                             <li class="inline-flex items-center">
                                 <a href="{{ route('admin.home') }}"
                                     class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-red-600">
-                                    <i class="fas fa-home mr-2"></i> Dashboard
+                                    <i class="fas fa-arrow-left mr-2"></i> Voltar para Dashboard
                                 </a>
                             </li>
                             <li aria-current="page">
