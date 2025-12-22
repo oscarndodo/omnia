@@ -17,17 +17,17 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'telefone' => 'required|string|min:9',
+            'phone' => 'required|string|min:9',
             'password' => 'required|string|min:6',
         ]);
 
-        $user = User::where('phone', $credentials['telefone'])->first();
+        $user = User::where('phone', $credentials['phone'])->first();
         if ($user === null) {
             return redirect()->route('login')->withErrors(['error' => 'Credenciais inválidas.']);
         }
 
         Auth::attempt($credentials);
-        if (Auth::check()) {
+        if (Auth::check() && Auth::user()->role == "Sector") {
             return redirect()->route('admin.home');
         } else {
             return redirect()->route('login')->withErrors(['error' => 'Credenciais inválidas.']);
@@ -35,9 +35,9 @@ class AuthController extends Controller
     }
 
 
-    public function logout(Request $request)
+    public function logout()
     {
         Auth::logout();
-        return redirect()->route('auth.logout');
+        return redirect()->route('login');
     }
 }

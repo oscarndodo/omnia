@@ -15,7 +15,7 @@ Route::get('auth', [AuthController::class, 'index'])->name('login');
 Route::post('auth/login', [AuthController::class, 'login'])->name('auth.login');
 Route::get('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get("/home", [AdminController::class, 'home'])->name('admin.home');
 
@@ -28,6 +28,11 @@ Route::prefix('admin')->group(function () {
     Route::post('/novo/evento', [AdminController::class, 'novoEvento'])->name('admin.grupos.evento');
     Route::get("/grupos/{id}", [AdminController::class, 'grupo'])->name('admin.grupo');
     Route::get("/grupos/{id}/evento/{evento_id}", [AdminController::class, 'evento'])->name('admin.grupo.evento');
+    Route::get("/grupos/{id}/evento/{evento_id}/remover", [AdminController::class, 'eventoDelete'])->name('admin.grupo.evento.delete');
+    Route::get("/grupos/{id}/evento/{evento_id}/presenca/{crente_id}", [AdminController::class, 'marcarPresenca'])->name('admin.grupo.evento.presenca');
+    Route::post("/grupos/{id}/evento/{evento_id}/oferta", [AdminController::class, 'oferta'])->name('admin.grupo.evento.oferta');
+    Route::get("/grupos/{id}/evento/{evento_id}/oferta/{oferta_id}/eliminar", [AdminController::class, 'ofertaDelete'])->name('admin.grupo.evento.oferta.delete');
+    Route::post("/grupos/{id}/evento/{evento_id}/visita", [AdminController::class, 'visita'])->name('admin.grupo.evento.visita');
 
     Route::get("/eventos", [AdminController::class, 'eventos'])->name('admin.eventos');
 

@@ -82,7 +82,7 @@
             <!-- Logo -->
             <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-center lg:justify-start">
                 <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center border -lg">
-                    <span class="text-white font-bold text-lg"></span>
+                    <span class="text-white font-bold text-lg fas fa-crown"></span>
                 </div>
                 <div class="hidden lg:block ml-3">
                     <h1 class="text-xl font-bold text-gray-900">OMNIA</h1>
@@ -108,8 +108,7 @@
                             class="sidebar-item flex items-center p-3 rounded-xl hover:bg-gray-50 text-gray-700 transition-colors">
                             <i class="fas fa-users text-lg w-6 text-center"></i>
                             <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Crentes</span>
-                            <span
-                                class="hidden lg:block ml-auto bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">248</span>
+                            
                         </a>
                     </li>
 
@@ -128,8 +127,7 @@
                             class="sidebar-item flex items-center p-3 rounded-xl hover:bg-gray-50 text-gray-700 transition-colors">
                             <i class="fas fa-calendar-alt text-lg w-6 text-center"></i>
                             <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Eventos</span>
-                            <span
-                                class="hidden lg:block ml-auto bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">3</span>
+                           
                         </a>
                     </li>
 

@@ -146,119 +146,7 @@
 
 
     <div class="w-full">
-        <!-- Header Moderno -->
-        <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-sm border-b border-gray-100 border -sm">
-            <div class="flex items-center justify-between px-6 py-4">
-                <!-- Esquerda: Título e Breadcrumb -->
-                <div class="flex items-center space-x-4">
-                    <button id="menuToggle"
-                        class="lg:hidden text-gray-600 hover:text-red-700 p-2 rounded-lg hover:bg-gray-100">
-                        <i class="fas fa-bars text-lg"></i>
-                    </button>
-                    <div>
-                        <h1 class="text-xl font-bold text-gray-900">Dashboard</h1>
-                        <div class="flex items-center text-sm text-gray-500">
-                            <a href="#" class="hover:text-red-700">Início</a>
-                            <i class="fas fa-chevron-right mx-2 text-xs"></i>
-                            <span class="text-gray-900 font-medium">Visão Geral</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Direita: Search e Perfil -->
-                <div class="flex items-center space-x-4">
-                    <!-- Search -->
-                    <div class="relative hidden md:block">
-                        <input type="text" placeholder="Pesquisar..."
-                            class="search-input pl-10 pr-4 py-2.5 w-64 text-sm border border-gray-200 rounded-xl focus:outline-none focus:border-red-300 transition-colors">
-                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-                    </div>
-
-                    <!-- Notificações -->
-                    <div class="relative">
-                        <button id="notificationsBtn"
-                            class="relative p-2.5 text-gray-600 hover:text-red-700 rounded-lg hover:bg-gray-100 transition-colors">
-                            <i class="fas fa-bell text-lg"></i>
-                            <span class="notification-badge text-white">3</span>
-                        </button>
-                        <!-- Dropdown Notificações -->
-                        <div id="notificationsDropdown"
-                            class="dropdown-content absolute right-0 mt-2 w-80 bg-white rounded-xl border -xl border border-gray-100 py-2">
-                            <div class="px-4 py-3 border-b border-gray-100">
-                                <h3 class="font-semibold text-gray-900">Notificações</h3>
-                                <p class="text-xs text-gray-500">3 novas notificações</p>
-                            </div>
-                            <div class="max-h-80 overflow-y-auto">
-                                <!-- Notificação 1 -->
-                                <a href="#"
-                                    class="flex items-start px-4 py-3 hover:bg-gray-50 border-b border-gray-50">
-                                    <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-3">
-                                        <i class="fas fa-users text-red-600"></i>
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-sm font-medium text-gray-900">Novo crente registado</p>
-                                        <p class="text-xs text-gray-500">João Baptista acabou de se registrar</p>
-                                        <p class="text-xs text-gray-400 mt-1">Há 5 minutos</p>
-                                    </div>
-                                </a>
-                                <!-- Notificação 2 -->
-                                <a href="#"
-                                    class="flex items-start px-4 py-3 hover:bg-gray-50 border-b border-gray-50">
-                                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                                        <i class="fas fa-calendar text-blue-600"></i>
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-sm font-medium text-gray-900">Evento amanhã</p>
-                                        <p class="text-xs text-gray-500">Culto de Celebração às 18h</p>
-                                        <p class="text-xs text-gray-400 mt-1">Há 2 horas</p>
-                                    </div>
-                                </a>
-                                <!-- Notificação 3 -->
-                                <a href="#" class="flex items-start px-4 py-3 hover:bg-gray-50">
-                                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
-                                        <i class="fas fa-hand-holding-usd text-green-600"></i>
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-sm font-medium text-gray-900">Dízimo recebido</p>
-                                        <p class="text-xs text-gray-500">MZN 5,000 de Maria José</p>
-                                        <p class="text-xs text-gray-400 mt-1">Hoje às 10:30</p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="px-4 py-3 border-t border-gray-100">
-                                <a href="#"
-                                    class="text-sm text-red-600 hover:text-red-800 font-medium text-center block">
-                                    Ver todas as notificações
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Separador -->
-                    <div class="h-6 w-px bg-gray-200"></div>
-
-                    <!-- Quick Actions -->
-                    <button class="p-2.5 text-gray-600 hover:text-red-700 rounded-lg hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-plus text-lg"></i>
-                    </button>
-
-                    <!-- User Menu -->
-                    <div class="relative">
-                        <button id="userMenuBtn"
-                            class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                            <div class="text-right hidden md:block">
-                                <p class="text-sm font-medium text-gray-900">Admin OMNIA</p>
-                                <p class="text-xs text-gray-500">Administrador Principal</p>
-                            </div>
-                            <div
-                                class="w-10 h-10 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white font-semibold border ">
-                                AD
-                            </div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </header>
+       
 
         <!-- Conteúdo Principal -->
         <main class="flex-1 overflow-y-auto p-6">
@@ -268,32 +156,27 @@
                     <div class="flex flex-col md:flex-row md:items-center justify-between">
                         <div>
                             <h2 class="text-2xl md:text-3xl font-bold mb-2">Bem-vindo, Administrador</h2>
-                            <p class="text-red-100 opacity-90">Aqui está uma visão geral da sua igreja hoje</p>
+                            <p class="text-red-100 opacity-90">Aqui está uma visão geral da igreja hoje</p>
                         </div>
                         <div class="mt-4 md:mt-0">
-                            <button
-                                class="bg-white text-red-800 font-semibold px-6 py-3 rounded-xl hover:bg-red-50 transition-colors border -lg">
+                            <a href="{{ route('admin.crentes.novo') }}"
+                                class="bg-white text-red-800 font-semibold px-6 py-3 rounded-xl hover:scale-90 hover:opacity-80 active:scale-95 ease-in-out duration-300 transition-all border-lg">
                                 <i class="fas fa-plus mr-2"></i> Adicionar Novo Crente
-                            </button>
+                        </a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Cards de Estatísticas -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
                 <!-- Total de Crentes -->
-                <div class="card-hover bg-white rounded-2xl border -sm border border-gray-100 p-6">
+                <div class="card-hover bg-white rounded-2xl border-sm border border-gray-100 p-6">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm text-gray-500 font-medium">Total de Crentes</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">1,248</p>
-                            <div class="flex items-center mt-2">
-                                <span class="text-xs text-green-600 bg-green-50 px-2 py-1 rounded-full">
-                                    <i class="fas fa-arrow-up mr-1"></i> 12.5%
-                                </span>
-                                <span class="text-xs text-gray-500 ml-2">vs último mês</span>
-                            </div>
+                            <p class="text-3xl font-bold text-gray-900 mt-2">{{ $total_crentes }}</p>
+                            
                         </div>
                         <div class="stats-icon bg-red-50">
                             <i class="fas fa-users text-2xl text-red-600"></i>
@@ -301,8 +184,8 @@
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100">
                         <div class="flex items-center justify-between text-sm">
-                            <span class="text-gray-500">Homens: 680</span>
-                            <span class="text-gray-500">Mulheres: 568</span>
+                            <span class="text-gray-500">Homens: {{ $total_homens }}</span>
+                            <span class="text-gray-500">Mulheres: {{ $total_mulheres }}</span>
                         </div>
                     </div>
                 </div>
@@ -311,13 +194,10 @@
                 <div class="card-hover bg-white rounded-2xl border -sm border border-gray-100 p-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-sm text-gray-500 font-medium">Batizados (Mês)</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">24</p>
+                            <p class="text-sm text-gray-500 font-medium">Batizados</p>
+                            <p class="text-3xl font-bold text-gray-900 mt-2">{{$total_batizados}}</p>
                             <div class="flex items-center mt-2">
-                                <span class="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded-full">
-                                    <i class="fas fa-arrow-up mr-1"></i> 8.3%
-                                </span>
-                                <span class="text-xs text-gray-500 ml-2">vs último mês</span>
+                               
                             </div>
                         </div>
                         <div class="stats-icon bg-blue-50">
@@ -327,22 +207,19 @@
                     <div class="mt-4 pt-4 border-t border-gray-100">
                         <div class="flex items-center text-sm">
                             <i class="fas fa-calendar text-gray-400 mr-2"></i>
-                            <span class="text-gray-500">Próximo batismo: 25 Nov</span>
+                            <span class="text-gray-500"> 25 Nov</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Grupos Ativos -->
-                <div class="card-hover bg-white rounded-2xl border -sm border border-gray-100 p-6">
+                <div class="card-hover bg-white rounded-2xl border-sm border border-gray-100 p-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-sm text-gray-500 font-medium">Grupos/Células</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">18</p>
+                            <p class="text-sm text-gray-500 font-medium">Grupos</p>
+                            <p class="text-3xl font-bold text-gray-900 mt-2">{{ $total_grupos }}</p>
                             <div class="flex items-center mt-2">
-                                <span class="text-xs text-amber-600 bg-amber-50 px-2 py-1 rounded-full">
-                                    <i class="fas fa-plus mr-1"></i> 2 novos
-                                </span>
-                                <span class="text-xs text-gray-500 ml-2">este mês</span>
+                               
                             </div>
                         </div>
                         <div class="stats-icon bg-amber-50">
@@ -352,22 +229,19 @@
                     <div class="mt-4 pt-4 border-t border-gray-100">
                         <div class="flex items-center text-sm">
                             <i class="fas fa-user text-gray-400 mr-2"></i>
-                            <span class="text-gray-500">Média: 69 crentes/grupo</span>
+                            <span class="text-gray-500">Média: 69 </span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Dízimos do Mês -->
-                <div class="card-hover bg-white rounded-2xl border -sm border border-gray-100 p-6">
+                <div class="card-hover col-span-2 bg-white rounded-2xl border -sm border border-gray-100 p-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-sm text-gray-500 font-medium">Dízimos (Mês)</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">MZN 45,820</p>
+                            <p class="text-sm text-gray-500 font-medium">Total Acumulado</p>
+                            <p class="text-2xl font-bold text-gray-900 mt-2">{{ number_format($total_ofertas, 2, '.', ',') }} MT</p>
                             <div class="flex items-center mt-2">
-                                <span class="text-xs text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
-                                    <i class="fas fa-arrow-up mr-1"></i> 8.5%
-                                </span>
-                                <span class="text-xs text-gray-500 ml-2">vs último mês</span>
+                                
                             </div>
                         </div>
                         <div class="stats-icon bg-emerald-50">
@@ -376,8 +250,8 @@
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100">
                         <div class="flex items-center justify-between text-sm">
-                            <span class="text-gray-500">Ofertas: MZN 12,450</span>
-                            <span class="text-gray-500">Dízimos: MZN 33,370</span>
+                            <span class="text-gray-500">Ofertas: {{ number_format($total_oferta, 2, '.', ',') }} MT</span>
+                            <span class="text-gray-500">Dízimos: {{ number_format($total_dizimo, 2, '.', ',') }} MT</span>
                         </div>
                     </div>
                 </div>

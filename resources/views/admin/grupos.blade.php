@@ -7,8 +7,8 @@
         <div class="mb-8">
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                    <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">Grupos / Células</h1>
-                    <p class="text-gray-600 mt-2">Gerencie os grupos de células da sua igreja</p>
+                    <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">Grupos</h1>
+                    <p class="text-gray-600 mt-2">Gerencie os grupos familiares da sua igreja</p>
                 </div>
                 <div class="flex items-center space-x-4 mt-4 lg:mt-0">
                     <!-- Botão de Relatório -->

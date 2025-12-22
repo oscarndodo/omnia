@@ -99,23 +99,23 @@
                                 </td>
                                 <td class="py-4 px-6">
                                     <div class="flex items-center">
-                                        <span class="font-medium">120</span>
+                                        <span class="font-medium">{{ $item->presenca()->count() }}</span>
                                     </div>
                                 </td>
                                 <td class="py-4 px-6">
                                     <div class="flex items-center space-x-2">
-                                        <button
+                                        <a href="{{ route('admin.grupo.evento', [$item->grupo->id, $item->id]) }}"
                                             class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
                                             <i class="fas fa-eye"></i>
-                                        </button>
+                                    </a>
                                         <button
                                             class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button
+                                        <a href="{{ route('admin.grupo.evento.delete', [$item->grupo->id, $item->id] ) }}"
                                             class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
                                             <i class="fas fa-trash"></i>
-                                        </button>
+                                    </a>
                                     </div>
                                 </td>
                             </tr>

@@ -5,40 +5,10 @@
     <div class="p-6">
         <!-- Breadcrumb -->
         <div class="mb-8">
-            <nav class="flex mb-6" aria-label="Breadcrumb">
-                <ol class="inline-flex items-center space-x-1 md:space-x-3">
-                    <li class="inline-flex items-center">
-                        <a href="{{ route('admin.home') }}"
-                            class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-red-700 transition-colors">
-                            <i class="fas fa-home mr-2"></i> Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <div class="flex items-center">
-                            <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
-                            <a href="{{ route('admin.grupos') }}"
-                                class="ml-2 text-sm font-medium text-gray-700 hover:text-red-700 transition-colors">Grupos</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex items-center">
-                            <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
-                            <a href="#"
-                                class="ml-2 text-sm font-medium text-gray-700 hover:text-red-700 transition-colors">Grupo
-                                Avivamento</a>
-                        </div>
-                    </li>
-                    <li aria-current="page">
-                        <div class="flex items-center">
-                            <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
-                            <span class="ml-2 text-sm font-medium text-red-700">Detalhes do Evento</span>
-                        </div>
-                    </li>
-                </ol>
-            </nav>
+
 
             <!-- Cabeçalho do Evento -->
-            <div class="bg-gradient-to-r from-blue-50 to-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
                 <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between">
                     <div class="flex-1">
                         <div class="flex items-start">
@@ -49,27 +19,26 @@
                             <div class="flex-1">
                                 <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                                     <div>
-                                        <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">Reunião Semanal da Célula
+                                        <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">{{ $evento->titulo }}
                                         </h1>
                                         <div class="flex flex-wrap items-center gap-2 mt-2">
-                                            <span
-                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 border border-green-200">
-                                                <i class="fas fa-check-circle mr-1 text-xs"></i> Realizado
-                                            </span>
+
                                             <span
                                                 class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
-                                                <i class="fas fa-users mr-1"></i> 12 presentes
+                                                <i class="fas fa-users mr-1"></i> {{ $presentes }} presentes
                                             </span>
                                             <span
                                                 class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 border border-purple-200">
-                                                <i class="fas fa-coins mr-1"></i> R$ 280,50 coletado
+                                                <i class="fas fa-coins mr-1"></i> {{ number_format($total_ofertas, 2, '.', ',') }}
+                                                MT coletado
                                             </span>
                                         </div>
                                     </div>
                                     <div class="mt-4 lg:mt-0">
                                         <span
                                             class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800 border border-red-200">
-                                            <i class="fas fa-calendar-day mr-1"></i> 25/03/2024
+                                            <i class="fas fa-calendar-day mr-1"></i>
+                                            <span>{{ \Carbon\Carbon::parse($evento->data)->format('d/m/Y') }}</span>
                                         </span>
                                     </div>
                                 </div>
@@ -77,11 +46,12 @@
                                 <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="flex items-center text-gray-600">
                                         <i class="fas fa-clock text-blue-600 mr-3 w-5"></i>
-                                        <span>19:00 - 21:00 (2 horas)</span>
+                                        <span>{{ \Carbon\Carbon::parse($evento->hora_inicio)->format('H:i') }} -
+                                            {{ \Carbon\Carbon::parse($evento->hora_fim)->format('H:i') }}</span>
                                     </div>
                                     <div class="flex items-center text-gray-600">
                                         <i class="fas fa-map-marker-alt text-red-600 mr-3 w-5"></i>
-                                        <span>Casa do João Miguel - Rua das Flores, 123</span>
+                                        <span>{{ $evento->local }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +73,8 @@
                             <i class="fas fa-user-check text-red-600"></i>
                         </div>
                         <span>Presenças</span>
-                        <span class="ml-2 bg-red-100 text-red-800 text-xs px-2 py-0.5 rounded-full">12/15</span>
+                        <span
+                            class="ml-2 bg-red-100 text-red-800 text-xs px-2 py-0.5 rounded-full">{{ $presentes }}</span>
                     </button>
 
                     <!-- Tab Ofertas -->
@@ -114,7 +85,9 @@
                             <i class="fas fa-hand-holding-usd text-gray-600"></i>
                         </div>
                         <span>Ofertas</span>
-                        <span class="ml-2 bg-gray-100 text-gray-800 text-xs px-2 py-0.5 rounded-full">R$ 280,50</span>
+                        <span
+                            class="ml-2 bg-gray-100 text-gray-800 text-xs px-2 py-0.5 rounded-full">{{ number_format($total_ofertas, 2, '.', ',') }}
+                            MT</span>
                     </button>
 
 
@@ -124,74 +97,7 @@
 
         <!-- Conteúdo da Tab Presenças -->
         <div id="conteudo-presencas" class="space-y-6">
-            <!-- Estatísticas Rápidas -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm font-medium">Total Presentes</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">12</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
-                            <i class="fas fa-user-check text-green-600 text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-green-600 text-sm font-medium flex items-center">
-                            <i class="fas fa-arrow-up mr-1"></i> 80% do grupo
-                        </span>
-                    </div>
-                </div>
 
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm font-medium">Ausentes</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">3</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center">
-                            <i class="fas fa-user-times text-red-600 text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-red-600 text-sm font-medium flex items-center">
-                            <i class="fas fa-exclamation-circle mr-1"></i> 20% do grupo
-                        </span>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm font-medium">Visitantes</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">2</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
-                            <i class="fas fa-user-plus text-blue-600 text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-blue-600 text-sm font-medium">Novas pessoas</span>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm font-medium">Frequência</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">80%</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center">
-                            <i class="fas fa-chart-line text-yellow-600 text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-green-600 text-sm font-medium flex items-center">
-                            <i class="fas fa-arrow-up mr-1"></i> +5% vs último
-                        </span>
-                    </div>
-                </div>
-            </div>
 
             <!-- Controle de Presenças -->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
@@ -221,172 +127,72 @@
                             <tr>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Membro</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Função</th>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Status</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Presença</th>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Hora de Chegada</th>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Ações</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
-                            <!-- Membro 1 - Presente -->
-                            <tr class="hover:bg-green-50/30 transition-colors duration-200">
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white font-semibold mr-3 shadow-md">
-                                            JM
-                                        </div>
-                                        <div>
-                                            <p class="font-medium text-gray-900">João Miguel</p>
-                                            <p class="text-sm text-gray-500">Líder Principal</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800 border border-yellow-200">
-                                        <i class="fas fa-crown mr-1 text-xs"></i> Líder
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 border border-green-200">
-                                        <i class="fas fa-circle mr-1 text-xs"></i> Ativo
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div class="relative">
-                                            <input type="checkbox" id="presenca-1" class="sr-only" checked>
-                                            <label for="presenca-1" class="flex items-center cursor-pointer">
-                                                <div
-                                                    class="w-10 h-6 flex items-center bg-green-500 rounded-full p-1 transition-all duration-300">
-                                                    <div
-                                                        class="bg-white w-4 h-4 rounded-full shadow-md transform translate-x-4">
-                                                    </div>
-                                                </div>
-                                                <span class="ml-3 text-sm font-medium text-green-700">Presente</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-gray-700">19:05</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <button
-                                        class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm rounded-lg transition-colors flex items-center">
-                                        <i class="fas fa-clock mr-1"></i> Editar Hora
-                                    </button>
-                                </td>
-                            </tr>
 
-                            <!-- Membro 2 - Presente -->
-                            <tr class="hover:bg-green-50/30 transition-colors duration-200">
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white font-semibold mr-3 shadow-md">
-                                            AC
-                                        </div>
-                                        <div>
-                                            <p class="font-medium text-gray-900">Ana Costa</p>
-                                            <p class="text-sm text-gray-500">Líder Auxiliar</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 border border-purple-200">
-                                        <i class="fas fa-user-shield mr-1 text-xs"></i> Auxiliar
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 border border-green-200">
-                                        <i class="fas fa-circle mr-1 text-xs"></i> Ativo
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div class="relative">
-                                            <input type="checkbox" id="presenca-2" class="sr-only" checked>
-                                            <label for="presenca-2" class="flex items-center cursor-pointer">
-                                                <div
-                                                    class="w-10 h-6 flex items-center bg-green-500 rounded-full p-1 transition-all duration-300">
-                                                    <div
-                                                        class="bg-white w-4 h-4 rounded-full shadow-md transform translate-x-4">
-                                                    </div>
-                                                </div>
-                                                <span class="ml-3 text-sm font-medium text-green-700">Presente</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-gray-700">19:15</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <button
-                                        class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm rounded-lg transition-colors flex items-center">
-                                        <i class="fas fa-clock mr-1"></i> Editar Hora
-                                    </button>
-                                </td>
-                            </tr>
 
-                            <!-- Membro 3 - Ausente -->
-                            <tr class="hover:bg-red-50/30 transition-colors duration-200">
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white font-semibold mr-3 shadow-md">
-                                            PS
+                            @foreach ($presenca as $item)
+                                <!-- Membro 3 - Ausente -->
+                                <tr class="hover:bg-red-50/30 transition-colors duration-200">
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center">
+                                            <div
+                                                class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white font-semibold mr-3 shadow-md">
+                                                {{ $item['data']->nome[0] }}
+                                            </div>
+                                            <div>
+                                                <p class="font-medium text-gray-900"> {{ $item['data']->nome }}</p>
+                                                <p class="text-sm text-gray-500">Membro</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <p class="font-medium text-gray-900">Pedro Silva</p>
-                                            <p class="text-sm text-gray-500">Membro</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
-                                        <i class="fas fa-user mr-1 text-xs"></i> Membro
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800 border border-yellow-200">
-                                        <i class="fas fa-circle mr-1 text-xs"></i> Irregular
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div class="relative">
-                                            <input type="checkbox" id="presenca-3" class="sr-only">
-                                            <label for="presenca-3" class="flex items-center cursor-pointer">
-                                                <div
-                                                    class="w-10 h-6 flex items-center bg-gray-300 rounded-full p-1 transition-all duration-300">
-                                                    <div class="bg-white w-4 h-4 rounded-full shadow-md"></div>
-                                                </div>
-                                                <span class="ml-3 text-sm font-medium text-gray-700">Ausente</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-gray-400">-</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <button
-                                        class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm rounded-lg transition-colors flex items-center">
-                                        <i class="fas fa-edit mr-1"></i> Justificar
-                                    </button>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
+                                            <i class="fas fa-user mr-1 text-xs"></i> Membro
+                                        </span>
+                                    </td>
 
-                            <!-- Visitante 1 -->
-                            <tr class="hover:bg-blue-50/30 transition-colors duration-200">
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center">
+                                            @if ($item->status)
+                                                <a href="{{ route('admin.grupo.evento.presenca', [$evento->grupo->id, $evento->id, $item->id]) }}"
+                                                    class="relative">
+                                                    <label for="presenca-4" class="flex items-center cursor-pointer">
+                                                        <div
+                                                            class="w-10 h-6 flex items-center bg-green-500 rounded-full p-1 transition-all duration-300">
+                                                            <div
+                                                                class="bg-white w-4 h-4 rounded-full shadow-md transform translate-x-4">
+                                                            </div>
+                                                        </div>
+                                                        <span
+                                                            class="ml-3 text-sm font-medium text-green-700">Presente</span>
+                                                    </label>
+                                                </a>
+                                            @else
+                                             <a href="{{ route('admin.grupo.evento.presenca', [$evento->grupo->id, $evento->id, $item->id]) }}"
+                                                    class="relative">
+                                                    <label for="presenca-3" class="flex items-center cursor-pointer">
+                                                        <div
+                                                            class="w-10 h-6 flex items-center bg-gray-300 rounded-full p-1 transition-all duration-300">
+                                                            <div class="bg-white w-4 h-4 rounded-full shadow-md"></div>
+                                                        </div>
+                                                        <span class="ml-3 text-sm font-medium text-gray-700">Ausente</span>
+                                                    </label>
+                                                </a>
+                                               
+                                            @endif
+                                        </div>
+                                    </td>
+
+
+                                </tr>
+                            @endforeach
+
+                            @foreach ($evento->visitas as $item)
+                                <tr class="hover:bg-blue-50/30 transition-colors duration-200">
                                 <td class="py-4 px-6">
                                     <div class="flex items-center">
                                         <div
@@ -394,8 +200,8 @@
                                             VS
                                         </div>
                                         <div>
-                                            <p class="font-medium text-gray-900">Visitante Silva</p>
-                                            <p class="text-sm text-gray-500">Convidado</p>
+                                            <p class="font-medium text-gray-900">{{ $item->nome }}</p>
+                                            <p class="text-sm text-gray-500">{{ $item->telefone }} ({{ $item->idade }} anos)</p>
                                         </div>
                                     </div>
                                 </td>
@@ -405,16 +211,10 @@
                                         <i class="fas fa-user-clock mr-1 text-xs"></i> Visitante
                                     </span>
                                 </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
-                                        <i class="fas fa-star mr-1 text-xs"></i> Novo
-                                    </span>
-                                </td>
+
                                 <td class="py-4 px-6">
                                     <div class="flex items-center">
                                         <div class="relative">
-                                            <input type="checkbox" id="presenca-4" class="sr-only" checked>
                                             <label for="presenca-4" class="flex items-center cursor-pointer">
                                                 <div
                                                     class="w-10 h-6 flex items-center bg-green-500 rounded-full p-1 transition-all duration-300">
@@ -427,96 +227,22 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-gray-700">19:20</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <button
-                                            class="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-700 text-sm rounded-lg transition-colors flex items-center">
-                                            <i class="fas fa-times mr-1"></i> Remover
-                                        </button>
-                                        <button
-                                            class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 text-sm rounded-lg transition-colors flex items-center">
-                                            <i class="fas fa-user-plus mr-1"></i> Converter
-                                        </button>
-                                    </div>
-                                </td>
+
                             </tr>
+                            @endforeach
+
+
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Total de Presenças -->
-                <div class="p-6 border-t border-gray-100 bg-gray-50">
-                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-                        <div class="text-sm text-gray-600">
-                            <span class="font-medium text-green-700">12 presentes</span> |
-                            <span class="font-medium text-red-700">3 ausentes</span> |
-                            <span class="font-medium text-blue-700">2 visitantes</span>
-                        </div>
-                        <button
-                            class="mt-4 lg:mt-0 px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-medium rounded-xl transition-all duration-300 flex items-center">
-                            <i class="fas fa-save mr-2"></i> Salvar Alterações
-                        </button>
-                    </div>
-                </div>
+
             </div>
         </div>
 
         <!-- Conteúdo da Tab Ofertas -->
         <div id="conteudo-ofertas" class="hidden space-y-6">
-            <!-- Estatísticas Financeiras -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm font-medium">Total Coletado</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">R$ 280,50</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
-                            <i class="fas fa-hand-holding-usd text-green-600 text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-green-600 text-sm font-medium flex items-center">
-                            <i class="fas fa-arrow-up mr-1"></i> 15% vs último evento
-                        </span>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm font-medium">Contribuintes</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">8</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
-                            <i class="fas fa-users text-blue-600 text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-blue-600 text-sm font-medium">67% dos presentes</span>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm font-medium">Média por Pessoa</p>
-                            <p class="text-3xl font-bold text-gray-900 mt-2">R$ 35,06</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center">
-                            <i class="fas fa-chart-bar text-purple-600 text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-green-600 text-sm font-medium flex items-center">
-                            <i class="fas fa-arrow-up mr-1"></i> R$ 5,20 vs média
-                        </span>
-                    </div>
-                </div>
-            </div>
+          
 
             <!-- Detalhes das Ofertas -->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
@@ -546,160 +272,51 @@
                             <tr>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Contribuinte</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Tipo</th>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Valor (R$)</th>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Método</th>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Data/Hora</th>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Observações</th>
+                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Valor</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Ações</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100">
-                            <!-- Oferta 1 -->
+                           
+                            @forelse ($evento->ofertas as $item)
+                                 <!-- Oferta 1 -->
                             <tr class="hover:bg-green-50/30 transition-colors duration-200">
                                 <td class="py-4 px-6">
                                     <div class="flex items-center">
                                         <div
                                             class="w-8 h-8 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white text-sm font-semibold mr-3">
-                                            JM
+                                            {{ $item->crente->nome[0] }}
                                         </div>
-                                        <span class="font-medium text-gray-900">João Miguel</span>
+                                        <span class="font-medium text-gray-900">{{ $item->crente->nome }}</span>
                                     </div>
                                 </td>
                                 <td class="py-4 px-6">
                                     <span
                                         class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
-                                        Oferta
+                                        {{ $item->tipo }}
                                     </span>
                                 </td>
                                 <td class="py-4 px-6">
-                                    <span class="text-lg font-bold text-green-700">R$ 50,00</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 border border-gray-200">
-                                        <i class="fas fa-money-bill-wave mr-1"></i> Dinheiro
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="space-y-1">
-                                        <span class="text-sm text-gray-700">25/03/2024</span>
-                                        <span class="text-xs text-gray-500">19:30</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-sm text-gray-600">Contribuição regular</span>
-                                </td>
+                                    <span class="text-lg font-bold text-green-700">{{ number_format($item->valor, 2, '.', ',') }}
+                            MT</span>
+                              
                                 <td class="py-4 px-6">
                                     <div class="flex items-center space-x-2">
                                         <button
-                                            class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
+                                        class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <a href="{{ route('admin.grupo.evento.oferta.delete', [$evento->grupo->id, $evento->id, $item->id]) }}"
+                                        class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
+                                        <i class="fas fa-trash"></i>
+                                </a>
                                     </div>
                                 </td>
                             </tr>
-
-                            <!-- Oferta 2 -->
-                            <tr class="hover:bg-green-50/30 transition-colors duration-200">
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white text-sm font-semibold mr-3">
-                                            AC
-                                        </div>
-                                        <span class="font-medium text-gray-900">Ana Costa</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 border border-purple-200">
-                                        Dízimo
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-lg font-bold text-green-700">R$ 35,50</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 border border-gray-200">
-                                        <i class="fas fa-money-bill-wave mr-1"></i> Dinheiro
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="space-y-1">
-                                        <span class="text-sm text-gray-700">25/03/2024</span>
-                                        <span class="text-xs text-gray-500">19:35</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-sm text-gray-600">Dízimo mensal</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <!-- Oferta 3 -->
-                            <tr class="hover:bg-green-50/30 transition-colors duration-200">
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-8 h-8 rounded-full bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center text-white text-sm font-semibold mr-3">
-                                            VS
-                                        </div>
-                                        <span class="font-medium text-gray-900">Visitante Silva</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800 border border-yellow-200">
-                                        Contribuição
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-lg font-bold text-green-700">R$ 20,00</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 border border-gray-200">
-                                        <i class="fas fa-money-bill-wave mr-1"></i> Dinheiro
-                                    </span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="space-y-1">
-                                        <span class="text-sm text-gray-700">25/03/2024</span>
-                                        <span class="text-xs text-gray-500">20:15</span>
-                                    </div>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <span class="text-sm text-gray-600">Primeira contribuição</span>
-                                </td>
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center space-x-2">
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button
-                                            class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                            @empty
+                                
+                            @endforelse
+                           
                         </tbody>
                     </table>
                 </div>
@@ -712,7 +329,7 @@
 
     <!-- Modal Adicionar Visitante -->
     <div id="modalAdicionarVisitante"
-        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        class="fixed inset-0 bg-black backdrop-blur-sm bg-opacity-50 z-50 hidden items-center justify-center p-4">
         <div
             class="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0">
             <div class="sticky top-0 bg-white p-6 border-b border-gray-100 z-10">
@@ -728,11 +345,12 @@
                 </div>
             </div>
 
-            <form class="p-6">
+            <form class="p-6" action="{{ route('admin.grupo.evento.visita', [$evento->grupo->id, $evento->id]) }}" method="POST">
+                @csrf
                 <div class="space-y-5">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Nome do Visitante *</label>
-                        <input type="text"
+                        <input type="text" name="nome"
                             class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                             placeholder="Nome completo">
                     </div>
@@ -740,33 +358,23 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Telefone</label>
-                            <input type="tel"
+                            <input type="tel" name="telefone"
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                                placeholder="(11) 99999-8888">
+                                placeholder="84 12 34 567">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Idade</label>
-                            <input type="number"
+                            <input type="number" name="idade"
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                 placeholder="30">
                         </div>
                     </div>
 
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Como conheceu o grupo?</label>
-                        <select
-                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                            <option value="">Selecione</option>
-                            <option value="indicacao">Indicação de amigo</option>
-                            <option value="rede-social">Redes sociais</option>
-                            <option value="convite">Convite pessoal</option>
-                            <option value="outro">Outro</option>
-                        </select>
-                    </div>
+                   
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Observações</label>
-                        <textarea rows="3"
+                        <textarea rows="3" name="descricao"
                             class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                             placeholder="Observações sobre o visitante..."></textarea>
                     </div>
@@ -788,9 +396,8 @@
 
     <!-- Modal Registrar Oferta -->
     <div id="modalRegistrarOferta"
-        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
-        <div
-            class="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0">
+        class="fixed inset-0 bg-black backdrop-blur-sm bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-md transform transition-all duration-300 scale-95 opacity-0">
             <div class="sticky top-0 bg-white p-6 border-b border-gray-100 z-10">
                 <div class="flex items-center justify-between">
                     <div>
@@ -804,33 +411,33 @@
                 </div>
             </div>
 
-            <form class="p-6">
+            <form class="p-6" action="{{ route('admin.grupo.evento.oferta', [$evento->grupo->id, $evento->id]) }}" method="POST">
                 <div class="space-y-5">
+                    @csrf
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Contribuinte *</label>
-                        <select
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Crente *</label>
+                        <select name="crente_id"
                             class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
-                            <option value="">Selecione um membro</option>
-                            <option value="1">João Miguel</option>
-                            <option value="2">Ana Costa</option>
-                            <option value="3">Pedro Silva</option>
-                            <option value="visitante">Visitante</option>
+                            <option value="">Selecione um</option>
+                           @foreach ($presenca as $item)
+                               <option value="{{ $item->id }}">{{$item->data->nome}}</option>
+                           @endforeach
                         </select>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Contribuição *</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de oferta *</label>
                         <div class="grid grid-cols-2 gap-3">
                             <label
                                 class="flex items-center p-4 border border-gray-200 rounded-xl hover:border-green-300 cursor-pointer transition-colors">
-                                <input type="radio" name="tipo" value="oferta" class="mr-3" checked>
+                                <input type="radio" name="tipo" value="Oferta" class="mr-3" checked>
                                 <div>
                                     <div class="font-medium text-gray-900">Oferta</div>
                                 </div>
                             </label>
                             <label
                                 class="flex items-center p-4 border border-gray-200 rounded-xl hover:border-green-300 cursor-pointer transition-colors">
-                                <input type="radio" name="tipo" value="dizimo" class="mr-3">
+                                <input type="radio" name="tipo" value="Dizimo" class="mr-3">
                                 <div>
                                     <div class="font-medium text-gray-900">Dízimo</div>
                                 </div>
@@ -839,29 +446,13 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Valor (R$) *</label>
-                        <input type="number" step="0.01"
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Valor em MT *</label>
+                        <input type="number" step="0.01" name="valor"
                             class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                             placeholder="0,00">
                     </div>
 
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Método de Pagamento</label>
-                        <select
-                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
-                            <option value="dinheiro">Dinheiro</option>
-                            <option value="pix">PIX</option>
-                            <option value="cartao">Cartão</option>
-                            <option value="transferencia">Transferência</option>
-                        </select>
-                    </div>
 
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Observações</label>
-                        <textarea rows="3"
-                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                            placeholder="Observações sobre a contribuição..."></textarea>
-                    </div>
                 </div>
 
                 <div class="mt-8 pt-6 border-t border-gray-100 flex justify-end space-x-4">
@@ -1068,23 +659,13 @@
                         const form = modal.querySelector('form');
                         if (form) {
                             form.addEventListener('submit', function(e) {
-                                e.preventDefault();
-                                // Aqui você adicionaria a lógica para salvar
-                                alert('Salvo com sucesso!');
-                                fecharModal();
+                                form.submit();
                             });
                         }
                     }
                 });
 
-                // Salvar alterações de presenças
-                const salvarBtn = document.querySelector('button:contains("Salvar Alterações")');
-                if (salvarBtn) {
-                    salvarBtn.addEventListener('click', function() {
-                        // Aqui você adicionaria a lógica para salvar todas as presenças
-                        alert('Presenças salvas com sucesso!');
-                    });
-                }
+                
             });
         </script>
     @endpush

@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('estado_civil')->nullable();
             $table->string('nome_pai')->nullable();
             $table->string('nome_mae')->nullable();
-            $table->boolean('batizado')->default(true);
+            $table->boolean('batizado')->default(false);
             $table->boolean('dizimista')->default(false);
             $table->boolean('casado')->default(false);
             $table->enum('estado', ['Ativo', 'Inativo', 'Morto', 'Desviado'])->default('Ativo');

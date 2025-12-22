@@ -76,12 +76,12 @@
         </div>
 
         <!-- Tabs de Conteúdo -->
-        <div class="mb-8">
-            <div class="border-b border-gray-200">
-                <nav class="-mb-px flex space-x-8 overflow-x-auto">
+        <div class="mb-8 h-auto">
+            <div class="border-b h-auto border-gray-200">
+                <nav class="flex space-x-8 overflow-x-auto">
                     <!-- Tab Membros -->
                     <button id="tab-membros"
-                        class="tab-button py-4 px-1 border-b-2 font-medium text-sm transition-all duration-300 border-red-700 text-red-700 whitespace-nowrap flex items-center group">
+                        class="tab-button py- px-1 border-b-2 font-medium text-sm transition-all duration-300 border-red-700 text-red-700 whitespace-nowrap flex items-center group">
                         <div
                             class="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center mr-3 group-hover:bg-red-200 transition-colors">
                             <i class="fas fa-users text-red-600"></i>
@@ -94,13 +94,13 @@
 
                     <!-- Tab Eventos -->
                     <button id="tab-eventos"
-                        class="tab-button py-4 px-1 border-b-2 font-medium text-sm transition-all duration-300 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap flex items-center group">
+                        class="tab-button py- px-1 border-b-2 font-medium text-sm transition-all duration-300 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap flex items-center group">
                         <div
                             class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-3 group-hover:bg-gray-200 transition-colors">
                             <i class="fas fa-calendar-alt text-gray-600"></i>
                         </div>
                         <span>Eventos</span>
-                        <span class="ml-2 bg-gray-100 text-gray-800 text-xs px-2 py-0.5 rounded-full">4</span>
+                        <span class="ml-2 bg-gray-100 text-gray-800 text-xs px-2 py-0.5 rounded-full">{{$grupo->eventos()->count()}}</span>
                     </button>
                 </nav>
             </div>
@@ -131,7 +131,7 @@
 
                         <button
                             class="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors flex items-center">
-                            <i class="fas fa-filter mr-2"></i> Filtros
+                            <i class="fas fa-search mr-2"></i> Buscar
                         </button>
                     </div>
                 </div>
@@ -144,9 +144,7 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Membro</th>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Função</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Contato</th>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Frequência</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Status</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Ações</th>
                             </tr>
@@ -167,41 +165,52 @@
                                             </div>
                                             <div>
                                                 <p class="font-medium text-gray-900">{{ $item->nome }}</p>
-                                                <p class="text-sm text-gray-500">Líder Principal</p>
+                                                <p class="text-sm text-gray-500">
+                                                      @php
+
+                                                $idade = \Carbon\Carbon::parse($item->data_nascimento)->age;
+
+                                                if ($idade <= 12) {
+                                                    $faixa = 'Criança';
+                                                } elseif ($idade <= 17) {
+                                                    $faixa = 'Adolescente';
+                                                } elseif ($idade <= 35) {
+                                                    $faixa = 'Jovem';
+                                                } else {
+                                                    $faixa = 'Adulto';
+                                                }
+                                            @endphp
+                                            {{ $faixa }}
+                                                </p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="py-4 px-6">
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800 border border-yellow-200">
-                                            <i class="fas fa-crown mr-1 text-xs"></i> Líder
-                                        </span>
-                                    </td>
+                                   
                                     <td class="py-4 px-6">
                                         <div class="space-y-1">
                                             <div class="flex items-center text-gray-600">
                                                 <i class="fas fa-phone text-xs mr-2 w-4"></i>
-                                                <span class="text-sm">(11) 99999-8888</span>
+                                                <span class="text-sm">{{ $item->telefone ?? "N/A" }}</span>
                                             </div>
                                             <div class="flex items-center text-gray-600">
                                                 <i class="fas fa-envelope text-xs mr-2 w-4"></i>
-                                                <span class="text-sm truncate">joao@email.com</span>
+                                                <span class="text-sm truncate">{{ $item->endereco ?? "N/A" }}</span>
                                             </div>
                                         </div>
                                     </td>
+                                  
                                     <td class="py-4 px-6">
-                                        <div class="flex items-center">
-                                            <div class="w-24 bg-gray-200 rounded-full h-2 mr-3">
-                                                <div class="bg-green-600 h-2 rounded-full" style="width: 95%"></div>
-                                            </div>
-                                            <span class="text-sm font-medium text-gray-700">95%</span>
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span
+                                        @if ($item->batizado)
+                                            <span
                                             class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 border border-green-200">
-                                            <i class="fas fa-circle mr-1 text-xs"></i> Ativo
+                                            <i class="fas fa-circle mr-1 text-xs"></i> Em Comunhão
                                         </span>
+                                        @else
+                                            <span
+                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800 border border-red-200">
+                                            <i class="fas fa-close mr-1 text-xs"></i> Simpatizante
+                                        </span>
+                                        @endif
                                     </td>
                                     <td class="py-4 px-6">
                                         <div class="flex items-center space-x-2">
@@ -241,31 +250,18 @@
 
 
             <!-- Lista de Eventos -->
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-3 2xl:grid-cols-4 gap-6">
 
                 @forelse ($grupo->eventos as $item)
                     <div
-                        class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-300">
-                        <div class="h-2 bg-red-500"></div>
-                        <div class="p-6">
-                            <div class="flex items-start justify-between mb-4">
-                                <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center">
-                                    <i class="fas fa-flag text-red-600 text-lg"></i>
-                                </div>
+                        class="bg-white rounded-xl shadow-sm border-2 shadow-red-300 border-red-200 overflow-hidden hover:shadow-md transition-shadow duration-300">
+                        <div class="h-auto p-5 bg-gradient-to-r from-red-400 to-red-700">
 
-                                @if (!$item->status)
-                                    <span class="px-3 py-1 text-xs rounded-full bg-green-100 text-green-700">
-                                        Agendado
-                                    </span>
-                                @else
-                                    <span class="px-3 py-1 text-xs rounded-full bg-red-100 text-red-700">
-                                        Terminado
-                                    </span>
-                                @endif
-                            </div>
-
+                            <p class="text-white text-sm">{{ $item->descricao }}</p>
+                        </div>
+                        <div class="p-6 pt-0">
+                          
                             <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ $item->titulo }}</h3>
-                            <p class="text-gray-600 text-sm mb-4">{{ $item->descricao }}</p>
 
                             <div class="space-y-3 mb-6">
                                 <div class="flex items-center text-gray-700">
@@ -286,21 +282,17 @@
                                 <div class="flex items-center">
                                     <div class="flex -space-x-2">
                                         <div
-                                            class="w-8 h-8 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border-2 border-white">
+                                            class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 border-2 border-white flex items-center justify-center">
+                                            <i class="fas fa-users text0-xs text-white"></i>
                                         </div>
-                                        <div
-                                            class="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 border-2 border-white">
-                                        </div>
-                                        <div
-                                            class="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 border-2 border-white">
-                                        </div>
+                                       
                                     </div>
-                                    <span class="ml-2 text-sm text-gray-600">120 participantes</span>
+                                    <span class="ml-2 text-sm text-gray-600">{{ $item->presenca()->count() }} participantes</span>
                                 </div>
-                                <div class="flex items-center space-x-2">
+                                <div class="flex justify-center items-center bg-red-600 rounded-lg  text-white hover:bg-red-500">
                                     <a href="{{ route('admin.grupo.evento', ['id' => $grupo->id, 'evento_id' => $item->id]) }}"
-                                        class="p-4 h-8 rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                        <i class="fas fa-eye"></i> detalhes
+                                        class="px-6 py-2.5  transition-colors flex items-center justify-center">
+                                        Detalhes
                                 </a>
                                 </div>
                             </div>

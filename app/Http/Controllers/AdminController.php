@@ -6,6 +6,7 @@ use App\Models\Congregacao;
 use App\Models\Crente;
 use App\Models\Evento;
 use App\Models\Grupo;
+use App\Models\Oferta;
 use App\Models\Sector;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -36,7 +37,37 @@ class AdminController extends Controller
     }
     public function home()
     {
-        return view('admin.home');
+        $total_crentes = Crente::count();
+        $total_mulheres = Crente::where("genero", 'Feminino')->count();
+        $total_homens = Crente::where("genero", 'Masculino')->count();
+        $total_batizados = Crente::where("batizado", true)->count();
+        $total_grupos = Grupo::count();
+
+        $ofertas = Oferta::all();
+        $total_ofertas = 0.0;
+        $total_oferta = 0.0;
+        $total_dizimo = 0.0;
+
+        foreach($ofertas as $item) {
+            $total_ofertas += floatval($item['valor']);
+            if ($item['tipo'] == "Dizimo") {
+                $total_dizimo += floatval($item['valor']);
+            } else {
+                $total_oferta += floatval($item['valor']);
+            }
+        }
+
+        // dd($total_crentes, $total_mulheres, $total_homens);
+        return view('admin.home', [
+            "total_crentes" => $total_crentes,
+            "total_mulheres" => $total_mulheres,
+            "total_homens" => $total_homens,
+            "total_batizados" => $total_batizados,
+            "total_grupos" => $total_grupos,
+            "total_ofertas" => $total_ofertas,
+            "total_oferta" => $total_oferta,
+            "total_dizimo" => $total_dizimo
+        ]);
     }
 
 
@@ -106,40 +137,162 @@ class AdminController extends Controller
         return Redirect::back()->withErrors(['success' => "Sector criado com sucesso!"]);
     }
 
-        public function novoEvento(Request $request)
-        {
-            $data = $request->validate([
-                "grupo_id" => "required",
-                "titulo" => "required|string",
-                "data" => "required|date",
-                "descricao" => "nullable|string",
-                "local" => "nullable|string",
-                "tipo" => "nullable|string",
-                "inicio" => "nullable|string",
-                "termino" => "nullable|string",
-            ]);
+    public function novoEvento(Request $request)
+    {
+        $data = $request->validate([
+            "grupo_id" => "required",
+            "titulo" => "required|string",
+            "data" => "required|date",
+            "descricao" => "nullable|string",
+            "local" => "nullable|string",
+            "tipo" => "nullable|string",
+            "inicio" => "nullable|string",
+            "termino" => "nullable|string",
+        ]);
 
-            
-            $grupo = Grupo::find($data['grupo_id']);
-            if ($grupo == null) {
-                return Redirect::back()->withErrors(['error' => "Grupo familiar inválido!"]);
-            }
-            $grupo->eventos()->create($data);
-            return Redirect::back()->withErrors(['success' => "Evento criado com sucesso!"]);
+
+        $grupo = Grupo::find($data['grupo_id']);
+        if ($grupo == null) {
+            return Redirect::back()->withErrors(['error' => "Grupo familiar inválido!"]);
         }
+        $evento = $grupo->eventos()->create($data);
+        foreach ($grupo->crentes as $item) {
+            $evento->presenca()->create([
+                "crente_id" => $item['id'],
+                'status' => false
+            ]);
+        }
+        return Redirect::back()->withErrors(['success' => "Evento criado com sucesso!"]);
+    }
 
     public function grupo($id)
     {
         $grupo = Grupo::findOrFail($id);
         if ($grupo == null) {
-            return Redirect::back()->withErrors(['error' => "Grupo familiar inválido!"]);
+            return Redirect::back()->withErrors(['error' => "Grupo não encontrado!!"]);
         }
         return view('admin.grupo.home', ['grupo' => $grupo]);
     }
 
     public function evento($id, $evento_id)
     {
-        return view('admin.grupo.evento');
+        $grupo = Grupo::find($id);
+        if ($grupo == null) {
+            return Redirect::back()->withErrors(['error' => "Grupo não encontrado!!"]);
+        }
+        $evento = $grupo->eventos()->find($evento_id);
+        if ($evento == null) {
+            return Redirect::back()->withErrors(['error' => "Evento não encontrado!"]);
+        }
+
+        $presentes = $evento->presenca()->count() + $evento->visitas()->count();
+        $presenca = $evento->presenca()->orderByDesc("id")->paginate();
+        foreach ($presenca as $item) {
+            $item['data'] = $grupo->crentes()->find($item['crente_id']);
+        }
+
+        $total_ofertas = 0.0;
+        foreach ($evento->ofertas as $item) {
+            $total_ofertas += floatval($item['valor']);
+            $item['crente'] = $grupo->crentes()->find($item['crente_id']);
+        }
+
+        return view('admin.grupo.evento', [
+            'evento' => $evento,
+            'presentes' => $presentes,
+            'total_ofertas' => $total_ofertas,
+            'presenca' => $presenca
+        ]);
+    }
+    public function eventoDelete($id, $evento_id)
+    {
+        $grupo = Grupo::find($id);
+        if ($grupo == null) {
+            return Redirect::back()->withErrors(['error' => "Grupo não encontrado!!"]);
+        }
+        $evento = $grupo->eventos()->find($evento_id);
+        if ($evento == null) {
+            return Redirect::back()->withErrors(['error' => "Evento não encontrado!"]);
+        }
+        $evento->ofertas()->delete();
+        $evento->visitas()->delete();
+        $evento->presenca()->delete();
+        $evento->delete();
+         return Redirect::back()->withErrors(['success' => "Evento eliminado!"]);
+    }
+
+    public function marcarPresenca($id, $evento_id, $crente_id)
+    {
+        $grupo = Grupo::find($id);
+        if ($grupo == null) {
+            return Redirect::back()->withErrors(['error' => "Grupo não encontrado!!"]);
+        }
+        $evento = $grupo->eventos()->find($evento_id);
+        if ($evento == null) {
+            return Redirect::back()->withErrors(['error' => "Evento não encontrado!"]);
+        }
+        $crente = $evento->presenca()->find($crente_id);
+         if ($crente == null) {
+            return Redirect::back()->withErrors(['error' => "Crente não encontrado!"]);
+        }
+        $crente->status = !$crente->status;
+        $crente->save();
+        return Redirect::back()->withErrors(['success' => "Presenca alterada!"]);
+    }
+
+    public function oferta($id, $evento_id, Request $request){
+         $grupo = Grupo::find($id);
+        if ($grupo == null) {
+            return Redirect::back()->withErrors(['error' => "Grupo não encontrado!!"]);
+        }
+        $evento = $grupo->eventos()->find($evento_id);
+        if ($evento == null) {
+            return Redirect::back()->withErrors(['error' => "Evento não encontrado!"]);
+        }
+
+        $data = $request->all();
+        $crente = $evento->presenca()->find($data['crente_id']);
+         if ($crente == null) {
+            return Redirect::back()->withErrors(['error' => "Crente não encontrado!"]);
+        }
+        $evento->ofertas()->create($data);
+        return Redirect::back()->withErrors(['success' => "Oferta realizada!"]);
+    }
+    public function ofertaDelete($id, $evento_id, $oferta_id){
+         $grupo = Grupo::find($id);
+        if ($grupo == null) {
+            return Redirect::back()->withErrors(['error' => "Grupo não encontrado!!"]);
+        }
+        $evento = $grupo->eventos()->find($evento_id);
+        if ($evento == null) {
+            return Redirect::back()->withErrors(['error' => "Evento não encontrado!"]);
+        }
+        $evento = $grupo->eventos()->find($evento_id);
+        if ($evento == null) {
+            return Redirect::back()->withErrors(['error' => "Evento não encontrado!"]);
+        }
+        $oferta = $evento->ofertas()->find($oferta_id);
+        if ($oferta == null) {
+            return Redirect::back()->withErrors(['error' => "Oferta não encontrada!"]);
+        }
+        $oferta->delete();
+        return Redirect::back()->withErrors(['success' => "Oferta eliminada!"]);
+    }
+
+    public function visita($id, $evento_id, Request $request){
+         $grupo = Grupo::find($id);
+        if ($grupo == null) {
+            return Redirect::back()->withErrors(['error' => "Grupo não encontrado!!"]);
+        }
+        $evento = $grupo->eventos()->find($evento_id);
+        if ($evento == null) {
+            return Redirect::back()->withErrors(['error' => "Evento não encontrado!"]);
+        }
+
+        $data = $request->all();
+       
+        $evento->visitas()->create($data);
+        return Redirect::back()->withErrors(['success' => "Visitante cadastrado!"]);
     }
 
     public function eventos()
@@ -156,7 +309,14 @@ class AdminController extends Controller
 
     public function dizimistas()
     {
-        return view('admin.dizimistas');
+        // Fazer com que pegue apenas o mes corrente.
+        $dizimistas = Oferta::where("tipo", "dizimo")->where("created_at", now()->format(""))->orderByDesc('id')->paginate();
+        foreach($dizimistas as $item){
+            $item['data'] = Crente::find($item['crente_id']);
+        }
+        return view('admin.dizimistas', [
+            'dizimistas' => $dizimistas
+        ]);
     }
 
     public function config()

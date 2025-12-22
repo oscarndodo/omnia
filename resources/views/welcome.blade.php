@@ -42,7 +42,7 @@
                                     </path>
                                 </svg>
                             </div>
-                            <input type="tel" name="telefone" placeholder="Número de telefone" required
+                            <input type="tel" name="phone" placeholder="Número de telefone" required
                                 class="w-full pl-10 pr-4 py-3 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none transition-all duration-200 bg-surface/50"
                                 autocomplete="tel" />
                         </div>

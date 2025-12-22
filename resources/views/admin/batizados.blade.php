@@ -15,7 +15,7 @@
         </div>
 
         <!-- Estatísticas de Batizados -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        {{-- <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                 <div class="flex items-center justify-between">
                     <div>
@@ -81,7 +81,7 @@
                     </span>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Conteúdo - Lista Geral (Escondido por padrão) -->
         <div id="view-lista" class="space-y-6">

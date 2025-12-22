@@ -25,4 +25,15 @@ class Evento extends Model
     {
         return $this->belongsTo(Grupo::class);
     }
+
+    public function ofertas() {
+        return $this->hasMany(Oferta::class);
+    }
+    public function visitas() {
+        return $this->hasMany(Visita::class);
+    }
+
+    public function presenca() {
+        return $this->hasMany(Presenca::class);
+    }
 }
