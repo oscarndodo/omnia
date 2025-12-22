@@ -27,7 +27,7 @@ class AuthController extends Controller
         }
 
         Auth::attempt($credentials);
-        if (Auth::check() && Auth::user()->role == "Sector") {
+        if (Auth::check()) {
             return redirect()->route('admin.home');
         } else {
             return redirect()->route('login')->withErrors(['error' => 'Credenciais inválidas.']);
