@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('sector_id')->constrained('sectors')->cascadeOnDelete();
             $table->string('nome');
-            $table->string('lider');
+            $table->string('lider')->nullable();
             $table->string('endereco');
             $table->string("tipo_obra")->nullable();
             $table->string("proprietario")->nullable();

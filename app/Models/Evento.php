@@ -17,6 +17,7 @@ class Evento extends Model
         'local',
         'tipo',
         'inicio',
+        'oferta',
         'termino',
         'status',
     ];
@@ -24,10 +25,6 @@ class Evento extends Model
     public function grupo()
     {
         return $this->belongsTo(Grupo::class);
-    }
-
-    public function ofertas() {
-        return $this->hasMany(Oferta::class);
     }
     
     public function visitas() {

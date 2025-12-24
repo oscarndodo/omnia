@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('descricao')->nullable();
             $table->string('inicio')->nullable();
             $table->string('termino')->nullable();
+            $table->string('oferta')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();
         });

@@ -310,7 +310,7 @@
                                             <p class="font-medium text-gray-900">
                                                 {{ $item->endereco }}
                                             </p>
-                                            <p class="text-xs text-gray-500">Grupo {{ $item->grupo->nome }}</p>
+                                            <p class="text-xs text-gray-500">Grupo {{ $item->grupo->nome ?? "N/A" }}</p>
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
@@ -322,11 +322,11 @@
 
                                     <td class="py-4 px-6">
                                         <div class="flex items-center space-x-2">
-                                            <button
+                                            <a href="{{ route('admin.crentes.perfil', $item->id) }}"
                                                 class="p-1.5 text-gray-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors"
                                                 title="Ver perfil">
                                                 <i class="fas fa-eye"></i>
-                                            </button>
+                                        </a>
                                             <button
                                                 class="p-1.5 text-gray-400 hover:text-blue-600 rounded-lg hover:bg-blue-50 transition-colors"
                                                 title="Editar">

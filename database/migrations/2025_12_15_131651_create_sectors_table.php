@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sectors', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('lider');
+            $table->string('lider')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

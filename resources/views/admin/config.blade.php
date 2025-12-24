@@ -14,7 +14,7 @@
             color: white;
         }
     </style>
-    @vite('resources/css/app.css')
+    <link rel="stylesheet" href="{{ asset('assets/css/tailwindcss.css') }}">
 </head>
 
 <body class="bg-gray-50">
@@ -454,8 +454,8 @@
                                             <td class="py-4 px-6">
                                                 <div class="space-y-1">
                                                     <span
-                                                        class="font-medium text-gray-900">{{ $item->lider->name }}</span>
-                                                    <p class="text-sm text-gray-500">{{ $item->lider->role }}</p>
+                                                        class="font-medium text-gray-900">{{ $item->lider->name ?? "N/A" }}</span>
+                                                    <p class="text-sm text-gray-500">{{ $item->lider->role ?? "N/A" }}</p>
                                                 </div>
                                             </td>
                                             <td class="py-4 px-6">

@@ -30,7 +30,7 @@
                                             <span
                                                 class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 border border-purple-200">
                                                 <i class="fas fa-coins mr-1"></i>
-                                                {{ number_format($total_ofertas, 2, '.', ',') }}
+                                                {{ number_format($evento->oferta, 2, '.', ',') }}
                                                 MT coletado
                                             </span>
                                         </div>
@@ -62,40 +62,7 @@
             </div>
         </div>
 
-        <!-- Tabs de Conteúdo -->
-        <div class="mb-8">
-            <div class="border-b border-gray-200">
-                <nav class="-mb-px flex space-x-8 overflow-x-auto">
-                    <!-- Tab Presenças -->
-                    <button id="tab-presencas"
-                        class="tab-button py-4 px-1 border-b-2 font-medium text-sm transition-all duration-300 border-red-700 text-red-700 whitespace-nowrap flex items-center group">
-                        <div
-                            class="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center mr-3 group-hover:bg-red-200 transition-colors">
-                            <i class="fas fa-user-check text-red-600"></i>
-                        </div>
-                        <span>Presenças</span>
-                        <span
-                            class="ml-2 bg-red-100 text-red-800 text-xs px-2 py-0.5 rounded-full">{{ $presentes }}</span>
-                    </button>
-
-                    <!-- Tab Ofertas -->
-                    <button id="tab-ofertas"
-                        class="tab-button py-4 px-1 border-b-2 font-medium text-sm transition-all duration-300 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap flex items-center group">
-                        <div
-                            class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center mr-3 group-hover:bg-gray-200 transition-colors">
-                            <i class="fas fa-hand-holding-usd text-gray-600"></i>
-                        </div>
-                        <span>Ofertas</span>
-                        <span
-                            class="ml-2 bg-gray-100 text-gray-800 text-xs px-2 py-0.5 rounded-full">{{ number_format($total_ofertas, 2, '.', ',') }}
-                            MT</span>
-                    </button>
-
-
-                </nav>
-            </div>
-        </div>
-
+      
         <!-- Conteúdo da Tab Presenças -->
         <div id="conteudo-presencas" class="space-y-6">
 
@@ -116,6 +83,10 @@
                             <button id="adicionarVisitanteBtn"
                                 class="px-4 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-xl transition-all duration-300 flex items-center">
                                 <i class="fas fa-user-plus mr-2"></i> Adicionar Visitante
+                            </button>
+                             <button id="registrarOfertaBtn"
+                                class="px-4 py-2.5 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-medium rounded-xl transition-all duration-300 flex items-center">
+                                <i class="fas fa-plus-circle mr-2"></i> Nova Oferta
                             </button>
                         </div>
                     </div>
@@ -241,90 +212,7 @@
             </div>
         </div>
 
-        <!-- Conteúdo da Tab Ofertas -->
-        <div id="conteudo-ofertas" class="hidden space-y-6">
-
-
-            <!-- Detalhes das Ofertas -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                <div class="p-6 border-b border-gray-100">
-                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-900">Registro de Ofertas</h3>
-                            <p class="text-gray-600 mt-1">Registro detalhado das contribuições do culto</p>
-                        </div>
-                        <div class="flex items-center space-x-3 mt-4 lg:mt-0">
-                            <button
-                                class="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-xl transition-colors flex items-center">
-                                <i class="fas fa-print mr-2"></i> Imprimir
-                            </button>
-                            <button id="registrarOfertaBtn"
-                                class="px-4 py-2.5 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-medium rounded-xl transition-all duration-300 flex items-center">
-                                <i class="fas fa-plus-circle mr-2"></i> Nova Oferta
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Lista de Ofertas -->
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Contribuinte</th>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Tipo</th>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Valor</th>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-100">
-
-                            @forelse ($evento->ofertas as $item)
-                                <tr class="hover:bg-green-50/30 transition-colors duration-200">
-                                    <td class="py-4 px-6">
-                                        <div class="flex items-center">
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center text-white text-sm font-semibold mr-3">
-                                                {{ $item->crente->nome[0] ?? "N/A" }}
-                                            </div>
-                                            <span class="font-medium text-gray-900">{{ $item->crente->nome ?? "N/A" }}</span>
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span
-                                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
-                                            {{ $item->tipo }}
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span
-                                            class="text-lg font-bold text-green-700">{{ number_format($item->valor, 2, '.', ',') }}
-                                            MT</span>
-
-                                    <td class="py-4 px-6">
-                                        <div class="flex items-center space-x-2">
-                                            <button
-                                                class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <a href="{{ route('admin.grupo.evento.oferta.delete', [$evento->grupo->id, $evento->id, $item->id]) }}"
-                                                class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @empty
-                            @endforelse
-
-                        </tbody>
-                    </table>
-                </div>
-
-
-            </div>
-        </div>
-
+     
     </div>
 
     <!-- Modal Adicionar Visitante -->
@@ -397,8 +285,8 @@
 
     <!-- Modal Registrar Oferta -->
     <div id="modalRegistrarOferta"
-        class="fixed inset-0 bg-black backdrop-blur-sm bg-opacity-50 z-50 hidden items-center justify-center p-4">
-        <div class="bg-white rounded-2xl w-full max-w-md transform transition-all duration-300 scale-95 opacity-0">
+        class="fixed inset-0 bg-black backdrop-blur-sm bg-opacity-50 z-50 hidden items-center justify-center  overflow-hiddenp-4">
+        <div class="bg-white rounded-2xl w-full overflow-hidden max-w-md transform transition-all duration-300 scale-95 opacity-0">
             <div class="sticky top-0 bg-white p-6 border-b border-gray-100 z-10">
                 <div class="flex items-center justify-between">
                     <div>
@@ -416,40 +304,10 @@
                 method="POST">
                 <div class="space-y-5">
                     @csrf
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Crente *</label>
-                        <select name="crente_id"
-                            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
-                            <option value="">Selecione um</option>
-                            @foreach ($presenca as $item)
-                                <option value="{{ $item->id }}">{{ $item->data->nome }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de oferta *</label>
-                        <div class="grid grid-cols-2 gap-3">
-                            <label
-                                class="flex items-center p-4 border border-gray-200 rounded-xl hover:border-green-300 cursor-pointer transition-colors">
-                                <input type="radio" name="tipo" value="Oferta" class="mr-3" checked>
-                                <div>
-                                    <div class="font-medium text-gray-900">Oferta</div>
-                                </div>
-                            </label>
-                            <label
-                                class="flex items-center p-4 border border-gray-200 rounded-xl hover:border-green-300 cursor-pointer transition-colors">
-                                <input type="radio" name="tipo" value="Dizimo" class="mr-3">
-                                <div>
-                                    <div class="font-medium text-gray-900">Dízimo</div>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-
+                  
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Valor em MT *</label>
-                        <input type="number" step="0.01" name="valor"
+                        <input type="number" step="0.01" name="oferta"
                             class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                             placeholder="0,00">
                     </div>

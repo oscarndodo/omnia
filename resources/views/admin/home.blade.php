@@ -155,7 +155,7 @@
                 <div class="gradient-bg rounded-2xl p-8 text-white border -lg">
                     <div class="flex flex-col md:flex-row md:items-center justify-between">
                         <div>
-                            <h2 class="text-2xl md:text-3xl font-bold mb-2">Bem-vindo, {{ auth()->user()->name }}</h2>
+                            {{-- <h2 class="text-2xl md:text-3xl font-bold mb-2">Bem-vindo, {{ auth()->user()->name }}</h2> --}}
                             <p class="text-red-100 opacity-90">Aqui está uma visão geral da igreja hoje</p>
                         </div>
                         <div class="mt-4 md:mt-0">
@@ -251,8 +251,8 @@
                     </div>
                     <div class="mt-4 pt-4 border-t border-gray-100">
                         <div class="flex items-center justify-between text-sm">
-                            <span class="text-gray-500">Ofertas: {{ number_format($total_oferta, 2, '.', ',') }} MT</span>
-                            <span class="text-gray-500">Dízimos: {{ number_format($total_dizimo, 2, '.', ',') }} MT</span>
+                            {{-- <span class="text-gray-500">Ofertas: {{ number_format($total_oferta, 2, '.', ',') }} MT</span> --}}
+                            {{-- <span class="text-gray-500">Dízimos: {{ number_format($total_dizimo, 2, '.', ',') }} MT</span> --}}
                         </div>
                     </div>
                 </div>

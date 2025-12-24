@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('crentes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('grupo_id')->nullable()->constrained('grupos')->cascadeOnDelete();
+            $table->string('grupo_id')->nullable(); 
             $table->string('nome');
             $table->enum('genero', ['Masculino', 'Feminino'])->nullable();
             $table->string('telefone')->nullable();

@@ -18,23 +18,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        $users = User::orderByDesc('id')->paginate(10);
-        $activos = User::where("status", true)->count();
-        $inactivos = User::where("status", false)->count();
-
-        $sectores = Sector::orderByDesc("id")->paginate();
-        $congregacoes = Congregacao::orderByDesc("id")->paginate();
-
-        foreach ($sectores as $item) {
-            $item['lider'] = User::find($item->lider);
-        }
-        return view('admin.config', [
-            'users' => $users,
-            'activos' => $activos,
-            'inactivos' => $inactivos,
-            'sectores' => $sectores,
-            'congregacoes' => $congregacoes
-        ]);
+        return Redirect::route('admin.home');
     }
     public function home()
     {
@@ -44,18 +28,13 @@ class AdminController extends Controller
         $total_batizados = Crente::where("batizado", true)->count();
         $total_grupos = Grupo::count();
 
-        $ofertas = Oferta::all();
+        $eventos = Evento::whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->get();
         $total_ofertas = 0.0;
-        $total_oferta = 0.0;
-        $total_dizimo = 0.0;
-
-        foreach ($ofertas as $item) {
-            $total_ofertas += floatval($item['valor']);
-            if ($item['tipo'] == "Dizimo") {
-                $total_dizimo += floatval($item['valor']);
-            } else {
-                $total_oferta += floatval($item['valor']);
-            }
+        
+        foreach ($eventos as $item) {
+            $total_ofertas += floatval($item['oferta']);
         }
 
 
@@ -120,8 +99,6 @@ class AdminController extends Controller
             "total_batizados" => $total_batizados,
             "total_grupos" => $total_grupos,
             "total_ofertas" => $total_ofertas,
-            "total_oferta" => $total_oferta,
-            "total_dizimo" => $total_dizimo,
             "homens" => $homens,
             "mulheres" => $mulheres,
             'meses' => $meses,
@@ -145,14 +122,25 @@ class AdminController extends Controller
 
         $data = $request->all();
         // dd($data);
-        $grupo = Grupo::find($data['grupo']);
-        if ($grupo == null) {
-            return Redirect::back()->withErrors(['error' => "Grupo familiar inválido!"]);
+        if (isset($data['grupo_id']) && $data['grupo_id'] !== "") {
+            $grupo = Grupo::find($data['grupo_id']);
+            if ($grupo) {
+                $grupo->crentes()->create($data);
+            }
+        } else {
+            Crente::create($data);
         }
-        $grupo->crentes()->create($data);
         return Redirect::route('admin.crentes')->withErrors(['success' => "Crente criado com sucesso!"]);
     }
 
+        public function perfil($id)
+        {
+            $crente = Crente::findOrFail($id);
+            if ($crente == null) {
+                return Redirect::back()->withErrors(['error' => "Crente não encontrado!!"]);
+            }
+            return view('crente', ['crente' => $crente]);
+        }
 
     public function grupos()
     {
@@ -231,7 +219,27 @@ class AdminController extends Controller
         if ($grupo == null) {
             return Redirect::back()->withErrors(['error' => "Grupo não encontrado!!"]);
         }
-        return view('admin.grupo.home', ['grupo' => $grupo]);
+        $crentes = Crente::where("grupo_id", $grupo['id'])->orderByDesc('id')->paginate();
+        $crentes_disponiveis = Crente::where("grupo_id", null)->orderByDesc('id')->paginate();
+        return view('admin.grupo.home', ['grupo' => $grupo, 'crentes' => $crentes, 'crentes_disponiveis' => $crentes_disponiveis]);
+    }
+
+    public function addCrente($id, Request $request)
+    {
+        $data = $request->all();
+        $grupo = Grupo::find($id);
+        if ($grupo == null) {
+            return Redirect::back()->withErrors(['error' => "Grupo não encontrado!!"]);
+        }
+
+        foreach ($data['crentes'] as $crente_id) {
+            $crente = Crente::find($crente_id);
+            if ($crente) {
+                $crente->grupo_id = $grupo->id;
+                $crente->save();
+            }
+        }
+        return Redirect::back()->withErrors(['success' => "Crentes adicionados ao grupo com sucesso!"]);
     }
 
     public function evento($id, $evento_id)
@@ -251,17 +259,11 @@ class AdminController extends Controller
             $item['data'] = $grupo->crentes()->find($item['crente_id']);
         }
 
-        $total_ofertas = 0.0;
-        foreach ($evento->ofertas as $item) {
-            $total_ofertas += floatval($item['valor']);
-            $item['crente'] = $grupo->crentes()->find($item['crente_id']);
-            // dd($item->toArray());
-        }
+       
 
         return view('admin.grupo.evento', [
             'evento' => $evento,
             'presentes' => $presentes,
-            'total_ofertas' => $total_ofertas,
             'presenca' => $presenca
         ]);
     }
@@ -313,13 +315,8 @@ class AdminController extends Controller
         }
 
         $data = $request->all();
-
-        $crente = $evento->presenca()->find($data['crente_id']);
-        // dd($data, $evento->presenca);
-        if ($crente == null) {
-            return Redirect::back()->withErrors(['error' => "Crente não encontrado!"]);
-        }
-        $evento->ofertas()->create($data);
+        $evento['oferta'] = $data['oferta'];
+        $evento->save();
         return Redirect::back()->withErrors(['success' => "Oferta realizada!"]);
     }
     public function ofertaDelete($id, $evento_id, $oferta_id)
@@ -435,13 +432,15 @@ class AdminController extends Controller
 
     public function novoSector(Request $request)
     {
-        $data = $request->validate([
-            "nome" => "required",
-            "lider" => "required"
-        ]);
-        $user = User::find($data['lider']);
-        $data['lider'] = $user['id'];
+        $data = $request->all();
 
+        if(isset($data['lider'])){
+            $user = User::find($data['lider']);
+            $data['lider'] = $user['id'];
+            if ($user == null) return Redirect::back()->withErrors(['error' => "Líder invalido!"]);
+        }
+        
+        $user = User::find($data['lider']);
         Sector::create($data);
         return Redirect::back()->withErrors(['success' => "Sector criado com sucesso!"]);
     }

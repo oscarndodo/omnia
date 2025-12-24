@@ -5,8 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Bem-vindo</title>
-    @vite('resources/css/app.css')
-
+    <link rel="stylesheet" href="{{ asset('assets/css/tailwindcss.css') }}">
 </head>
 
 <body class="bg-gradient-to-br from-white to-red-100 flex items-center justify-center min-h-screen p-4">
