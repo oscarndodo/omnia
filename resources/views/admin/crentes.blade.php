@@ -192,14 +192,13 @@
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <!-- Barra de Busca -->
                     <div class="flex justify-end w-full">
-                        <div class="search-box flex items-center px-4 py-2.5 w-1/3">
-                            <i class="fas fa-search text-gray-400 mr-3"></i>
-                            <input type="text" placeholder="Buscar crentes por nome, telefone ou localização..."
-                                class="flex-1 outline-none text-sm" id="searchInput">
-                            <button class="text-gray-400 hover:text-gray-600 ml-3">
-                                <i class="fas fa-filter"></i>
+                        <form action="{{ route('admin.crentes.buscar') }}" method="GET" class="search-box flex items-center px-4 py-2.5 w-1/3">
+                            <input type="text" placeholder="Buscar crentes por nome ou endereço..."
+                                class="flex-1 outline-none text-sm" id="searchInput" name="q" value="{{ request('q') }}">
+                            <button type="submit" class="text-gray-400 hover:text-gray-600 ml-3">
+                                <i class="fas fa-search"></i>
                             </button>
-                        </div>
+                        </form>
                     </div>
 
                   

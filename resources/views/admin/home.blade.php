@@ -155,7 +155,7 @@
                 <div class="gradient-bg rounded-2xl p-8 text-white border -lg">
                     <div class="flex flex-col md:flex-row md:items-center justify-between">
                         <div>
-                            {{-- <h2 class="text-2xl md:text-3xl font-bold mb-2">Bem-vindo, {{ auth()->user()->name }}</h2> --}}
+                            <h2 class="text-2xl md:text-3xl font-bold mb-2">Bem-vindo, {{ auth()->user()->name }}</h2>
                             <p class="text-red-100 opacity-90">Aqui está uma visão geral da igreja hoje</p>
                         </div>
                         <div class="mt-4 md:mt-0">
@@ -320,7 +320,7 @@
                     }],
                     chart: {
                         type: 'area',
-                        height: 480,
+                        height: 440,
                         toolbar: {
                             show: false
                         }
@@ -384,7 +384,7 @@
                     ],
                     chart: {
                         type: 'bar',
-                        height: 480,
+                        height: 440,
                         stacked: true,
                         toolbar: {
                             show: false

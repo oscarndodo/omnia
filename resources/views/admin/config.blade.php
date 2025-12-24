@@ -183,20 +183,20 @@
                         <!-- Barra de Busca e Ações -->
                         <div class="p-6 border-b border-gray-100">
                             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-                                <div class="flex-1">
+                                <form class="flex-1" action="{{ route('admin.config.buscar') }}" method="GET">
                                     <div class="relative">
-                                        <i
-                                            class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                                        <input type="text" id="searchUsers"
+                                        <button type="submit"
+                                            class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></button>
+                                        <input type="text" id="searchUsers" name="q"
                                             placeholder="Buscar usuário por nome, telefone ou perfil..."
                                             class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
                                     </div>
-                                </div>
+                                </form>
                                 <div class="flex items-center space-x-3 mt-4 lg:mt-0 lg:ml-4">
                                     <button
                                         class="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors flex items-center group">
-                                        <i class="fas fa-filter mr-2 group-hover:rotate-90 transition-transform"></i>
-                                        Filtros
+                                        <i class="fas fa-search mr-2 group-hover:rotate-90 transition-transform"></i>
+                                        Buscar
                                     </button>
                                     <button
                                         class="px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-xl transition-all duration-300 flex items-center group">
@@ -431,8 +431,6 @@
                                     <tr>
                                         <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Sector</th>
                                         <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Líder</th>
-                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Status</th>
-                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-100">
@@ -458,35 +456,7 @@
                                                     <p class="text-sm text-gray-500">{{ $item->lider->role ?? "N/A" }}</p>
                                                 </div>
                                             </td>
-                                            <td class="py-4 px-6">
-                                                @if ($item->status)
-                                                    <span
-                                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                                        <i class="fas fa-circle mr-1 text-xs"></i> Activo
-                                                    </span>
-                                                @else
-                                                    <span
-                                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                                                        <i class="fas fa-circle mr-1 text-xs"></i> Inactivo
-                                                    </span>
-                                                @endif
-                                            </td>
-                                            <td class="py-4 px-6">
-                                                <div class="flex items-center space-x-2">
-                                                    <button
-                                                        class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                                        <i class="fas fa-eye"></i>
-                                                    </button>
-                                                    <button
-                                                        class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>
-                                                    <button
-                                                        class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
+                                           
                                         </tr>
                                     @empty
                                         <tr>
@@ -610,8 +580,6 @@
                                             Responsável</th>
                                         <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Localização
                                         </th>
-                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Status</th>
-                                        <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-100">
@@ -640,35 +608,7 @@
                                                     <span class="text-sm text-gray-700">{{ $item->endereco }}</span>
                                                 </div>
                                             </td>
-                                            <td class="py-4 px-6">
-                                                @if ($item->status)
-                                                    <span
-                                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                                        <i class="fas fa-circle mr-1 text-xs"></i> Activo
-                                                    </span>
-                                                @else
-                                                    <span
-                                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                                                        <i class="fas fa-circle mr-1 text-xs"></i> Inactivo
-                                                    </span>
-                                                @endif
-                                            </td>
-                                            <td class="py-4 px-6">
-                                                <div class="flex items-center space-x-2">
-                                                    <a href="{{ route('admin.home', $item->id) }}"
-                                                        class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                    <button
-                                                        class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>
-                                                    <button
-                                                        class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
+                                            
                                         </tr>
                                     @empty
                                         <tr>
@@ -682,27 +622,87 @@
                         </div>
 
                         <!-- Paginação -->
-                        <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
-                            <div class="text-sm text-gray-500">
-                                Mostrando 1-3 de 4 congregações
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <button
-                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <button
-                                    class="w-10 h-10 rounded-lg bg-red-600 text-white flex items-center justify-center">1</button>
-                                <button
-                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">2</button>
-                                <button
-                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">3</button>
-                                <button
-                                    class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>
+@if($congregacoes->hasPages())
+<div class="px-6 py-4 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <!-- Informação de exibição -->
+    <div class="text-sm text-gray-600">
+        Mostrando 
+        <span class="font-medium">{{ $congregacoes->firstItem() }}</span>
+        a 
+        <span class="font-medium">{{ $congregacoes->lastItem() }}</span>
+        de 
+        <span class="font-medium">{{ $congregacoes->total() }}</span>
+        @if($congregacoes->total() == 1) congregação @else congregações @endif
+    </div>
+
+    <!-- Navegação -->
+    <div class="flex items-center space-x-1">
+        <!-- Botão Anterior -->
+        @if($congregacoes->onFirstPage())
+            <span class="w-10 h-10 rounded-lg bg-gray-100 text-gray-400 flex items-center justify-center cursor-not-allowed">
+                <i class="fas fa-chevron-left"></i>
+            </span>
+        @else
+            <a href="{{ $congregacoes->previousPageUrl() }}" 
+               class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+        @endif
+
+        <!-- Números das páginas -->
+        @php
+            // Mostrar apenas algumas páginas ao redor da atual
+            $start = max(1, $congregacoes->currentPage() - 1);
+            $end = min($congregacoes->lastPage(), $congregacoes->currentPage() + 1);
+        @endphp
+
+        @if($start > 1)
+            <a href="{{ $congregacoes->url(1) }}" 
+               class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                1
+            </a>
+            @if($start > 2)
+                <span class="px-1 text-gray-400">...</span>
+            @endif
+        @endif
+
+        @for($page = $start; $page <= $end; $page++)
+            @if($page == $congregacoes->currentPage())
+                <span class="w-10 h-10 rounded-lg bg-red-600 text-white flex items-center justify-center font-medium">
+                    {{ $page }}
+                </span>
+            @else
+                <a href="{{ $congregacoes->url($page) }}" 
+                   class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                    {{ $page }}
+                </a>
+            @endif
+        @endfor
+
+        @if($end < $congregacoes->lastPage())
+            @if($end < $congregacoes->lastPage() - 1)
+                <span class="px-1 text-gray-400">...</span>
+            @endif
+            <a href="{{ $congregacoes->url($congregacoes->lastPage()) }}" 
+               class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                {{ $congregacoes->lastPage() }}
+            </a>
+        @endif
+
+        <!-- Botão Próximo -->
+        @if($congregacoes->hasMorePages())
+            <a href="{{ $congregacoes->nextPageUrl() }}" 
+               class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        @else
+            <span class="w-10 h-10 rounded-lg bg-gray-100 text-gray-400 flex items-center justify-center cursor-not-allowed">
+                <i class="fas fa-chevron-right"></i>
+            </span>
+        @endif
+    </div>
+</div>
+@endif
                     </div>
                 </section>
 

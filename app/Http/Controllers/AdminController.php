@@ -153,6 +153,20 @@ class AdminController extends Controller
         $crentes = Crente::orderByDesc('id')->paginate();
         return view('admin.crentes', ['crentes' => $crentes]);
     }
+
+    public function crenteBuscar(Request $request)
+    {
+        $query = $request->input('q');
+
+        $crentes = Crente::where('nome', 'LIKE', "%{$query}%")
+            ->orWhere("endereco", "LIKE", "%{$query}%")
+            ->orderByDesc('id')
+            ->paginate();
+
+        return view('admin.crentes', ['crentes' => $crentes]);
+    }
+
+
     public function novoCrente(Request $request)
     {
         if ($request->method() == "GET") {
@@ -172,6 +186,8 @@ class AdminController extends Controller
         }
         return Redirect::route('admin.crentes')->withErrors(['success' => "Crente criado com sucesso!"]);
     }
+
+    
 
     public function perfil($id)
     {
@@ -433,6 +449,18 @@ class AdminController extends Controller
         return view('admin.eventos', ['eventos' => $eventos]);
     }
 
+    public function eventoBuscar(Request $request)
+    {
+        $query = $request->input('q');
+
+        $eventos = Evento::where('titulo', 'LIKE', "%{$query}%")
+            ->orWhere("local", "LIKE", "%{$query}%")
+            ->orderByDesc('id')
+            ->paginate();
+
+        return view('admin.eventos', ['eventos' => $eventos]);
+    }
+
     public function batizados()
     {
         $batizados = Crente::where("batizado", true)->orderByDesc('id')->paginate();
@@ -468,6 +496,34 @@ class AdminController extends Controller
         foreach ($sectores as $item) {
             $item['lider'] = User::find($item->lider);
         }
+        return view('admin.config', [
+            'users' => $users,
+            'activos' => $activos,
+            'inactivos' => $inactivos,
+            'sectores' => $sectores,
+            'congregacoes' => $congregacoes
+        ]);
+    }
+
+    public function configBuscar(Request $request)
+    {
+        $query = $request->input('q');
+
+        $users = User::where('name', 'LIKE', "%{$query}%")
+            ->orWhere("phone", "LIKE", "%{$query}%")
+            ->orderByDesc('id')
+            ->paginate(10);
+
+        $activos = User::where("status", true)->count();
+        $inactivos = User::where("status", false)->count();
+
+        $sectores = Sector::orderByDesc("id")->paginate();
+        $congregacoes = Congregacao::orderByDesc("id")->paginate();
+
+        foreach ($sectores as $item) {
+            $item['lider'] = User::find($item->lider);
+        }
+
         return view('admin.config', [
             'users' => $users,
             'activos' => $activos,

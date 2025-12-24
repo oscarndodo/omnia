@@ -110,7 +110,7 @@
                             class="sidebar-item flex items-center p-3 rounded-xl hover:bg-gray-50 text-gray-700 transition-colors">
                             <i class="fas fa-users text-lg w-6 text-center"></i>
                             <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Crentes</span>
-                            
+
                         </a>
                     </li>
 
@@ -129,7 +129,7 @@
                             class="sidebar-item flex items-center p-3 rounded-xl hover:bg-gray-50 text-gray-700 transition-colors">
                             <i class="fas fa-calendar-alt text-lg w-6 text-center"></i>
                             <span class="sidebar-item-text hidden lg:block ml-3 font-medium">Cultos</span>
-                           
+
                         </a>
                     </li>
 
@@ -207,9 +207,31 @@
             </a>
         </aside>
 
+
+
         <!-- Conteúdo Principal -->
         <div class="main-content flex-1 min-h-screen">
             @yield('main')
+        </div>
+    </div>
+
+
+
+    <div role="alert" class="rounded-md border border-red-500 bg-red-50 p-4 shadow-sm z-50 fixed bottom-4 right-4 w-96">
+        <div class="flex items-start gap-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="-mt-0.5 size-6 text-red-700">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"></path>
+            </svg>
+
+            <div class="flex-1">
+                <strong class="block leading-tight font-medium text-red-800"> Error </strong>
+
+                <p class="mt-0.5 text-sm text-red-700">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus, dignissimos.
+                </p>
+            </div>
         </div>
     </div>
 

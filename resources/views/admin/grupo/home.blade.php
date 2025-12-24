@@ -123,34 +123,7 @@
                 </div>
             </div>
 
-            <!-- Filtros -->
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                <div class="flex flex-col lg:flex-row lg:items-center gap-4">
-                    <div class="flex-1">
-                        <div class="relative">
-                            <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                            <input type="text" placeholder="Buscar membro por nome..."
-                                class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap gap-3">
-                        <select
-                            class="px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
-                            <option value="">Todos os status</option>
-                            <option value="ativo">Em Comunhão</option>
-                            <option value="inativo">Simpatizante</option>
-                        </select>
-                        <button
-                            class="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors flex items-center">
-                            <i class="fas fa-filter mr-2"></i> Filtrar
-                        </button>
-                        <button
-                            class="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors flex items-center">
-                            <i class="fas fa-search mr-2"></i> Buscar
-                        </button>
-                    </div>
-                </div>
-            </div>
+    
 
             <!-- Lista de Membros -->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">

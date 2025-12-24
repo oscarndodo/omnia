@@ -20,21 +20,21 @@
         <div id="view-list" class=" space-y-6">
             <!-- Busca Avançada -->
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex justify-end w-full">
-                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 sm:w-1/3">
+                <form action="{{ route('admin.eventos.buscar') }}" method="GET" class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 sm:w-1/3">
                     <div class="flex-1">
                         <div class="relative">
                             <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                            <input type="text" placeholder="Buscar eventos..."
+                            <input type="text" name="q" placeholder="Buscar eventos..."
                                 class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">
                         </div>
                     </div>
                     <div class="flex items-center space-x-3">
-                        <button
+                        <button type="submit"
                             class="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors flex items-center">
                             <i class="fas fa-search mr-2"></i> Buscar
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
 
             <!-- Lista de Eventos -->

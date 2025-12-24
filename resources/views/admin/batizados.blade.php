@@ -146,14 +146,14 @@
                                     </td>
                                     <td class="py-4 px-6">
                                         <div class="flex items-center space-x-2">
-                                            <button
+                                            <a href="{{route('admin.crentes.perfil', $item->id)}}"
                                                 class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
                                                 <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button
+                                        </a>
+                                            <a href="{{ route('admin.crentes.editar', $item->id) }}"
                                                 class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
                                                 <i class="fas fa-edit"></i>
-                                            </button>
+                                    </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -166,30 +166,86 @@
                     </div>
 
                     <!-- Paginação -->
-                    <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
-                        <div class="text-sm text-gray-500">
-                            Mostrando 1-3 de 156 crentes
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <button
-                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button
-                                class="w-10 h-10 rounded-lg bg-red-600 text-white flex items-center justify-center">1</button>
-                            <button
-                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">2</button>
-                            <button
-                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">3</button>
-                            <span class="px-2">...</span>
-                            <button
-                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">16</button>
-                            <button
-                                class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
+                    <!-- Paginação (com ellipsis para muitas páginas) -->
+@if($batizados->hasPages())
+<div class="px-6 py-4 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <!-- Informação de exibição -->
+    <div class="text-sm text-gray-600">
+        Mostrando 
+        <span class="font-medium">{{ $batizados->firstItem() }}</span>
+        a 
+        <span class="font-medium">{{ $batizados->lastItem() }}</span>
+        de 
+        <span class="font-medium">{{ $batizados->total() }}</span>
+        @if($batizados->total() == 1) crente @else crentes @endif
+    </div>
+
+    <!-- Navegação -->
+    <div class="flex items-center space-x-1">
+        <!-- Botão Anterior -->
+        @if($batizados->onFirstPage())
+            <span class="w-10 h-10 rounded-lg bg-gray-100 text-gray-400 flex items-center justify-center cursor-not-allowed">
+                <i class="fas fa-chevron-left"></i>
+            </span>
+        @else
+            <a href="{{ $batizados->previousPageUrl() }}" 
+               class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+        @endif
+
+        <!-- Primeira página -->
+        @if($batizados->currentPage() > 3)
+            <a href="{{ $batizados->url(1) }}" 
+               class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                1
+            </a>
+            @if($batizados->currentPage() > 4)
+                <span class="px-2 text-gray-400">...</span>
+            @endif
+        @endif
+
+        <!-- Páginas ao redor da atual -->
+        @foreach(range(1, $batizados->lastPage()) as $page)
+            @if($page >= $batizados->currentPage() - 2 && $page <= $batizados->currentPage() + 2)
+                @if($page == $batizados->currentPage())
+                    <span class="w-10 h-10 rounded-lg bg-red-600 text-white flex items-center justify-center font-medium">
+                        {{ $page }}
+                    </span>
+                @else
+                    <a href="{{ $batizados->url($page) }}" 
+                       class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                        {{ $page }}
+                    </a>
+                @endif
+            @endif
+        @endforeach
+
+        <!-- Última página -->
+        @if($batizados->currentPage() < $batizados->lastPage() - 2)
+            @if($batizados->currentPage() < $batizados->lastPage() - 3)
+                <span class="px-2 text-gray-400">...</span>
+            @endif
+            <a href="{{ $batizados->url($batizados->lastPage()) }}" 
+               class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                {{ $batizados->lastPage() }}
+            </a>
+        @endif
+
+        <!-- Botão Próximo -->
+        @if($batizados->hasMorePages())
+            <a href="{{ $batizados->nextPageUrl() }}" 
+               class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        @else
+            <span class="w-10 h-10 rounded-lg bg-gray-100 text-gray-400 flex items-center justify-center cursor-not-allowed">
+                <i class="fas fa-chevron-right"></i>
+            </span>
+        @endif
+    </div>
+</div>
+@endif
                 </div>
             </div>
         </div>

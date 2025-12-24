@@ -20,6 +20,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get("/home", [AdminController::class, 'home'])->name('admin.home');
 
     Route::get("/crentes", [AdminController::class, 'crentes'])->name('admin.crentes');
+    Route::get("/crentes/buscar", [AdminController::class, 'crenteBuscar'])->name('admin.crentes.buscar');
     Route::get("/crentes/{id}/perfil", [AdminController::class, 'perfil'])->name('admin.crentes.perfil');
     Route::get("/crentes/{id}/editar", [AdminController::class, 'editarCrente'])->name('admin.crentes.editar');
     Route::post("/crentes/{id}/editar", [AdminController::class, 'editarCrente'])->name('admin.crentes.editar');
@@ -40,6 +41,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post("/grupos/{id}/evento/{evento_id}/visita", [AdminController::class, 'visita'])->name('admin.grupo.evento.visita');
 
     Route::get("/eventos", [AdminController::class, 'eventos'])->name('admin.eventos');
+    Route::get("/eventos/buscar", [AdminController::class, 'eventoBuscar'])->name('admin.eventos.buscar');
 
     Route::get("/batizados", [AdminController::class, 'batizados'])->name('admin.batizados');
 
@@ -47,6 +49,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::prefix("configuracoes")->group(function () {
         Route::get("/", [AdminController::class, 'config'])->name('admin.config');
+        Route::get("/buscar", [AdminController::class, 'configBuscar'])->name('admin.config.buscar');
         Route::post("/novo/usuario", [AdminController::class, 'novoUsuario'])->name('admin.config.user');
         Route::get("/novo/usuario/{id}/status", [AdminController::class, 'usuarioStatus'])->name('admin.config.user.status');
 
