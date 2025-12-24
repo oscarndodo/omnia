@@ -199,15 +199,14 @@
                                 <div class="flex items-center">
                                     <div
                                         class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white font-semibold mr-3">
-                                        {{ $item->data->nome[0] }}
+                                        {{ $item->nome[0] }}
                                     </div>
                                     <div>
-                                        <p class="font-medium text-gray-900">{{ $item->data->nome }}</p>
+                                        <p class="font-medium text-gray-900">{{ $item->nome }}</p>
                                         <p class="text-sm text-gray-500">
                                             @php
 
-                                                $idade = \Carbon\Carbon::parse($item->data->data_nascimento)->age;
-
+                                                $idade = \Carbon\Carbon::parse($item->data_nascimento)->age;
                                                 if ($idade <= 12) {
                                                     $faixa = 'Criança';
                                                 } elseif ($idade <= 17) {
@@ -225,7 +224,7 @@
                             </td>
                             <td class="py-4 px-6">
                                 <div class="space-y-1">
-                                    <span class="text-gray-700">{{ $item->nome }}</span>
+                                    <span class="text-gray-700">{{ $item->grupo->nome ?? "N/A" }}</span>
                                 </div>
                             </td>
                             <td class="py-4 px-6">
@@ -252,10 +251,10 @@
                             
                             <td class="py-4 px-6">
                                 <div class="flex items-center space-x-2">
-                                    <button
+                                    <a href="{{ route('admin.crentes.perfil', $item->id) }}"
                                         class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
                                         <i class="fas fa-eye"></i>
-                                    </button>
+                                </a>
                                    
                                 </div>
                             </td>

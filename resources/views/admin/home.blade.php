@@ -271,7 +271,7 @@
                            
                         </div>
                     </div>
-                    <div id="growthChart" class="chart-container" style="height: 300px;"></div>
+                    <div id="registroMensalChart" class="chart-container" style="height: 300px;"></div>
                 </div>
 
                 <!-- Distribuição por Idade (ApexCharts) -->
@@ -312,22 +312,15 @@
 
 
 
-                const meses = @json($meses);
-                const registosMensais = @json($registosMensais);
-
-                /*
-                |--------------------------------------------------------------------------
-                | GRÁFICO DE REGISTOS DE CRENTES POR MÊS
-                |--------------------------------------------------------------------------
-                */
+             
                 const registroMensalOptions = {
                     series: [{
                         name: 'Registos de Crentes',
-                        data: registosMensais
+                        data:  @json($registroMensalData)
                     }],
                     chart: {
-                        type: 'bar',
-                        height: 300,
+                        type: 'area',
+                        height: 480,
                         toolbar: {
                             show: false
                         }
@@ -343,7 +336,7 @@
                         enabled: false
                     },
                     xaxis: {
-                        categories: meses,
+                        categories: @json($registroMensalCategorias),
                         axisBorder: {
                             show: false
                         },
@@ -391,7 +384,7 @@
                     ],
                     chart: {
                         type: 'bar',
-                        height: 300,
+                        height: 480,
                         stacked: true,
                         toolbar: {
                             show: false

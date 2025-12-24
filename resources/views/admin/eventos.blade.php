@@ -7,8 +7,8 @@
         <div class="mb-8">
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                    <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">Calendário de Eventos</h1>
-                    <p class="text-gray-600 mt-2">Gerencie todos os eventos da igreja e grupos</p>
+                    <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">Calendário de Cultos</h1>
+                    <p class="text-gray-600 mt-2">Gerencie todos os culto da igreja e grupos</p>
                 </div>
                 
             </div>
@@ -43,7 +43,7 @@
                     <table class="w-full">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Evento</th>
+                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Culto</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Data/Hora</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Grupo Familiar</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Tipo</th>
@@ -123,31 +123,65 @@
                     </table>
                 </div>
 
-                <!-- Paginação -->
-                <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
-                    <div class="text-sm text-gray-500">
-                        Mostrando 1-3 de 48 eventos
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <button
-                            class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button
-                            class="w-10 h-10 rounded-lg bg-red-600 text-white flex items-center justify-center">1</button>
-                        <button
-                            class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">2</button>
-                        <button
-                            class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">3</button>
-                        <span class="px-2">...</span>
-                        <button
-                            class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">16</button>
-                        <button
-                            class="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
-                </div>
+               @if ($eventos->hasPages())
+<div class="px-6 py-4 border-t border-gray-100 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+    <!-- Info -->
+    <div class="text-sm text-gray-500">
+        Mostrando
+        <span class="font-medium text-gray-700">{{ $eventos->firstItem() }}</span>
+        –
+        <span class="font-medium text-gray-700">{{ $eventos->lastItem() }}</span>
+        de
+        <span class="font-medium text-gray-700">{{ $eventos->total() }}</span>
+        cultos
+    </div>
+
+    <!-- Navegação -->
+    <div class="flex items-center space-x-1">
+
+        {{-- Página anterior --}}
+        @if ($eventos->onFirstPage())
+            <span class="w-9 h-9 flex items-center justify-center rounded-md bg-gray-100 text-gray-400 cursor-not-allowed">
+                <i class="fas fa-chevron-left"></i>
+            </span>
+        @else
+            <a href="{{ $eventos->previousPageUrl() }}"
+               class="w-9 h-9 flex items-center justify-center rounded-md bg-gray-100 hover:bg-gray-200 text-gray-700">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+        @endif
+
+        {{-- Links numéricos --}}
+        @foreach ($eventos->links()->elements[0] ?? [] as $page => $url)
+            @if ($page == $eventos->currentPage())
+                <span class="w-9 h-9 flex items-center justify-center rounded-md bg-red-600 text-white text-sm font-medium">
+                    {{ $page }}
+                </span>
+            @else
+                <a href="{{ $url }}"
+                   class="w-9 h-9 flex items-center justify-center rounded-md bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm">
+                    {{ $page }}
+                </a>
+            @endif
+        @endforeach
+
+        {{-- Próxima página --}}
+        @if ($eventos->hasMorePages())
+            <a href="{{ $eventos->nextPageUrl() }}"
+               class="w-9 h-9 flex items-center justify-center rounded-md bg-gray-100 hover:bg-gray-200 text-gray-700">
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        @else
+            <span class="w-9 h-9 flex items-center justify-center rounded-md bg-gray-100 text-gray-400 cursor-not-allowed">
+                <i class="fas fa-chevron-right"></i>
+            </span>
+        @endif
+
+    </div>
+</div>
+@endif
+
             </div>
         </div>
 

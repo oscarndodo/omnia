@@ -224,18 +224,18 @@
                                     </td>
                                     <td class="py-4 px-6">
                                         <div class="flex items-center space-x-2">
-                                            <button
+                                            <a href="{{ route('admin.crentes.perfil', $item->id) }}"
                                                 class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors flex items-center justify-center">
                                                 <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button
+                                        </a>
+                                            <a href="{{ route('admin.crentes.editar', $item->id) }}"
                                                 class="w-8 h-8 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 transition-colors flex items-center justify-center">
                                                 <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button onclick="removerCrente({{ $item->id }})"
+                                    </a>
+                                            <a href="{{ route('admin.crentes.removeGrupo', $item->id) }}"
                                                 class="w-8 h-8 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors flex items-center justify-center">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
+                                                <i class="fas fa-ban"></i>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>

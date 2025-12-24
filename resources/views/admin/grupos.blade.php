@@ -42,7 +42,6 @@
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Membros</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Congregação</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Sector</th>
-                                <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Status</th>
                                 <th class="text-left py-4 px-6 text-sm font-semibold text-gray-700">Ações</th>
                             </tr>
                         </thead>
@@ -86,19 +85,6 @@
                                     </td>
                                     <td class="py-4 px-6">
                                         <span class="text-gray-700">{{ $item->congregacao->sector->nome }}</span>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        @if ($item->estado)
-                                            <span
-                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                                                <i class="fas fa-circle mr-1 text-xs"></i> Activo
-                                            </span>
-                                        @else
-                                            <span
-                                                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                                                <i class="fas fa-circle mr-1 text-xs"></i> Inactivo
-                                            </span>
-                                        @endif
                                     </td>
                                     <td class="py-4 px-6">
                                         <div class="flex items-center space-x-2">

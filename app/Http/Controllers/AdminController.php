@@ -11,6 +11,7 @@ use App\Models\Sector;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
@@ -28,11 +29,11 @@ class AdminController extends Controller
         $total_batizados = Crente::where("batizado", true)->count();
         $total_grupos = Grupo::count();
 
-        $eventos = Evento::whereMonth('created_at', now()->month)
+        $eventos = Evento::whereMonth('created_at', now( )->month)
             ->whereYear('created_at', now()->year)
             ->get();
         $total_ofertas = 0.0;
-        
+
         foreach ($eventos as $item) {
             $total_ofertas += floatval($item['oferta']);
         }
@@ -92,6 +93,44 @@ class AdminController extends Controller
         }
 
 
+        // Últimos 12 meses
+        $inicio = Carbon::now()->subMonths(11)->startOfMonth();
+
+        $registos = Crente::select(
+            DB::raw('MONTH(created_at) as mes'),
+            DB::raw('COUNT(*) as total')
+        )
+            ->where('created_at', '>=', $inicio)
+            ->groupBy('mes')
+            ->orderBy('mes')
+            ->get();
+
+        // Mapeamento dos meses (Abr → Mar)
+        $meses = [
+            4 => 'Abr',
+            5 => 'Mai',
+            6 => 'Jun',
+            7 => 'Jul',
+            8 => 'Ago',
+            9 => 'Set',
+            10 => 'Out',
+            11 => 'Nov',
+            12 => 'Dez',
+            1 => 'Jan',
+            2 => 'Fev',
+            3 => 'Mar'
+        ];
+
+        // Inicializa com zero
+        $dados = array_fill_keys(array_values($meses), 0);
+
+        foreach ($registos as $item) {
+            if (isset($meses[$item->mes])) {
+                $dados[$meses[$item->mes]] = $item->total;
+            }
+        }
+
+
         return view('admin.home', [
             "total_crentes" => $total_crentes,
             "total_mulheres" => $total_mulheres,
@@ -103,7 +142,8 @@ class AdminController extends Controller
             "mulheres" => $mulheres,
             'meses' => $meses,
             'registosMensais' => $registosMensais,
-
+            'registroMensalCategorias' => array_keys($dados),
+            'registroMensalData'       => array_values($dados),
         ]);
     }
 
@@ -133,14 +173,43 @@ class AdminController extends Controller
         return Redirect::route('admin.crentes')->withErrors(['success' => "Crente criado com sucesso!"]);
     }
 
-        public function perfil($id)
-        {
-            $crente = Crente::findOrFail($id);
-            if ($crente == null) {
-                return Redirect::back()->withErrors(['error' => "Crente não encontrado!!"]);
-            }
-            return view('crente', ['crente' => $crente]);
+    public function perfil($id)
+    {
+        $crente = Crente::findOrFail($id);
+        if ($crente == null) {
+            return Redirect::back()->withErrors(['error' => "Crente não encontrado!!"]);
         }
+        return view('crente', ['crente' => $crente]);
+    }
+
+    public function editarCrente($id, Request $request)
+    {
+        $crente = Crente::findOrFail($id);
+        if ($crente == null) {
+            return Redirect::back()->withErrors(['error' => "Crente não encontrado!!"]);
+        }
+
+        if ($request->method() == "GET") {
+            $grupos = Grupo::all();
+            return view('admin.crente-editar', ['crente' => $crente, 'grupos' => $grupos]);
+        }
+
+        $data = $request->all();
+        $crente->update($data);
+        return Redirect::route('admin.crentes')->withErrors(['success' => "Crente atualizado com sucesso!"]);
+    }
+
+    public function removerGrupo($id)
+    {
+        $crente = Crente::findOrFail($id);
+        if ($crente == null) {
+            return Redirect::back()->withErrors(['error' => "Crente não encontrado!!"]);
+        }
+
+        $crente->grupo_id = null;
+        $crente->save();
+        return Redirect::back()->withErrors(['success' => "Crente removido do grupo com sucesso!"]);
+    }
 
     public function grupos()
     {
@@ -256,10 +325,10 @@ class AdminController extends Controller
         $presentes = $evento->presenca()->count() + $evento->visitas()->count();
         $presenca = $evento->presenca()->orderByDesc("id")->paginate();
         foreach ($presenca as $item) {
-            $item['data'] = $grupo->crentes()->find($item['crente_id']);
+            $item['data'] = Crente::find($item['crente_id']);
         }
 
-       
+
 
         return view('admin.grupo.evento', [
             'evento' => $evento,
@@ -372,14 +441,14 @@ class AdminController extends Controller
 
     public function dizimistas()
     {
-        $dizimistas = Oferta::where('tipo', 'dizimo')
+        $dizimistas = Crente::where('batizado', true)
             ->whereMonth('created_at', now()->month)
             ->whereYear('created_at', now()->year)
             ->orderByDesc('id')
             ->paginate();
 
         foreach ($dizimistas as $item) {
-            $item['data'] = Crente::find($item->crente_id);
+            $item['grupo'] = Grupo::find($item->grupo_id);
         }
 
         return view('admin.dizimistas', [
@@ -434,12 +503,12 @@ class AdminController extends Controller
     {
         $data = $request->all();
 
-        if(isset($data['lider'])){
+        if (isset($data['lider'])) {
             $user = User::find($data['lider']);
             $data['lider'] = $user['id'];
             if ($user == null) return Redirect::back()->withErrors(['error' => "Líder invalido!"]);
         }
-        
+
         $user = User::find($data['lider']);
         Sector::create($data);
         return Redirect::back()->withErrors(['success' => "Sector criado com sucesso!"]);

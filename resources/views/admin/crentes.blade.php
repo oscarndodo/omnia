@@ -327,11 +327,11 @@
                                                 title="Ver perfil">
                                                 <i class="fas fa-eye"></i>
                                         </a>
-                                            <button
+                                            <a href="{{ route('admin.crentes.editar', $item->id) }}"
                                                 class="p-1.5 text-gray-400 hover:text-blue-600 rounded-lg hover:bg-blue-50 transition-colors"
                                                 title="Editar">
                                                 <i class="fas fa-edit"></i>
-                                            </button>
+                                    </a>
                                         </div>
                                     </td>
                                 </tr>

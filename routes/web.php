@@ -15,12 +15,15 @@ Route::get('auth', [AuthController::class, 'index'])->name('login');
 Route::post('auth/login', [AuthController::class, 'login'])->name('auth.login');
 Route::get('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get("/home", [AdminController::class, 'home'])->name('admin.home');
 
     Route::get("/crentes", [AdminController::class, 'crentes'])->name('admin.crentes');
     Route::get("/crentes/{id}/perfil", [AdminController::class, 'perfil'])->name('admin.crentes.perfil');
+    Route::get("/crentes/{id}/editar", [AdminController::class, 'editarCrente'])->name('admin.crentes.editar');
+    Route::post("/crentes/{id}/editar", [AdminController::class, 'editarCrente'])->name('admin.crentes.editar');
+    Route::get("/crentes/{id}/remover/grupo", [AdminController::class, 'removerGrupo'])->name('admin.crentes.removeGrupo');
     Route::get("/crentes/novo", [AdminController::class, 'novoCrente'])->name('admin.crentes.novo');
     Route::post("/crentes/novo", [AdminController::class, 'novoCrente'])->name('admin.crentes.novo');
 
